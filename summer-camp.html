@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Summer Camp | ABC Bridgeway English School</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lora:ital,wght@0,400;0,600;1,400&family=Cabin+Sketch:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest:#1a4a2e;
+    --forest-light:#2d7a4f;
+    --forest-dark:#0e2e1c;
+    --night:#0a1520;
+    --sun:#f5c842;
+    --sun-warm:#ff9a3c;
+    --fire-red:#e84a2f;
+    --text-dark:#1a2e1f;
+    --text-mid:#3d5a45;
+    --text-light:#7a9e82;
+    --cream:#fdf8f2;
+    --sky:#1e6db5; --sky-dark:#154f87;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Nunito',sans-serif; background:var(--cream); color:var(--text-dark); overflow-x:hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:200;
+    background:rgba(255,252,247,0.96); backdrop-filter:blur(12px);
+    border-bottom:2px solid rgba(45,122,79,0.2);
+    padding:0 2rem; display:flex; align-items:center; justify-content:space-between;
+    height:70px;
+  }
+  .nav-logo { display:flex; align-items:center; gap:0.5rem; text-decoration:none; }
+  .nav-logo img { height:52px; width:auto; }
+  .nav-logo-text { font-size:1.05rem; font-weight:900; color:var(--sky-dark); line-height:1.2; }
+  .nav-logo-text span { display:block; font-size:0.72rem; font-weight:700; color:var(--text-light); letter-spacing:1px; text-transform:uppercase; }
+  .nav-back {
+    background:var(--forest-light); color:white;
+    padding:0.55rem 1.4rem; border-radius:30px;
+    font-weight:800; font-size:0.88rem; text-decoration:none;
+    transition:background 0.2s; border:2px solid var(--forest);
+  }
+  .nav-back:hover { background:var(--forest); }
+
+  /* ── HERO ── */
+  .camp-hero {
+    padding-top:70px;
+    background:linear-gradient(180deg, #060e18 0%, #0c1e30 25%, #142a1e 65%, #1a4a2e 100%);
+    position:relative; overflow:hidden;
+    border-bottom:4px solid var(--sun);
+  }
+  .stars {
+    position:absolute; inset:0; pointer-events:none; z-index:0;
+    background-image:
+      radial-gradient(1.5px 1.5px at  8%  6%, rgba(255,255,255,0.95) 0%, transparent 100%),
+      radial-gradient(1px   1px   at 18% 13%, rgba(255,255,255,0.75) 0%, transparent 100%),
+      radial-gradient(2px   2px   at 32%  4%, rgba(255,255,255,0.85) 0%, transparent 100%),
+      radial-gradient(1px   1px   at 48% 10%, rgba(255,255,255,0.65) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 62%  7%, rgba(255,255,255,0.9)  0%, transparent 100%),
+      radial-gradient(1px   1px   at 75% 16%, rgba(255,255,255,0.7)  0%, transparent 100%),
+      radial-gradient(2px   2px   at 87%  3%, rgba(255,255,255,0.85) 0%, transparent 100%),
+      radial-gradient(1px   1px   at 14% 22%, rgba(255,255,255,0.55) 0%, transparent 100%),
+      radial-gradient(1px   1px   at 55% 18%, rgba(255,255,255,0.6)  0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 72%  9%, rgba(255,255,255,0.75) 0%, transparent 100%),
+      radial-gradient(1px   1px   at 93% 20%, rgba(255,255,255,0.5)  0%, transparent 100%),
+      radial-gradient(1px   1px   at  4% 17%, rgba(255,255,255,0.6)  0%, transparent 100%),
+      radial-gradient(1px   1px   at 40%  2%, rgba(255,255,255,0.8)  0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 27% 11%, rgba(255,255,255,0.65) 0%, transparent 100%),
+      radial-gradient(1px   1px   at 83%  8%, rgba(255,255,255,0.7)  0%, transparent 100%);
+    animation:twinkle 3.5s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle { 0%{opacity:0.65} 100%{opacity:1} }
+
+  .hero-text {
+    position:relative; z-index:10;
+    text-align:center;
+    padding:2.5rem 2rem 1rem;
+  }
+  .hero-eyebrow {
+    font-size:0.82rem; font-weight:800; letter-spacing:3px;
+    text-transform:uppercase; color:var(--sun);
+    margin-bottom:0.7rem; display:block;
+  }
+  .camp-title {
+    font-family:'Cabin Sketch',cursive;
+    font-size:clamp(2.6rem,7vw,5.8rem);
+    color:var(--sun);
+    text-shadow:0 0 40px rgba(245,200,66,0.5), 0 4px 0 rgba(0,0,0,0.45);
+    line-height:1.05; margin-bottom:0.4rem;
+    animation:riseIn 0.8s ease-out both;
+  }
+  @keyframes riseIn { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+  .camp-subtitle {
+    font-family:'Lora',serif; font-style:italic;
+    font-size:clamp(0.95rem,2vw,1.35rem);
+    color:rgba(255,255,255,0.72);
+    margin-bottom:0.6rem;
+  }
+  .camp-desc {
+    font-size:0.92rem; color:rgba(255,255,255,0.55);
+    max-width:480px; margin:0 auto 1.2rem;
+    line-height:1.75; font-weight:600;
+  }
+
+  /* fireflies */
+  .firefly {
+    position:absolute; z-index:5;
+    width:5px; height:5px; border-radius:50%;
+    background:var(--sun);
+    box-shadow:0 0 7px 3px rgba(245,200,66,0.75);
+    pointer-events:none;
+    animation:fireflyFloat var(--ffd,4s) ease-in-out infinite var(--ffdel,0s);
+  }
+  @keyframes fireflyFloat {
+    0%   { transform:translate(0,0);                                 opacity:0; }
+    15%  { opacity:1; }
+    50%  { transform:translate(var(--ffx,20px),var(--ffy,-28px));    opacity:0.85; }
+    85%  { opacity:0.3; }
+    100% { transform:translate(var(--ffx2,8px),var(--ffy2,-10px));   opacity:0; }
+  }
+
+  /* ── SVG SCENE ── */
+  .scene-wrap { position:relative; z-index:5; width:100%; max-width:940px; margin:0 auto; display:block; }
+  .scene-svg  { width:100%; height:auto; display:block; }
+
+  /* Flame animations */
+  .fl-main  { animation:flMain  1.8s ease-in-out infinite alternate; transform-origin:50% 100%; }
+  .fl-L     { animation:flL     2.2s ease-in-out infinite alternate; transform-origin:50% 100%; }
+  .fl-R     { animation:flR     2.6s ease-in-out infinite alternate; transform-origin:50% 100%; }
+  .fl-tip   { animation:flTip   2.0s ease-in-out infinite alternate; transform-origin:50% 100%; }
+  @keyframes flMain { 0%{transform:scaleX(1)    scaleY(1)   } 100%{transform:scaleX(0.95) scaleY(1.05)} }
+  @keyframes flL    { 0%{transform:scaleX(1)    scaleY(1)    rotate(-2deg)} 100%{transform:scaleX(0.93) scaleY(1.06) rotate(2deg)} }
+  @keyframes flR    { 0%{transform:scaleX(1)    scaleY(1)    rotate(1.5deg)}  100%{transform:scaleX(0.94) scaleY(1.05) rotate(-2deg)} }
+  @keyframes flTip  { 0%{transform:scaleX(1)    scaleY(1)   } 100%{transform:scaleX(0.88) scaleY(1.1) translateY(-2px)} }
+
+  .ember   { animation:emb 1.7s ease-out infinite; opacity:0; }
+  .ember2  { animation:emb 1.7s 0.57s ease-out infinite; opacity:0; }
+  .ember3  { animation:emb 1.7s 1.14s ease-out infinite; opacity:0; }
+  @keyframes emb {
+    0%  { opacity:0;   transform:translate(0,0) scale(1); }
+    15% { opacity:0.9; }
+    100%{ opacity:0;   transform:translate(var(--ex,8px),-38px) scale(0.25); }
+  }
+
+  /* ── YEAR NAV ── */
+  .year-nav {
+    background:var(--forest);
+    border-bottom:3px solid var(--sun);
+    padding:1rem 2rem;
+    position:sticky; top:70px; z-index:100;
+    display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap; justify-content:center;
+  }
+  .year-nav-label { font-size:0.75rem; font-weight:800; color:var(--sun); letter-spacing:1.5px; text-transform:uppercase; margin-right:0.4rem; }
+  .year-nav-link {
+    display:inline-block; padding:0.35rem 0.9rem;
+    border-radius:20px; font-size:0.85rem; font-weight:800;
+    background:rgba(245,200,66,0.1); color:rgba(255,255,255,0.85);
+    text-decoration:none; border:2px solid rgba(245,200,66,0.25);
+    transition:all 0.15s;
+  }
+  .year-nav-link:hover { background:var(--sun); color:var(--forest-dark); border-color:var(--sun); }
+
+  /* ── YEAR SECTIONS ── */
+  .year-section { padding:4rem 2rem; position:relative; overflow:hidden; }
+  .year-section:nth-child(odd)  { background:var(--cream); }
+  .year-section:nth-child(even) { background:#edf5ef; }
+  .container { max-width:1100px; margin:0 auto; }
+
+  .year-header {
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:2rem;
+    align-items:center;
+    margin-bottom:2.5rem;
+  }
+  .year-header-text { text-align:left; }
+  .year-tag {
+    display:inline-block; font-size:0.8rem; font-weight:800;
+    letter-spacing:2px; text-transform:uppercase;
+    color:var(--forest-light); margin-bottom:0.6rem;
+    background:rgba(45,122,79,0.1); padding:0.3rem 0.9rem;
+    border-radius:20px; border:2px solid rgba(45,122,79,0.2);
+  }
+  .year-title {
+    font-family:'Cabin Sketch',cursive;
+    font-size:clamp(3rem,6vw,5rem);
+    color:var(--forest); line-height:1; margin-bottom:0.8rem;
+  }
+  .year-divider { width:80px; height:4px; background:linear-gradient(90deg,var(--forest-light),var(--sun)); border-radius:4px; margin:0 0 1rem; }
+  .year-desc { font-size:0.95rem; color:var(--text-mid); max-width:480px; line-height:1.7; font-weight:600; }
+
+  .group-photo-wrap {
+    flex-shrink:0;
+    width:clamp(200px, 28vw, 340px);
+  }
+  .group-photo-frame {
+    border-radius:16px; overflow:hidden;
+    border:4px solid var(--forest-light);
+    box-shadow:0 8px 32px rgba(26,74,46,0.22), 4px 4px 0 var(--sun);
+    aspect-ratio:4/3;
+    background:#c2e0cb;
+    position:relative;
+    transition:transform 0.2s, box-shadow 0.2s;
+  }
+  .group-photo-frame:hover {
+    transform:translateY(-3px) rotate(-0.5deg);
+    box-shadow:0 14px 40px rgba(26,74,46,0.28), 4px 4px 0 var(--sun);
+  }
+  .group-photo-frame img {
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .group-photo-label {
+    position:absolute; bottom:0; left:0; right:0;
+    background:linear-gradient(transparent, rgba(14,46,28,0.78));
+    padding:1rem 0.8rem 0.5rem;
+    font-size:0.78rem; font-weight:800; color:rgba(255,255,255,0.9);
+    text-align:center; letter-spacing:0.5px; text-transform:uppercase;
+  }
+
+  @media(max-width:680px) {
+    .year-header { grid-template-columns:1fr; }
+    .year-header-text { text-align:center; }
+    .year-divider { margin:0 auto 1rem; }
+    .year-desc { margin:0 auto; }
+    .group-photo-wrap { width:100%; }
+  }
+
+  .photos-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.2rem; }
+  .photo-frame {
+    border-radius:16px; overflow:hidden;
+    border:3px solid rgba(45,122,79,0.2);
+    position:relative; transition:transform 0.2s,box-shadow 0.2s;
+    aspect-ratio:4/3; background:#c2e0cb;
+  }
+  .photo-frame:hover { transform:translateY(-5px) rotate(0.4deg); box-shadow:0 16px 48px rgba(26,74,46,0.22); border-color:var(--forest-light); }
+  .photo-frame img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.3s; }
+  .photo-frame:hover img { transform:scale(1.04); }
+  .photo-overlay {
+    position:absolute; bottom:0; left:0; right:0;
+    background:linear-gradient(transparent,rgba(14,46,28,0.82));
+    padding:1.5rem 1rem 0.8rem;
+    transform:translateY(100%); transition:transform 0.25s;
+  }
+  .photo-frame:hover .photo-overlay { transform:translateY(0); }
+  .photo-caption { font-size:0.85rem; font-weight:700; color:white; display:block; }
+
+  /* ── BUGS ── */
+  .bug {
+    position:absolute;
+    font-size:1.9rem;
+    cursor:pointer; z-index:20;
+    animation:bugCrawl var(--bs,12s) ease-in-out infinite var(--bd,0s);
+    transition:transform 0.15s;
+    user-select:none;
+  }
+  .bug:hover { transform:scale(1.4) !important; filter:drop-shadow(0 0 6px rgba(245,200,66,0.8)); }
+  .bug.caught { animation:none !important; opacity:0 !important; pointer-events:none; }
+
+  @keyframes bugCrawl {
+    0%   { transform:translate(var(--x0,0px),var(--y0,0px)) rotate(var(--r0,0deg)) scale(1);    opacity:0; }
+    5%   { opacity:1; }
+    20%  { transform:translate(var(--x1,40px),var(--y1,-12px)) rotate(var(--r1,15deg)) scale(1.05); }
+    35%  { transform:translate(var(--x1,40px),var(--y1,-12px)) rotate(var(--r1,15deg)) scale(0.95); }
+    50%  { transform:translate(var(--x2,90px),var(--y2,8px)) rotate(var(--r2,-12deg)) scale(1.05); }
+    65%  { transform:translate(var(--x2,90px),var(--y2,8px)) rotate(var(--r2,-12deg)) scale(0.95); }
+    80%  { transform:translate(var(--x3,140px),var(--y3,-8px)) rotate(var(--r3,10deg)) scale(1.05); }
+    93%  { opacity:1; }
+    100% { transform:translate(var(--x4,190px),var(--y4,0px)) rotate(var(--r4,0deg)) scale(1);   opacity:0; }
+  }
+  .bug-down { animation-name:bugCrawlDown; }
+  @keyframes bugCrawlDown {
+    0%   { transform:translate(var(--x0,0px),var(--y0,0px)) rotate(var(--r0,90deg)) scale(1);   opacity:0; }
+    5%   { opacity:1; }
+    20%  { transform:translate(var(--x1,8px),var(--y1,40px)) rotate(var(--r1,95deg)) scale(1.05); }
+    35%  { transform:translate(var(--x1,8px),var(--y1,40px)) rotate(var(--r1,95deg)) scale(0.95); }
+    50%  { transform:translate(var(--x2,-6px),var(--y2,85px)) rotate(var(--r2,85deg)) scale(1.05); }
+    65%  { transform:translate(var(--x2,-6px),var(--y2,85px)) rotate(var(--r2,85deg)) scale(0.95); }
+    80%  { transform:translate(var(--x3,7px),var(--y3,130px)) rotate(var(--r3,93deg)) scale(1.05); }
+    93%  { opacity:1; }
+    100% { transform:translate(var(--x4,0px),var(--y4,175px)) rotate(var(--r4,90deg)) scale(1);  opacity:0; }
+  }
+
+  /* ── BUG CAGE MODAL ── */
+  .cage-overlay {
+    display:none; position:fixed; inset:0; z-index:500;
+    background:rgba(10,26,16,0.82); backdrop-filter:blur(4px);
+    align-items:center; justify-content:center;
+  }
+  .cage-overlay.open { display:flex; animation:fadeIn 0.2s ease-out; }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+  .cage-box {
+    background:#1a3a22;
+    border:3px solid var(--sun);
+    border-radius:20px;
+    padding:2rem 2.5rem;
+    text-align:center;
+    max-width:320px; width:90%;
+    position:relative;
+    box-shadow:0 20px 60px rgba(0,0,0,0.6);
+    animation:popUp 0.3s cubic-bezier(.34,1.56,.64,1) both;
+  }
+  @keyframes popUp { from{transform:scale(0.6) translateY(20px)} to{transform:scale(1) translateY(0)} }
+
+  .cage-svg {
+    width:180px; height:200px;
+    margin:0 auto 0.8rem;
+    display:block;
+  }
+  .cage-bug {
+    font-size:3rem;
+    display:block;
+    margin-bottom:0.5rem;
+    animation:cageWiggle 1.2s ease-in-out infinite alternate;
+  }
+  @keyframes cageWiggle {
+    0%   { transform:rotate(-8deg) scale(1); }
+    50%  { transform:rotate(8deg) scale(1.1); }
+    100% { transform:rotate(-4deg) scale(0.95); }
+  }
+  .cage-count {
+    font-family:'Cabin Sketch',cursive;
+    font-size:1.1rem; color:var(--sun);
+    margin-bottom:0.4rem;
+  }
+  .cage-msg {
+    font-size:0.85rem; color:rgba(255,255,255,0.65);
+    font-weight:700; margin-bottom:1.2rem; line-height:1.5;
+  }
+  .cage-close {
+    background:var(--sun); color:var(--forest-dark);
+    border:none; padding:0.6rem 1.6rem;
+    border-radius:30px; font-family:'Nunito',sans-serif;
+    font-weight:900; font-size:0.95rem; cursor:pointer;
+    transition:transform 0.15s;
+  }
+  .cage-close:hover { transform:scale(1.06); }
+
+  /* ── FOOTER ── */
+  footer {
+    background:var(--forest-dark); color:rgba(255,255,255,0.55);
+    padding:2.5rem 2rem; text-align:center;
+    border-top:3px solid var(--sun); position:relative; z-index:1;
+  }
+  .footer-logo-wrap { display:flex; align-items:center; justify-content:center; gap:0.8rem; margin-bottom:0.6rem; }
+  .footer-logo-wrap img { height:44px; width:auto; }
+  .footer-logo-wrap span { font-size:1.1rem; font-weight:900; color:var(--sun); }
+  footer p { font-size:0.85rem; font-weight:600; }
+  .footer-divider { border:none; border-top:1px solid rgba(245,200,66,0.2); margin:1.2rem 0; }
+  .footer-copy { font-size:0.78rem; color:rgba(255,255,255,0.25); font-weight:600; }
+
+  @media(max-width:768px) {
+    .photos-grid { grid-template-columns:repeat(2,1fr); gap:0.8rem; }
+    .camp-title  { font-size:2.4rem; }
+    .year-title  { font-size:2.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.png" alt="Bridgeway logo">
+    <div class="nav-logo-text">Bridgeway <span>English School</span></div>
+  </a>
+  <a href="index.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<!-- ════════════════════════════════
+     HERO
+════════════════════════════════ -->
+<div class="camp-hero">
+  <div class="stars"></div>
+
+  <!-- Fireflies -->
+  <div class="firefly" style="left:10%;top:42%;--ffd:3.4s;--ffdel:0s;--ffx:22px;--ffy:-32px;--ffx2:8px;--ffy2:-12px;"></div>
+  <div class="firefly" style="left:25%;top:58%;--ffd:4.1s;--ffdel:0.9s;--ffx:-16px;--ffy:-26px;--ffx2:5px;--ffy2:-8px;"></div>
+  <div class="firefly" style="left:65%;top:46%;--ffd:3.7s;--ffdel:1.6s;--ffx:18px;--ffy:-38px;--ffx2:-9px;--ffy2:-16px;"></div>
+  <div class="firefly" style="left:80%;top:52%;--ffd:5s;--ffdel:0.4s;--ffx:-20px;--ffy:-30px;--ffx2:7px;--ffy2:-11px;"></div>
+  <div class="firefly" style="left:48%;top:28%;--ffd:4.4s;--ffdel:2.2s;--ffx:14px;--ffy:-42px;--ffx2:-4px;--ffy2:-18px;"></div>
+  <div class="firefly" style="left:36%;top:50%;--ffd:3.9s;--ffdel:3s;--ffx:-12px;--ffy:-22px;--ffx2:6px;--ffy2:-9px;"></div>
+
+  <div class="hero-text">
+    <span class="hero-eyebrow">✦ ABC Bridgeway Annual Event with Yamasabe in Oe Town</span>
+    <h1 class="camp-title">English Summer Camp</h1>
+    <div class="camp-subtitle">Adventures in the great outdoors since 2023</div>
+    <p class="camp-desc">Two days of campfires, outdoor adventures, and English immersion in the beautiful Yamagata countryside!</p>
+  </div>
+
+  <!-- ═══ ILLUSTRATED CAMPING SCENE ═══ -->
+  <div class="scene-wrap">
+    <svg class="scene-svg" viewBox="0 0 940 430" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="glow" cx="50%" cy="75%" r="35%">
+          <stop offset="0%"   stop-color="#ff8c00" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="#ff8c00" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="moonhalo" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"   stop-color="#fffde7" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#fffde7" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="soft"><feGaussianBlur stdDeviation="4"/></filter>
+        <filter id="softer"><feGaussianBlur stdDeviation="8"/></filter>
+      </defs>
+
+      <!-- Moon + halo -->
+      <circle cx="820" cy="52" r="30" fill="#fffde7" opacity="0.95"/>
+      <circle cx="836" cy="44" r="26" fill="#0c1e30"/>
+      <circle cx="820" cy="52" r="42" fill="url(#moonhalo)" filter="url(#softer)"/>
+
+      <!-- Distant mountains -->
+      <polygon points="  0,260  110,105  220,260" fill="#0c2a19" opacity="0.8"/>
+      <polygon points=" 70,260  210, 82  350,260" fill="#0e3020" opacity="0.75"/>
+      <polygon points="190,260  345, 58  500,260" fill="#0c2a19" opacity="0.72"/>
+      <polygon points="380,260  530, 78  680,260" fill="#0e3020" opacity="0.7"/>
+      <polygon points="560,260  700, 68  840,260" fill="#0c2a19" opacity="0.72"/>
+      <polygon points="700,260  835, 88  940,260" fill="#0e3020" opacity="0.7"/>
+
+      <!-- Ground -->
+      <rect x="0" y="355" width="940" height="75" fill="#163d24"/>
+      <ellipse cx="470" cy="356" rx="470" ry="9" fill="#2d7a4f" opacity="0.28"/>
+
+      <!-- Grass tufts -->
+      <g fill="#235c34" opacity="0.65">
+        <ellipse cx="50"  cy="357" rx="20" ry="5"/>
+        <ellipse cx="135" cy="359" rx="13" ry="4"/>
+        <ellipse cx="240" cy="356" rx="22" ry="5"/>
+        <ellipse cx="360" cy="358" rx="15" ry="4"/>
+        <ellipse cx="590" cy="357" rx="17" ry="5"/>
+        <ellipse cx="700" cy="359" rx="24" ry="5"/>
+        <ellipse cx="800" cy="356" rx="14" ry="4"/>
+        <ellipse cx="880" cy="358" rx="19" ry="5"/>
+      </g>
+
+      <!-- ── BIG TREE LEFT ── -->
+      <g transform="translate(48,48)">
+        <rect x="24" y="225" width="15" height="82" fill="#4a2d0e" rx="4"/>
+        <!-- each layer: apex at top, wide base at bottom, overlapping the layer below -->
+        <polygon points="31,172  -22,235  84,235" fill="#16612f"/>
+        <polygon points="31,130  -26,205  88,205" fill="#1a7238"/>
+        <polygon points="31, 88  -22,175  84,175" fill="#1e8542"/>
+        <polygon points="31, 55  -15,148  77,148" fill="#22974c"/>
+        <polygon points="31, 55    6, 95  56, 95" fill="#38c46a" opacity="0.3"/>
+      </g>
+
+      <!-- ── BIG TREE RIGHT ── -->
+      <g transform="translate(826,32)">
+        <rect x="24" y="240" width="15" height="82" fill="#4a2d0e" rx="4"/>
+        <polygon points="31,183  -24,250  86,250" fill="#16612f"/>
+        <polygon points="31,144  -28,220  90,220" fill="#1a7238"/>
+        <polygon points="31,103  -24,188  86,188" fill="#1e8542"/>
+        <polygon points="31, 66  -16,155  78,155" fill="#22974c"/>
+        <polygon points="31, 66    8,108  54,108" fill="#38c46a" opacity="0.3"/>
+      </g>
+
+      <!-- ── MID TREE LEFT ── -->
+      <g transform="translate(148,125)">
+        <rect x="16" y="168" width="10" height="60" fill="#4a2d0e" rx="3"/>
+        <polygon points="21,124  -12,182  54,182" fill="#16612f"/>
+        <polygon points="21, 92  -14,160  56,160" fill="#1a7238"/>
+        <polygon points="21, 64   -9,130  51,130" fill="#1e8542"/>
+      </g>
+
+      <!-- ── MID TREE RIGHT ── -->
+      <g transform="translate(755,138)">
+        <rect x="16" y="162" width="10" height="58" fill="#4a2d0e" rx="3"/>
+        <polygon points="21,118  -12,178  54,178" fill="#16612f"/>
+        <polygon points="21, 86  -14,152  56,152" fill="#1a7238"/>
+        <polygon points="21, 58   -9,122  51,122" fill="#1e8542"/>
+      </g>
+
+      <!-- ── RED TENT (main, left) ── -->
+      <g transform="translate(148,218)">
+        <polygon points="105,138  0,138  52,-12" fill="#b03020"/>
+        <polygon points="52,-12  24,138  52,138" fill="#d94030"/>
+        <ellipse cx="52" cy="138" rx="24" ry="14" fill="#200a08"/>
+        <ellipse cx="52" cy="138" rx="17" ry="10" fill="#140504" opacity="0.8"/>
+        <line x1="52" y1="-12" x2="52" y2="-26" stroke="#8b6914" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="52" cy="-28" r="4.5" fill="#f5c842"/>
+        <line x1="0"   y1="138" x2="-14" y2="153" stroke="#8b6914" stroke-width="2"/>
+        <line x1="105" y1="138" x2="118" y2="153" stroke="#8b6914" stroke-width="2"/>
+        <line x1="52" y1="-12" x2="-22" y2="84" stroke="#c8a96b" stroke-width="1.5" opacity="0.5" stroke-dasharray="4,3"/>
+        <line x1="52" y1="-12" x2="126" y2="84" stroke="#c8a96b" stroke-width="1.5" opacity="0.5" stroke-dasharray="4,3"/>
+      </g>
+
+      <!-- ── BLUE TENT (background, right) ── -->
+      <g transform="translate(590,260)" opacity="0.8">
+        <polygon points="84,108  0,108  42,-10" fill="#1e5fa0"/>
+        <polygon points="42,-10  18,108  42,108" fill="#2980c8"/>
+        <ellipse cx="42" cy="108" rx="19" ry="12" fill="#0c2840"/>
+        <line x1="42" y1="-10" x2="42" y2="-22" stroke="#8b6914" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="42" cy="-24" r="3.5" fill="#f5c842"/>
+        <line x1="0"  y1="108" x2="-12" y2="120" stroke="#8b6914" stroke-width="1.8"/>
+        <line x1="84" y1="108" x2=" 96" y2="120" stroke="#8b6914" stroke-width="1.8"/>
+      </g>
+
+      <!-- ── CAMPFIRE GLOW ── -->
+      <ellipse cx="470" cy="350" rx="130" ry="24" fill="url(#glow)" filter="url(#soft)"/>
+
+      <!-- ── LOGS ── -->
+      <g transform="translate(400,320)">
+        <ellipse cx="70" cy="28" rx="66" ry="11" fill="#54300f" transform="rotate(-11,70,28)"/>
+        <ellipse cx="70" cy="22" rx="66" ry="7.5" fill="#7a4520" transform="rotate(-11,70,22)"/>
+        <ellipse cx="70" cy="28" rx="62" ry="10" fill="#54300f" transform="rotate(13,70,28)"/>
+        <ellipse cx="70" cy="22" rx="62" ry="7"   fill="#7a4520" transform="rotate(13,70,22)"/>
+        <ellipse cx="19"  cy="28" rx="9" ry="10" fill="#8b5e3c" transform="rotate(-11,19,28)"/>
+        <ellipse cx="121" cy="28" rx="9" ry="10" fill="#8b5e3c" transform="rotate(-11,121,28)"/>
+        <!-- coal glow -->
+        <ellipse cx="70" cy="32" rx="40" ry="8"  fill="#b03000" opacity="0.5"/>
+        <ellipse cx="70" cy="32" rx="28" ry="6"  fill="#d45500" opacity="0.6"/>
+        <ellipse cx="70" cy="32" rx="17" ry="3.5" fill="#f09000" opacity="0.85"/>
+      </g>
+
+      <!-- Stone ring -->
+      <g transform="translate(398,343)" fill="#6a6a6a" opacity="0.82">
+        <ellipse cx="12"  cy="10" rx="11" ry="7" transform="rotate(-22,12,10)"/>
+        <ellipse cx="36"  cy="18" rx="10" ry="6"/>
+        <ellipse cx="64"  cy="20" rx="11" ry="6.5"/>
+        <ellipse cx="92"  cy="18" rx="10" ry="6"/>
+        <ellipse cx="116" cy="10" rx="11" ry="7" transform="rotate(22,116,10)"/>
+        <ellipse cx="64"   cy="2" rx="9"  ry="5.5" transform="rotate(5,64,2)"/>
+      </g>
+
+      <!-- ── FLAMES ── -->
+      <g transform="translate(408,262)">
+        <path class="fl-L"   d="M62,82 Q28,52 40,10 Q52,42 57,18 Q67,52 62,82Z" fill="#cc3c22" opacity="0.88"/>
+        <path class="fl-R"   d="M62,82 Q96,48 84, 8 Q70,40 67,17 Q57,50 62,82Z" fill="#cc3c22" opacity="0.88"/>
+        <path class="fl-main" d="M62,82 Q36,58 47,22 Q57,47 62, 4 Q67,47 77,22 Q88,58 62,82Z" fill="#ff7200"/>
+        <path class="fl-tip"  d="M62,82 Q47,62 54,32 Q62,52 62,10 Q62,52 70,32 Q77,62 62,82Z" fill="#f5c842" opacity="0.92"/>
+        <ellipse cx="62" cy="12" rx="5" ry="8" fill="white" opacity="0.45" class="fl-tip"/>
+        <circle class="ember"  cx="62" cy="78" r="2.5" fill="#f5c842" style="--ex:-16px"/>
+        <circle class="ember2" cx="62" cy="78" r="2"   fill="#ff9a3c" style="--ex:13px"/>
+        <circle class="ember3" cx="62" cy="78" r="2"   fill="white"   style="--ex:-4px"/>
+      </g>
+
+      <!-- ── FIGURE LEFT (sitting, roasting marshmallow) ── -->
+      <g transform="translate(288,270)">
+        <ellipse cx="38" cy="64" rx="40" ry="11" fill="#54300f"/>
+        <rect x="19" y="30" width="36" height="34" rx="9" fill="#c0392b"/>
+        <circle cx="37" cy="20" r="17" fill="#f5cba7"/>
+        <ellipse cx="37" cy="10" rx="17" ry="8" fill="#5d3a1a"/>
+        <circle cx="30" cy="20" r="2.8" fill="#2c3e50"/>
+        <circle cx="44" cy="20" r="2.8" fill="#2c3e50"/>
+        <path d="M30,27 Q37,33 44,27" stroke="#2c3e50" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <line x1="19" y1="42" x2=" 3" y2="57" stroke="#f5cba7" stroke-width="7.5" stroke-linecap="round"/>
+        <line x1="55" y1="42" x2="70" y2="57" stroke="#f5cba7" stroke-width="7.5" stroke-linecap="round"/>
+        <!-- marshmallow stick -->
+        <line x1="70" y1="57" x2="104" y2="28" stroke="#7a4520" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="105" cy="26" r="7" fill="white" opacity="0.92"/>
+        <circle cx="105" cy="26" r="5" fill="#f9e4c8"/>
+        <rect x="22" y="62" width="13" height="22" rx="5.5" fill="#2980b9"/>
+        <rect x="39" y="62" width="13" height="22" rx="5.5" fill="#2980b9"/>
+        <ellipse cx="28" cy="84" rx="10" ry="5.5" fill="#1a252f"/>
+        <ellipse cx="45" cy="84" rx="10" ry="5.5" fill="#1a252f"/>
+      </g>
+
+      <!-- ── FIGURE RIGHT (sitting, laughing) ── -->
+      <g transform="translate(572,272)">
+        <ellipse cx="38" cy="62" rx="40" ry="11" fill="#54300f"/>
+        <rect x="19" y="30" width="36" height="34" rx="9" fill="#27ae60"/>
+        <circle cx="37" cy="20" r="17" fill="#fad7a0"/>
+        <path d="M20,14 Q37,-3 54,14 Q54,3 37,1 Q20,3 20,14Z" fill="#1a1a1a"/>
+        <circle cx="30" cy="19" r="2.8" fill="#2c3e50"/>
+        <circle cx="44" cy="19" r="2.8" fill="#2c3e50"/>
+        <path d="M29,26 Q37,35 45,26" stroke="#2c3e50" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <line x1="55" y1="42" x2="70" y2="52" stroke="#fad7a0" stroke-width="7.5" stroke-linecap="round"/>
+        <line x1="19" y1="42" x2=" 4" y2="52" stroke="#fad7a0" stroke-width="7.5" stroke-linecap="round"/>
+        <rect x="22" y="60" width="13" height="22" rx="5.5" fill="#8e44ad"/>
+        <rect x="39" y="60" width="13" height="22" rx="5.5" fill="#8e44ad"/>
+        <ellipse cx="28" cy="82" rx="10" ry="5.5" fill="#1a252f"/>
+        <ellipse cx="45" cy="82" rx="10" ry="5.5" fill="#1a252f"/>
+      </g>
+
+      <!-- Smoke -->
+      <path d="M470,260 Q456,228 468,196 Q478,168 462,138" stroke="rgba(180,180,180,0.2)" stroke-width="6" fill="none" stroke-linecap="round">
+        <animate attributeName="d" dur="3.2s" repeatCount="indefinite"
+          values="M470,260 Q456,228 468,196 Q478,168 462,138;
+                  M470,260 Q484,224 472,190 Q460,162 476,130;
+                  M470,260 Q456,228 468,196 Q478,168 462,138"/>
+        <animate attributeName="opacity" dur="3.2s" repeatCount="indefinite" values="0.2;0.08;0.2"/>
+      </path>
+      <path d="M468,260 Q448,218 460,182 Q470,152 452,118" stroke="rgba(180,180,180,0.12)" stroke-width="3.5" fill="none" stroke-linecap="round">
+        <animate attributeName="d" dur="4.5s" repeatCount="indefinite"
+          values="M468,260 Q448,218 460,182 Q470,152 452,118;
+                  M468,260 Q488,215 476,178 Q466,149 484,114;
+                  M468,260 Q448,218 460,182 Q470,152 452,118"/>
+      </path>
+
+    </svg>
+  </div>
+</div><!-- end camp-hero -->
+
+<!-- YEAR NAV -->
+<div class="year-nav">
+  <span class="year-nav-label">⛺ Jump to:</span>
+  <a href="#year-2025" class="year-nav-link">2025</a>
+  <a href="#year-2024" class="year-nav-link">2024</a>
+  <a href="#year-2023" class="year-nav-link">2023</a>
+</div>
+
+<!-- ══════════════ YEAR SECTIONS ══════════════ -->
+
+<!-- 2025 -->
+<section class="year-section" id="year-2025">
+  <div class="bug" style="top:40%;left:1%;--bs:14s;--bd:0s;--x0:0px;--y0:0px;--x1:42px;--y1:-9px;--x2:90px;--y2:6px;--x3:132px;--y3:-6px;--x4:182px;--y4:0px;--r0:0deg;--r1:12deg;--r2:-9deg;--r3:11deg;--r4:0deg;">🐛</div>
+  <div class="container">
+    <div class="year-header">
+      <div class="year-header-text">
+        <div class="year-tag">⛺ Summer Camp</div>
+        <h2 class="year-title">2025</h2>
+        <div class="year-divider"></div>
+        <p class="year-desc">✏️ Teachers from America!, knot tying, tent setting, bon fire, pop corn, wood cutting, fire starting, hot sandwhich, Hunter/Seeker, and more!.</p>
+      </div>
+      <div class="group-photo-wrap">
+        <div class="group-photo-frame">
+          <img src="summer-camp/camp-2025-group.webp" alt="Group photo Summer Camp 2025" loading="lazy">
+          <div class="group-photo-label">📸 Group Photo 2025</div>
+        </div>
+      </div>
+    </div>
+    <div class="photos-grid">
+      <div class="photo-frame"><img src="summer-camp/camp-2025-1.webp" alt="Summer Camp 2025 photo 1" loading="lazy"><div class="photo-overlay"><span class="photo-caption">✏️ Add caption here</span></div></div>
+      <div class="photo-frame"><img src="summer-camp/camp-2025-2.webp" alt="Summer Camp 2025 photo 2" loading="lazy"><div class="photo-overlay"><span class="photo-caption">✏️ Add caption here</span></div></div>
+      <div class="photo-frame"><img src="summer-camp/camp-2025-3.webp" alt="Summer Camp 2025 photo 3" loading="lazy"><div class="photo-overlay"><span class="photo-caption">✏️ Add caption here</span></div></div>
+      <div class="photo-frame"><img src="summer-camp/camp-2025-4.webp" alt="Summer Camp 2025 photo 4" loading="lazy"><div class="photo-overlay"><span class="photo-caption">✏️ Add caption here</span></div></div>
+      <div class="photo-frame"><img src="summer-camp/camp-2025-5.jpg" alt="Summer Camp 2025 photo 5" loading="lazy"><div class="photo-overlay"><span class="photo-caption">✏️ Add caption here</span></div></div>
+      <div class="photo-frame"><img src="summer-camp/camp-2025-6.jpg" alt="Summer Camp 2025 photo 6" loading="lazy"><div class="photo-overlay"><span class="photo-caption">✏️ Add caption here</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2024 -->
+<section class="year-section" id="year-2024">
+  <div class="bug" style="top:45%;right:1%;--bs:16s;--bd:0.6s;--x0:0px;--y0:0px;--x1:-44px;--y1:-8px;--x2:-90px;--y2:5px;--x3:-134px;--y3:-6px;--x4:-178px;--y4:0px;--r0:180deg;--r1:170deg;--r2:188deg;--r3:172deg;--r4:180deg;">🐞</div>
+  <div class="container">
+    <div class="year-header">
+      <div class="year-header-text">
+        <div class="year-tag">⛺ Summer Camp</div>
+        <h2 class="year-title">2024</h2>
+        <div class="year-divider"></div>
+        <p class="year-desc">✏️ Scavenger hunting, dodgeball, bug catching, bon fire, wood cutting, hot sandwhich making, Hunter/Seeker, and more!.</p>
+      </div>
+      <div class="group-photo-wrap">
+        <div class="group-photo-frame">
+          <img src="summer-camp/camp-2024-group.jpg" alt="Group photo Summer Camp 2024" loading="lazy">
+          <div class="group-photo-label">📸 Group Photo 2024</div>
+        </div>
+      </div>
+    </div>
+    <div class="photos-grid">
+      <div class="photo-frame"><img src="summer-camp/camp-2024-1.jpg" alt="Summer Camp 2024 photo 1" loading="lazy"><div class="photo-overlay"><span class="photo-caption">✏️ Add caption here</span></div></div>
+      <div class="photo-frame"><img src="summer-camp/camp-2024-2.jpg" alt="Summer Camp 2024 photo 2" loading="lazy"><div class="photo-overlay"><span class="photo-caption">✏️ Add caption here</span></div></div>
+      <div class="photo-frame"><img src="summer-camp/camp-2024-3.jpeg" alt="Summer Camp 2024 photo 3" loading="lazy"><div class="photo-overlay"><span class="photo-caption">✏️ Add caption here</span></div></div>
+      <div class="photo-frame"><img src="summer-camp/camp-2024-4.jpg" alt="Summer Camp 2024 photo 4" loading="lazy"><div class="photo-overlay"><span class="photo-caption">✏️ Add caption here</span></div></div>
+      <div class="photo-frame"><img src="summer-camp/camp-2024-5.jpg" alt="Summer Camp 2024 photo 5" loading="lazy"><div class="photo-overlay"><span class="photo-caption">✏️ Add caption here</span></div></div>
+      <div class="photo-frame"><img src="summer-camp/camp-2024-6.jpg" alt="Summer Camp 2024 photo 6" loading="lazy"><div class="photo-overlay"><span class="photo-caption">✏️ Add caption here</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2023 -->
+<section class="year-section" id="year-2023">
+  <div class="bug" style="top:40%;left:2%;--bs:12s;--bd:1s;--x0:0px;--y0:0px;--x1:46px;--y1:-12px;--x2:96px;--y2:7px;--x3:142px;--y3:-9px;--x4:192px;--y4:0px;--r0:0deg;--r1:-14deg;--r2:10deg;--r3:-9deg;--r4:0deg;">🐜</div>
+  <div class="container">
+    <div class="year-header">
+      <div class="year-header-text">
+        <div class="year-tag">⛺ Summer Camp</div>
+        <h2 class="year-title">2023</h2>
+        <div class="year-divider"></div>
+        <p class="year-desc">✏️ Wood cutting, fire making, curry making, bon-fire, water-sliding, squirt guns, scavenger hunting and more!.</p>
+      </div>
+      <div class="group-photo-wrap">
+        <div class="group-photo-frame">
+          <img src="summer-camp/camp-2023-group.jpg" alt="Group photo Summer Camp 2023" loading="lazy">
+          <div class="group-photo-label">📸 Group Photo 2023</div>
+        </div>
+      </div>
+    </div>
+    <div class="photos-grid">
+      <div class="photo-frame"><img src="summer-camp/camp-2023-1.jpg" alt="Summer Camp 2023 photo 1" loading="lazy"><div class="photo-overlay"><span class="photo-caption">✏️ Add caption here</span></div></div>
+      <div class="photo-frame"><img src="summer-camp/camp-2023-2.jpg" alt="Summer Camp 2023 photo 2" loading="lazy"><div class="photo-overlay"><span class="photo-caption">✏️ Add caption here</span></div></div>
+      <div class="photo-frame"><img src="summer-camp/camp-2023-3.jpg" alt="Summer Camp 2023 photo 3" loading="lazy"><div class="photo-overlay"><span class="photo-caption">✏️ Add caption here</span></div></div>
+      <div class="photo-frame"><img src="summer-camp/camp-2023-4.jpg" alt="Summer Camp 2023 photo 4" loading="lazy"><div class="photo-overlay"><span class="photo-caption">✏️ Add caption here</span></div></div>
+      <div class="photo-frame"><img src="summer-camp/camp-2023-5.jpg" alt="Summer Camp 2023 photo 5" loading="lazy"><div class="photo-overlay"><span class="photo-caption">✏️ Add caption here</span></div></div>
+      <div class="photo-frame"><img src="summer-camp/camp-2023-6.jpg" alt="Summer Camp 2023 photo 6" loading="lazy"><div class="photo-overlay"><span class="photo-caption">✏️ Add caption here</span></div></div>
+    </div>
+  </div>
+</section>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo-wrap">
+    <img src="logo.png" alt="Bridgeway logo">
+    <span>ABC Bridgeway English School</span>
+  </div>
+  <p>山形県山形市元木2-2-17 | 023-641-3059</p>
+  <hr class="footer-divider">
+  <p class="footer-copy">© 2026 ABC Bridgeway English School. All rights reserved.</p>
+</footer>
+
+<!-- BUG CAGE MODAL -->
+<div class="cage-overlay" id="cageOverlay">
+  <div class="cage-box">
+    <!-- SVG cage illustration -->
+    <svg class="cage-svg" viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- cage body bars -->
+      <rect x="20" y="30" width="140" height="150" rx="12" fill="none" stroke="#c8a96b" stroke-width="3.5"/>
+      <!-- vertical bars -->
+      <line x1="47"  y1="30" x2="47"  y2="180" stroke="#c8a96b" stroke-width="2.5"/>
+      <line x1="74"  y1="30" x2="74"  y2="180" stroke="#c8a96b" stroke-width="2.5"/>
+      <line x1="101" y1="30" x2="101" y2="180" stroke="#c8a96b" stroke-width="2.5"/>
+      <line x1="128" y1="30" x2="128" y2="180" stroke="#c8a96b" stroke-width="2.5"/>
+      <!-- horizontal rings -->
+      <ellipse cx="90" cy="30"  rx="70" ry="10" fill="none" stroke="#c8a96b" stroke-width="3"/>
+      <ellipse cx="90" cy="80"  rx="70" ry="8"  fill="none" stroke="#c8a96b" stroke-width="2" opacity="0.5"/>
+      <ellipse cx="90" cy="130" rx="70" ry="8"  fill="none" stroke="#c8a96b" stroke-width="2" opacity="0.5"/>
+      <ellipse cx="90" cy="180" rx="70" ry="10" fill="none" stroke="#c8a96b" stroke-width="3"/>
+      <!-- handle -->
+      <line x1="90" y1="20" x2="90" y2="2"  stroke="#c8a96b" stroke-width="3" stroke-linecap="round"/>
+      <ellipse cx="90" cy="2" rx="12" ry="5" fill="none" stroke="#c8a96b" stroke-width="2.5"/>
+      <!-- door latch -->
+      <rect x="148" y="90" width="14" height="24" rx="4" fill="#8b6914" stroke="#c8a96b" stroke-width="1.5"/>
+      <circle cx="155" cy="102" r="3" fill="#f5c842"/>
+      <!-- inside glow -->
+      <ellipse cx="90" cy="130" rx="55" ry="35" fill="rgba(245,200,66,0.06)"/>
+    </svg>
+
+    <span class="cage-bug" id="cageBugEmoji">🐛</span>
+    <div class="cage-count" id="cageCount">Bug caught! 🎉</div>
+    <div class="cage-msg" id="cageMsg">You caught a bug!<br>Keep exploring to find the others.</div>
+    <button class="cage-close" id="cageClose">Release it! 🌿</button>
+  </div>
+</div>
+
+<script>
+  const bugs = document.querySelectorAll('.bug');
+  const overlay = document.getElementById('cageOverlay');
+  const cageBugEmoji = document.getElementById('cageBugEmoji');
+  const cageCount = document.getElementById('cageCount');
+  const cageMsg = document.getElementById('cageMsg');
+  const cageClose = document.getElementById('cageClose');
+
+  let caughtBugs = [];
+  const totalBugs = bugs.length;
+
+  const messages = [
+    ["Got one! 🎉", "You caught a bug!<br>Keep exploring to find the others."],
+    ["Two down! 🐾", "Nice catch! There's still one more out there..."],
+    ["Bug collector! 🏆", "You found all the bugs!<br>You're an expert bug catcher! 🌟"],
+  ];
+
+  bugs.forEach(bug => {
+    bug.addEventListener('click', () => {
+      if (bug.classList.contains('caught')) return;
+
+      const emoji = bug.textContent.trim();
+      caughtBugs.push(emoji);
+      bug.classList.add('caught');
+
+      cageBugEmoji.textContent = emoji;
+
+      const idx = Math.min(caughtBugs.length - 1, messages.length - 1);
+      cageCount.textContent = messages[idx][0];
+      cageMsg.innerHTML = messages[idx][1];
+
+      overlay.classList.add('open');
+    });
+  });
+
+  cageClose.addEventListener('click', () => {
+    overlay.classList.remove('open');
+  });
+
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) overlay.classList.remove('open');
+  });
+</script>
+</body>
+</html>

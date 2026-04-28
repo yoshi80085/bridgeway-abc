@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course Books | ABC Bridgeway English School</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:#fdf8f2; --warm-white:#fffcf7;
+    --sky:#1e6db5; --sky-light:#e3eef8; --sky-dark:#154f87;
+    --sun:#f0a500; --sun-light:#fff4e0;
+    --grass:#2ab04a; --grass-light:#e4f5ea;
+    --teal:#00b4cc;
+    --text-dark:#1a2840; --text-mid:#4a5568; --text-light:#8a9ab0;
+    --border:#dde8f0; --shadow:rgba(30,109,181,0.13);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Nunito',sans-serif; background:var(--cream); color:var(--text-dark); }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(255,252,247,0.94); backdrop-filter:blur(12px);
+    border-bottom:2px solid var(--border);
+    padding:0 2rem; display:flex; align-items:center; justify-content:space-between;
+    height:70px;
+  }
+  .nav-logo { display:flex; align-items:center; gap:0.5rem; text-decoration:none; }
+  .nav-logo img { height:52px; width:auto; }
+  .nav-logo-text { font-size:1.05rem; font-weight:900; color:var(--sky-dark); line-height:1.2; }
+  .nav-logo-text span { display:block; font-size:0.72rem; font-weight:700; color:var(--text-light); letter-spacing:1px; text-transform:uppercase; }
+  .nav-back {
+    background:var(--sky); color:white;
+    padding:0.55rem 1.4rem; border-radius:30px;
+    font-weight:800; font-size:0.88rem; text-decoration:none;
+    transition:background 0.2s;
+  }
+  .nav-back:hover { background:var(--sky-dark); }
+
+  /* PAGE HEADER */
+  .page-header {
+    padding:7rem 2rem 3rem;
+    text-align:center;
+    background:var(--warm-white);
+    border-bottom:2px solid var(--border);
+  }
+  .section-tag { display:inline-block; font-size:0.78rem; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--sky); margin-bottom:0.8rem; }
+  .page-header h1 {
+    font-family:'Lora',serif;
+    font-size:clamp(2rem,4vw,3rem);
+    font-weight:600; color:var(--text-dark); margin-bottom:1rem;
+  }
+  .page-header h1 em { font-style:italic; color:var(--sky); }
+  .page-header p { font-size:1.05rem; color:var(--text-mid); max-width:560px; margin:0 auto; line-height:1.7; font-weight:600; }
+
+  /* SECTIONS */
+  .books-section { padding:4rem 2rem; }
+  .books-section:nth-child(even) { background:white; }
+  .container { max-width:1100px; margin:0 auto; }
+  .section-label {
+    display:inline-flex; align-items:center; gap:0.5rem;
+    font-size:0.78rem; font-weight:800; letter-spacing:2px;
+    text-transform:uppercase; color:var(--sky); margin-bottom:0.6rem;
+  }
+  .books-section h2 {
+    font-family:'Lora',serif;
+    font-size:clamp(1.6rem,3vw,2.2rem);
+    font-weight:600; color:var(--text-dark);
+    margin-bottom:0.6rem;
+  }
+  .books-section h2 em { font-style:italic; color:var(--sky); }
+  .books-section .section-desc {
+    font-size:1rem; color:var(--text-mid); max-width:600px;
+    line-height:1.7; font-weight:600; margin-bottom:2rem;
+  }
+
+  /* BOOK CARDS */
+  .books-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.2rem; }
+  .book-card {
+    display:block; text-decoration:none;
+    border-radius:18px; padding:1.8rem 1.6rem;
+    border:2.5px solid var(--border); background:var(--warm-white);
+    transition:transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    position:relative; overflow:hidden;
+    cursor:pointer;
+  }
+  #junior-grid {
+  max-width: 480px;
+}
+  .book-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:5px;
+    border-radius:18px 18px 0 0;
+  }
+  .book-card.green::before { background:var(--grass); }
+  .book-card.blue::before  { background:var(--sky); }
+  .book-card.gold::before  { background:var(--sun); }
+  .book-card.teal::before  { background:var(--teal); }
+  .book-card:hover {
+    transform:translateY(-5px);
+    box-shadow:0 12px 40px var(--shadow);
+    border-color:var(--sky);
+  }
+  .book-emoji { font-size:2.2rem; margin-bottom:0.8rem; display:block; }
+  .book-level {
+    display:inline-block; font-size:0.7rem; font-weight:800;
+    letter-spacing:1.5px; text-transform:uppercase;
+    padding:0.2rem 0.7rem; border-radius:20px; margin-bottom:0.7rem;
+  }
+  .lv-kinder { background:var(--grass-light); color:#1a7a35; }
+  .lv-kids   { background:var(--sky-light);   color:var(--sky-dark); }
+  .lv-junior { background:var(--sun-light);   color:#a06800; }
+  .lv-adult  { background:#fce8e8;            color:#c0392b; }
+  .book-card h3 { font-size:1.05rem; font-weight:900; margin-bottom:0.4rem; color:var(--text-dark); }
+  .book-card p  { font-size:0.88rem; color:var(--text-mid); line-height:1.55; font-weight:600; }
+  .book-link-hint { margin-top:1rem; font-size:0.8rem; font-weight:800; color:var(--sky); }
+
+  /* PRICING */
+  .price-card {
+    display: inline-flex; flex-wrap: wrap; align-items: center; gap: 1.5rem;
+    background: white; border-radius: 16px;
+    border: 2.5px solid var(--border);
+    padding: 1.1rem 1.6rem; margin-bottom: 2rem;
+    box-shadow: 0 4px 18px var(--shadow);
+  }
+  .price-item {
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; min-width: 100px;
+  }
+  .price-item + .price-item { border-left: 2px solid var(--border); padding-left: 1.5rem; }
+  .price-label {
+    font-size: 0.72rem; font-weight: 800; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--text-light); margin-bottom: 0.2rem;
+  }
+  .price-amount {
+    font-size: 1.5rem; font-weight: 900; color: var(--sky-dark); line-height: 1;
+  }
+  .price-amount sup { font-size: 0.85rem; font-weight: 800; vertical-align: super; }
+  .price-sub {
+    font-size: 0.75rem; font-weight: 700; color: var(--text-light); margin-top: 0.15rem;
+  }
+  .price-note {
+    font-size: 0.8rem; font-weight: 700; color: var(--text-mid);
+    background: var(--sun-light); border: 1.5px solid var(--sun);
+    border-radius: 10px; padding: 0.35rem 0.9rem; white-space: nowrap;
+  }
+  .fees-banner {
+    background: var(--sky-dark); color: white;
+    border-radius: 18px; padding: 1.8rem 2rem;
+    margin-top: 3rem; display: flex; flex-wrap: wrap;
+    gap: 1.5rem; align-items: flex-start; justify-content: space-between;
+  }
+  .fees-banner h3 { font-size: 1rem; font-weight: 900; margin-bottom: 0.3rem; }
+  .fees-banner p { font-size: 0.88rem; color: rgba(255,255,255,0.8); font-weight: 600; line-height: 1.5; }
+  .fees-item { flex: 1; min-width: 180px; }
+  .fees-item .fees-amount { font-size: 1.4rem; font-weight: 900; color: var(--sun); }
+
+  /* FOOTER */
+  footer { background:#0f1e33; color:rgba(255,255,255,0.6); padding:2.5rem 2rem; text-align:center; }
+  .footer-logo-wrap { display:flex; align-items:center; justify-content:center; gap:0.8rem; margin-bottom:0.6rem; }
+  .footer-logo-wrap img { height:44px; width:auto; }
+  .footer-logo-wrap span { font-size:1.1rem; font-weight:900; color:white; }
+  footer p { font-size:0.85rem; font-weight:600; }
+  .footer-divider { border:none; border-top:1px solid rgba(255,255,255,0.08); margin:1.2rem 0; }
+  .footer-copy { font-size:0.78rem; color:rgba(255,255,255,0.3); font-weight:600; }
+
+  @media(max-width:768px) {
+    .books-grid { grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); }
+    .side-by-side { grid-template-columns:1fr !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.png" alt="Bridgeway logo">
+    <div class="nav-logo-text">Bridgeway <span>English School</span></div>
+  </a>
+  <a href="index.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <span class="section-tag">✦ Our Curriculum</span>
+  <h1>Course <em>Books</em></h1>
+  <p>Every class at ABC Bridgeway uses carefully chosen textbooks designed to grow with your child. Click any book to learn more.</p>
+</div>
+
+<!-- LITTLE HANDS -->
+<section class="books-section" id="little-hands">
+  <div class="container">
+    <span class="section-label">🌱 Kindergarten · Ages 3-5</span>
+    <h2>Little <em>Hands</em></h2>
+    <p class="section-desc">Our gentlest introduction to English — song-based, play-driven lessons that build a joyful first connection with the language.</p>
+    <div class="price-card">
+      <div class="price-item">
+        <div class="price-label">月謝 Monthly Fee</div>
+        <div class="price-amount"><sup>¥</sup>7,000</div>
+        <div class="price-sub">per month · 50 min lesson</div>
+      </div>
+      <div class="price-item">
+        <div class="price-label">レッスン回数</div>
+        <div class="price-amount">42</div>
+        <div class="price-sub">lessons per year</div>
+      </div>
+      <div class="price-note">🎈 Ages 3–5 · Small groups</div>
+    </div>
+    <div class="books-grid">
+      <a class="book-card green" href="little-hands.html#book-1">
+        <img src="images/little-hands-1-cover.jpg" alt="Little Hands 1" style="width:100%; border-radius:10px; margin-bottom:1rem;">
+        <span class="book-level lv-kinder">Level 1</span>
+        <h3>Little Hands 1</h3>
+        <p>First words, colours, numbers, and simple greetings through songs and games.</p>
+        <div class="book-link-hint">Learn more →</div>
+      </a>
+      <a class="book-card green" href="little-hands.html#book-2">
+        <img src="images/little-hands-2-cover.jpg" alt="Hand in Hand Starter" style="width:100%; border-radius:10px; margin-bottom:1rem;">
+        <span class="book-level lv-kinder">Level 2</span>
+        <h3>Little Hands 2</h3>
+        <p>Building on Level 1 — more vocabulary, simple sentences, and classroom language.</p>
+        <div class="book-link-hint">Learn more →</div>
+      </a>
+      <a class="book-card green" href="little-hands.html#book-3">
+        <img src="images/little-hands-3-cover.jpg" alt="Hand in Hand Starter" style="width:100%; border-radius:10px; margin-bottom:1rem;">
+        <span class="book-level lv-kinder">Level 3</span>
+        <h3>Little Hands 3</h3>
+        <p>Confidence in speaking and listening, ready to transition into Hand in Hand.</p>
+        <div class="book-link-hint">Learn more →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- HAND IN HAND -->
+<section class="books-section" id="hand-in-hand">
+  <div class="container">
+    <span class="section-label">✋ Primary School · Ages 6–12</span>
+    <h2>Hand in <em>Hand</em></h2>
+    <p class="section-desc">A spiral curriculum that revisits and deepens. Each level builds naturally on the last — nothing is ever forgotten.</p>
+    <div class="price-card">
+      <div class="price-item">
+        <div class="price-label">月謝 Monthly Fee</div>
+        <div class="price-amount"><sup>¥</sup>7,000</div>
+        <div class="price-sub">per month · 50 min lesson</div>
+      </div>
+      <div class="price-item">
+        <div class="price-label">レッスン回数</div>
+        <div class="price-amount">42</div>
+        <div class="price-sub">lessons per year</div>
+      </div>
+      <div class="price-note">📚 Elementary School · Small groups</div>
+    </div>
+    <div class="books-grid">
+  <a class="book-card blue" href="hih-starter.html">
+  <img src="images/hih-starter-cover.jpg" alt="Hand in Hand Starter" style="width:100%; border-radius:10px; margin-bottom:1rem;">
+  <span class="book-level lv-kids">Starter</span>
+  <h3>Hand in Hand Starter</h3>
+  <p>The bridge from Little Hands — first structured reading, writing, and conversation.</p>
+  <div class="book-link-hint">Go to lessons →</div>
+</a>
+  <a class="book-card blue" href="hih-1.html">
+    <img src="images/hih-1-cover.jpg" alt="Hand in Hand Starter" style="width:100%; border-radius:10px; margin-bottom:1rem;">
+    <span class="book-level lv-kids">Level 1</span>
+    <h3>Hand in Hand 1</h3>
+    <p>Building core vocabulary and simple sentence structures through fun, engaging activities.</p>
+    <div class="book-link-hint">Go to lessons →</div>
+  </a>
+  <a class="book-card blue" href="hih-2.html">
+    <img src="images/hih-2-cover.jpg" alt="Hand in Hand Starter" style="width:100%; border-radius:10px; margin-bottom:1rem;">
+    <span class="book-level lv-kids">Level 2</span>
+    <h3>Hand in Hand 2</h3>
+    <p>Expanding grammar and communication skills with growing confidence in speaking and listening.</p>
+    <div class="book-link-hint">Learn more →</div>
+  </a>
+  <a class="book-card blue" href="hih-3.html">
+    <img src="images/hih-3-cover.WEBP" alt="Hand in Hand Starter" style="width:100%; border-radius:10px; margin-bottom:1rem;">
+    <span class="book-level lv-kids">Level 3</span>
+    <h3>Hand in Hand 3</h3>
+    <p>Deeper reading comprehension and more complex sentence patterns introduced naturally.</p>
+    <div class="book-link-hint">Learn more →</div>
+  </a>
+  <a class="book-card blue" href="hih-4.html">
+    <img src="images/hih-4-cover.webp" alt="Hand in Hand Starter" style="width:100%; border-radius:10px; margin-bottom:1rem;">
+    <span class="book-level lv-kids">Level 4</span>
+    <h3>Hand in Hand 4</h3>
+    <p>Students begin expressing opinions and ideas with greater fluency and accuracy.</p>
+    <div class="book-link-hint">Learn more →</div>
+  </a>
+  <a class="book-card blue" href="hih-5.html">
+    <img src="images/hih-5-cover.webp" alt="Hand in Hand Starter" style="width:100%; border-radius:10px; margin-bottom:1rem;">
+    <span class="book-level lv-kids">Level 5</span>
+    <h3>Hand in Hand 5</h3>
+    <p>Advanced primary English — rich vocabulary, reading texts, and confident conversation.</p>
+    <div class="book-link-hint">Learn more →</div>
+  </a>
+  <a class="book-card blue" href="hih-6.html">
+    <img src="images/hih-6-cover.webp" alt="Hand in Hand Starter" style="width:100%; border-radius:10px; margin-bottom:1rem;">
+    <span class="book-level lv-kids">Level 6</span>
+    <h3>Hand in Hand 6</h3>
+    <p>The final primary level — students graduate ready for junior high English with confidence.</p>
+    <div class="book-link-hint">Learn more →</div>
+  </a>
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- JUNIOR + ADULT SIDE BY SIDE -->
+<div style="background:var(--cream); padding:4rem 2rem;">
+  <div class="container">
+    <div class="side-by-side" style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:start;">
+
+      <!-- JUNIOR -->
+      <div style="background:white; border-radius:20px; padding:2rem; border:2px solid var(--border);">
+        <span class="section-label">🎓 Junior High - High School</span>
+        <h2 class="books-section" style="font-family:'Lora',serif; font-size:clamp(1.4rem,2.5vw,2rem); font-weight:600; color:var(--text-dark); margin-bottom:0.6rem;">Junior High <em style="font-style:italic; color:var(--sky);">Series</em></h2>
+        <p class="section-desc">Academic English that prepares students for high school, exams, and real-world communication.</p>
+        <div class="price-card">
+          <div class="price-item">
+            <div class="price-label">月謝 Monthly Fee</div>
+            <div class="price-amount"><sup>¥</sup>7,500</div>
+            <div class="price-sub">per month · 50 min lesson</div>
+          </div>
+          <div class="price-item">
+            <div class="price-label">レッスン回数</div>
+            <div class="price-amount">42</div>
+            <div class="price-sub">lessons per year</div>
+          </div>
+          <div class="price-note">🎓 Ages 12–15 · Small groups</div>
+        </div>
+        <div class="books-grid">
+          <a class="book-card gold" href="#">
+            <img src="images/first-hand-series.png" alt="First Hand Access" style="width:100%; border-radius:10px; margin-bottom:1rem;">
+            <span class="book-level lv-junior">Junior High</span>
+            <h3>First Hand Access</h3>
+            <p>Reading, writing, and grammar for junior high students — bridging primary and academic English.</p>
+            <div class="book-link-hint">Learn more →</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- ADULT -->
+      <div style="background:var(--warm-white); border-radius:20px; padding:2rem; border:2px solid var(--border);">
+        <span class="section-label">👩‍👧 Adults · All Levels</span>
+        <h2 class="books-section" style="font-family:'Lora',serif; font-size:clamp(1.4rem,2.5vw,2rem); font-weight:600; color:var(--text-dark); margin-bottom:0.6rem;">Adult <em style="font-style:italic; color:var(--sky);">Conversation</em></h2>
+        <p class="section-desc">Flexible, communicative materials chosen to match each adult student's goals and level.</p>
+        <div class="price-card">
+          <div class="price-item">
+            <div class="price-label">月謝 Monthly Fee</div>
+            <div class="price-amount"><sup>¥</sup>7,700</div>
+            <div class="price-sub">per month · 50 min lesson</div>
+          </div>
+          <div class="price-item">
+            <div class="price-label">プライベート (5回)</div>
+            <div class="price-amount"><sup>¥</sup>25,000</div>
+            <div class="price-sub">5 private lessons</div>
+          </div>
+          <div class="price-note">💬 All levels · Flexible schedule</div>
+        </div>
+        <div class="books-grid">
+          <a class="book-card teal" href="#">
+            <span class="book-emoji">📓</span>
+            <span class="book-level lv-adult">Adults</span>
+            <h3>Adult Conversation Materials</h3>
+            <p>Curated materials for travel, daily life, workplace English, and free conversation practice.</p>
+            <div class="book-link-hint">Learn more →</div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FEES BANNER -->
+<div style="padding: 0 2rem 4rem; background: var(--cream);">
+  <div class="container">
+    <div class="fees-banner">
+      <div class="fees-item">
+        <h3>🎌 入会金 Registration Fee</h3>
+        <div class="fees-amount">¥10,000</div>
+        <p>Paid once at enrolment.<br>各種割引あり — discounts available.</p>
+      </div>
+      <div class="fees-item">
+        <h3>📦 年間教材・運営協力金 Annual Materials Fee</h3>
+        <div class="fees-amount">¥10,000</div>
+        <p>Paid at enrolment, then every April.<br>Covers teaching materials and classroom operation.</p>
+      </div>
+      <div class="fees-item">
+        <h3>🎁 無料体験 Free Trial</h3>
+        <div class="fees-amount">¥0</div>
+        <p>First lesson is completely free.<br>No obligation — just come and try!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo-wrap">
+    <img src="logo.png" alt="Bridgeway logo">
+    <span>ABC Bridgeway English School</span>
+  </div>
+  <p>山形県山形市元木2-2-17 | 023-641-3059</p>
+  <hr class="footer-divider">
+  <p class="footer-copy">© 2026 ABC Bridgeway English School. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

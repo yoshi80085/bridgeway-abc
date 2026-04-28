@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You | ABC Bridgeway English School</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fdf8f2;
+    --warm-white: #fffcf7;
+    --sky: #1e6db5;
+    --sky-light: #e3eef8;
+    --sky-dark: #154f87;
+    --sun: #f0a500;
+    --sun-light: #fff4e0;
+    --grass: #2ab04a;
+    --grass-light: #e4f5ea;
+    --teal: #00b4cc;
+    --coral: #f07060;
+    --text-dark: #1a2840;
+    --text-mid: #4a5568;
+    --text-light: #8a9ab0;
+    --border: #dde8f0;
+    --shadow: rgba(30,109,181,0.13);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Nunito',sans-serif; background:var(--cream); color:var(--text-dark); overflow-x:hidden; min-height:100vh; display:flex; flex-direction:column; }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(255,252,247,0.94); backdrop-filter:blur(12px);
+    border-bottom:2px solid var(--border);
+    padding:0 2rem; display:flex; align-items:center; justify-content:space-between;
+    height:70px;
+  }
+  .nav-logo { display:flex; align-items:center; gap:0.5rem; text-decoration:none; }
+  .nav-logo img { height:52px; width:auto; }
+  .nav-logo-text { font-size:1.05rem; font-weight:900; color:var(--sky-dark); line-height:1.2; }
+  .nav-logo-text span { display:block; font-size:0.72rem; font-weight:700; color:var(--text-light); letter-spacing:1px; text-transform:uppercase; }
+  .nav-cta {
+    background:var(--sky); color:white;
+    padding:0.55rem 1.4rem; border-radius:30px;
+    font-weight:800; font-size:0.88rem; text-decoration:none;
+    transition:background 0.2s, transform 0.15s;
+    box-shadow:0 4px 14px rgba(30,109,181,0.35);
+  }
+  .nav-cta:hover { background:var(--sky-dark); transform:translateY(-1px); }
+
+  /* HERO / MAIN */
+  .thank-you-wrap {
+    flex:1;
+    padding-top:70px;
+    background:var(--warm-white);
+    display:flex; align-items:center; justify-content:center;
+    position:relative; overflow:hidden;
+    min-height:100vh;
+  }
+
+  /* Blobs */
+  .hero-blobs { position:absolute; inset:0; pointer-events:none; }
+  .blob { position:absolute; border-radius:50%; filter:blur(55px); opacity:0.3; }
+  .blob-1 { width:500px; height:500px; background:var(--sky-light); top:-100px; right:-100px; animation:float1 9s ease-in-out infinite; }
+  .blob-2 { width:360px; height:360px; background:var(--sun-light); bottom:-80px; left:-80px; animation:float2 11s ease-in-out infinite; }
+  .blob-3 { width:240px; height:240px; background:var(--grass-light); top:45%; left:52%; animation:float1 13s ease-in-out infinite reverse; }
+  @keyframes float1 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-22px)} }
+  @keyframes float2 { 0%,100%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-16px) rotate(4deg)} }
+
+  .thank-you-inner {
+    max-width:680px; padding:3rem 2rem;
+    text-align:center; position:relative; z-index:1;
+  }
+
+  .logo-wrap {
+    margin:0 auto 2rem;
+    animation:popIn 0.6s cubic-bezier(.34,1.56,.64,1) both;
+  }
+  .logo-wrap img { height:120px; width:auto; filter:drop-shadow(0 8px 24px rgba(30,109,181,0.2)); }
+
+  .checkmark {
+    width:80px; height:80px; margin:0 auto 1.5rem;
+    background:var(--grass); border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 30px rgba(42,176,74,0.35);
+    animation:popIn 0.6s 0.1s cubic-bezier(.34,1.56,.64,1) both;
+  }
+  .checkmark svg { width:40px; height:40px; stroke:white; stroke-width:3; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+
+  .badge {
+    display:inline-flex; align-items:center; gap:0.5rem;
+    background:var(--grass-light); color:var(--grass);
+    border:2px solid var(--grass); border-radius:30px;
+    padding:0.4rem 1.1rem; font-size:0.85rem; font-weight:800;
+    margin-bottom:1.4rem; letter-spacing:0.4px;
+    animation:slideUp 0.6s 0.2s ease-out both;
+  }
+
+  .thank-title {
+    font-family:'Lora',serif;
+    font-size:clamp(2rem,5vw,3.2rem);
+    font-weight:600; line-height:1.25;
+    color:var(--text-dark); margin-bottom:1rem;
+    animation:slideUp 0.6s 0.25s ease-out both;
+  }
+  .thank-title em { font-style:italic; color:var(--sky); }
+
+  .thank-sub {
+    font-size:1.05rem; color:var(--text-mid);
+    line-height:1.75; font-weight:600;
+    margin-bottom:0.8rem;
+    animation:slideUp 0.6s 0.3s ease-out both;
+  }
+
+  .thank-jp {
+    font-size:0.92rem; color:var(--text-light);
+    font-weight:700; margin-bottom:2.5rem;
+    animation:slideUp 0.6s 0.35s ease-out both;
+  }
+
+  .info-cards {
+    display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;
+    margin-bottom:2.5rem;
+    animation:slideUp 0.6s 0.4s ease-out both;
+  }
+  .info-card {
+    background:white; border:2px solid var(--border);
+    border-radius:16px; padding:1.1rem 1.4rem;
+    box-shadow:0 4px 20px var(--shadow);
+    text-align:left; min-width:160px; flex:1; max-width:200px;
+  }
+  .info-card .icon { font-size:1.6rem; margin-bottom:0.4rem; display:block; }
+  .info-card strong { display:block; font-size:0.82rem; font-weight:900; color:var(--sky-dark); margin-bottom:0.2rem; letter-spacing:0.3px; }
+  .info-card span { font-size:0.82rem; color:var(--text-mid); font-weight:600; line-height:1.4; }
+
+  .btns {
+    display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;
+    animation:slideUp 0.6s 0.45s ease-out both;
+  }
+  .btn-primary {
+    background:var(--sky); color:white;
+    padding:0.85rem 2rem; border-radius:40px;
+    font-weight:800; font-size:1rem; text-decoration:none;
+    box-shadow:0 6px 20px rgba(30,109,181,0.4);
+    transition:transform 0.15s, box-shadow 0.15s;
+  }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 10px 28px rgba(30,109,181,0.45); }
+  .btn-secondary {
+    background:transparent; color:var(--sky-dark);
+    padding:0.85rem 2rem; border-radius:40px;
+    font-weight:800; font-size:1rem; text-decoration:none;
+    border:2.5px solid var(--sky); transition:background 0.15s;
+  }
+  .btn-secondary:hover { background:var(--sky-light); }
+
+  @keyframes popIn { from{opacity:0;transform:scale(0.7)} to{opacity:1;transform:scale(1)} }
+  @keyframes slideUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+
+  /* FOOTER */
+  footer {
+    background:var(--text-dark); color:white;
+    text-align:center; padding:2.5rem 2rem 2rem;
+    font-size:0.88rem; line-height:1.8; font-weight:600;
+  }
+  .footer-logo-wrap { display:flex; align-items:center; justify-content:center; gap:0.7rem; margin-bottom:0.8rem; }
+  .footer-logo-wrap img { height:36px; filter:brightness(0) invert(1); }
+  .footer-logo-wrap span { font-weight:900; font-size:1rem; }
+  footer p { color:rgba(255,255,255,0.6); margin-bottom:0.4rem; }
+  .footer-links { display:flex; gap:1.5rem; justify-content:center; list-style:none; margin:1rem 0; flex-wrap:wrap; }
+  .footer-links a { color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.85rem; transition:color 0.2s; }
+  .footer-links a:hover { color:white; }
+  .footer-divider { border:none; border-top:1px solid rgba(255,255,255,0.1); margin:1rem 0; }
+  .footer-copy { color:rgba(255,255,255,0.35); font-size:0.78rem; }
+
+  @media(max-width:600px) {
+    .logo-wrap img { height:90px; }
+    .info-cards { flex-direction:column; align-items:center; }
+    .info-card { max-width:100%; width:100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="logo.png" alt="Bridgeway logo">
+    <div class="nav-logo-text">ABC Bridgeway<span>English School · Yamagata</span></div>
+  </a>
+  <a class="nav-cta" href="/">← Back to Home</a>
+</nav>
+
+<!-- MAIN -->
+<div class="thank-you-wrap">
+  <div class="hero-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div class="thank-you-inner">
+
+    <div class="logo-wrap">
+      <img src="logo.png" alt="ABC Bridgeway English School">
+    </div>
+
+    <div class="checkmark">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+
+    <div class="badge">✦ Message Received!</div>
+
+    <h1 class="thank-title">Thank you for <em>reaching out!</em></h1>
+
+    <p class="thank-sub">We've received your message and will be in touch very soon.<br>We look forward to welcoming your child to ABC Bridgeway!</p>
+
+    <p class="thank-jp">お問い合わせありがとうございます。<br>まもなくご連絡いたします。</p>
+
+    <div class="info-cards">
+      <div class="info-card">
+        <span class="icon">📞</span>
+        <strong>Call Us</strong>
+        <span><a href="tel:0236413059" style="color:var(--sky);text-decoration:none;">023-641-3059</a></span>
+      </div>
+      <div class="info-card">
+        <span class="icon">🎁</span>
+        <strong>Free Trial</strong>
+        <span>First lesson is completely free — no obligation!</span>
+      </div>
+      <div class="info-card">
+        <span class="icon">📍</span>
+        <strong>Find Us</strong>
+        <span>Motoki 2-2-17,<br>Yamagata City</span>
+      </div>
+    </div>
+
+    <div class="btns">
+      <a href="/" class="btn-primary">🏠 Back to Home</a>
+      <a href="https://www.instagram.com/abc_eikaiwa/" target="_blank" class="btn-secondary">📸 Follow on Instagram</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo-wrap">
+    <img src="logo.png" alt="Bridgeway logo">
+    <span>ABC Bridgeway English School</span>
+  </div>
+  <p>山形県山形市元木2-2-17 | 023-641-3059</p>
+  <p>ずっと身につく英会話 — English that lasts a lifetime.</p>
+  <ul class="footer-links">
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#courses">Courses</a></li>
+    <li><a href="/#contact">Contact</a></li>
+    <li><a href="https://abc-eikaiwa.com" target="_blank">Current Site</a></li>
+  </ul>
+  <hr class="footer-divider">
+  <p class="footer-copy">© 2026 ABC Bridgeway English School. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

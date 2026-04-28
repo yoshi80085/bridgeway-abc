@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Little Hands | ABC Bridgeway English School</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lora:ital,wght@0,400;0,600;1,400&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fdf8f2;
+    --warm-white: #fffcf7;
+    --sky: #1e6db5;
+    --sky-light: #e3eef8;
+    --sky-dark: #154f87;
+    --sun: #f0a500;
+    --sun-light: #fff4e0;
+    --grass: #2ab04a;
+    --grass-light: #e4f5ea;
+    --teal: #00b4cc;
+    --teal-light: #e0f8fb;
+    --coral: #f07060;
+    --coral-light: #fdecea;
+    --purple: #8b5cf6;
+    --purple-light: #ede9fe;
+    --text-dark: #1a2840;
+    --text-mid: #4a5568;
+    --text-light: #8a9ab0;
+    --border: #dde8f0;
+    --shadow: rgba(30,109,181,0.13);
+
+    /* Book colours */
+    --book1: #f07060;   --book1-light: #fdecea;  --book1-dark: #b84030;
+    --book2: #2ab04a;   --book2-light: #e4f5ea;  --book2-dark: #1a7a33;
+    --book3: #8b5cf6;   --book3-light: #ede9fe;  --book3-dark: #5b21b6;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Nunito',sans-serif; background:var(--cream); color:var(--text-dark); overflow-x:hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(255,252,247,0.94); backdrop-filter:blur(12px);
+    border-bottom:2px solid var(--border);
+    padding:0 2rem; display:flex; align-items:center; justify-content:space-between;
+    height:70px;
+  }
+  .nav-logo { display:flex; align-items:center; gap:0.5rem; text-decoration:none; }
+  .nav-logo img { height:52px; width:auto; }
+  .nav-logo-text { font-size:1.05rem; font-weight:900; color:var(--sky-dark); line-height:1.2; }
+  .nav-logo-text span { display:block; font-size:0.72rem; font-weight:700; color:var(--text-light); letter-spacing:1px; text-transform:uppercase; }
+  .nav-back {
+    background:var(--coral); color:white;
+    padding:0.55rem 1.4rem; border-radius:30px;
+    font-weight:800; font-size:0.88rem; text-decoration:none;
+    transition:background 0.2s;
+  }
+  .nav-back:hover { background:var(--book1-dark); }
+
+  /* ── HERO HEADER ── */
+  .page-hero {
+    padding-top:70px;
+    background: linear-gradient(135deg, #fff4e0 0%, #fdecea 40%, #e4f5ea 80%, #e3eef8 100%);
+    position:relative; overflow:hidden;
+  }
+  .hero-stars { position:absolute; inset:0; pointer-events:none; }
+  .star {
+    position:absolute; font-size:1.4rem; opacity:0.35;
+    animation:wobble 4s ease-in-out infinite;
+  }
+  .star:nth-child(1)  { top:15%; left:5%;  animation-delay:0s; }
+  .star:nth-child(2)  { top:30%; left:88%; animation-delay:0.5s; }
+  .star:nth-child(3)  { top:60%; left:3%;  animation-delay:1s; }
+  .star:nth-child(4)  { top:75%; left:92%; animation-delay:1.5s; }
+  .star:nth-child(5)  { top:10%; left:50%; animation-delay:0.8s; }
+  .star:nth-child(6)  { top:85%; left:45%; animation-delay:2s; }
+  .star:nth-child(7)  { top:50%; left:75%; animation-delay:0.3s; }
+  .star:nth-child(8)  { top:20%; left:22%; animation-delay:1.8s; }
+  @keyframes wobble { 0%,100%{transform:rotate(-8deg) scale(1)} 50%{transform:rotate(8deg) scale(1.15)} }
+
+  .hero-inner {
+    max-width:1100px; margin:0 auto;
+    padding:3rem 2rem 2.5rem;
+    display:grid; grid-template-columns:1fr auto;
+    gap:2rem; align-items:center;
+    position:relative; z-index:1;
+  }
+  .hero-text { }
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:0.5rem;
+    background:white; border:2.5px solid var(--coral);
+    color:var(--book1-dark); border-radius:30px;
+    padding:0.35rem 1rem; font-size:0.82rem; font-weight:900;
+    margin-bottom:1rem; letter-spacing:0.4px;
+    box-shadow:0 3px 12px rgba(240,112,96,0.2);
+  }
+  .hero-title {
+    font-family:'Fredoka One', cursive;
+    font-size:clamp(2.8rem,6vw,4.5rem);
+    line-height:1.1; color:var(--text-dark);
+    margin-bottom:0.6rem;
+  }
+  .hero-title .rainbow-l { color:var(--coral); }
+  .hero-title .rainbow-h { color:var(--sun); }
+  .hero-subtitle {
+    font-size:1.05rem; color:var(--text-mid);
+    font-weight:700; line-height:1.6; margin-bottom:0.6rem;
+  }
+  .hero-jp {
+    font-size:0.9rem; color:var(--text-light); font-weight:700;
+  }
+
+  /* Chip character */
+  .chip-wrap {
+    position:relative; flex-shrink:0;
+    width:220px;
+    animation:chipBob 3s ease-in-out infinite;
+  }
+  .chip-wrap img {
+    width:100%; height:auto;
+    filter:drop-shadow(0 12px 28px rgba(0,0,0,0.18));
+  }
+  .chip-bubble {
+    position:absolute; top:-10px; right:-50px;
+    background:white; border:2.5px solid var(--sun);
+    border-radius:18px 18px 18px 4px;
+    padding:0.5rem 0.8rem;
+    font-size:0.78rem; font-weight:900; color:var(--text-dark);
+    box-shadow:0 4px 14px rgba(240,165,0,0.25);
+    white-space:nowrap;
+    animation:bubblePop 0.5s 0.3s cubic-bezier(.34,1.56,.64,1) both;
+  }
+  .chip-name {
+    position:absolute; bottom:-12px; left:50%; transform:translateX(-50%);
+    background:var(--purple); color:white;
+    border-radius:20px; padding:0.25rem 1rem;
+    font-size:0.78rem; font-weight:900; letter-spacing:1px; text-transform:uppercase;
+    white-space:nowrap;
+    box-shadow:0 3px 10px rgba(139,92,246,0.35);
+  }
+  @keyframes chipBob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+  @keyframes bubblePop { from{opacity:0;transform:scale(0.5)} to{opacity:1;transform:scale(1)} }
+
+  /* ── ICE CREAM GAME ── */
+  .icecream-row {
+    display:flex; align-items:flex-end; justify-content:center;
+    gap:1.2rem; margin-top:1.2rem; flex-wrap:wrap;
+  }
+  .icecream-label {
+    font-family:'Fredoka One', cursive;
+    font-size:0.85rem; color:var(--text-mid);
+    text-align:center; margin-bottom:0.4rem; letter-spacing:0.5px;
+  }
+  .ice-cone {
+    font-size:2.8rem; cursor:grab; user-select:none;
+    transition:transform 0.15s, filter 0.15s;
+    display:inline-block; line-height:1;
+    filter:drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+  }
+  .ice-cone:hover { transform:scale(1.3) rotate(-10deg); filter:drop-shadow(0 6px 14px rgba(0,0,0,0.25)); }
+  .ice-cone.given { opacity:0.2; cursor:default; pointer-events:none; }
+  .chip-hand-ice {
+    position:absolute; bottom:50px; left:-0px;
+    font-size:2.2rem; opacity:0;
+    transition:opacity 0.4s, transform 0.4s;
+    transform:rotate(-20deg) scale(0.4);
+    pointer-events:none;
+  }
+  .chip-hand-ice.show { opacity:1; transform:rotate(-20deg) scale(2); }
+  @keyframes coneFloat {
+    0%   { transform:translateY(0) scale(1) rotate(0deg); opacity:1; }
+    55%  { transform:translateY(-70px) scale(1.4) rotate(20deg); opacity:1; }
+    100% { transform:translateY(-30px) scale(0) rotate(40deg); opacity:0; }
+  }
+  .cone-flying {
+    position:fixed; pointer-events:none; z-index:9999;
+    font-size:2.8rem; animation:coneFloat 0.65s ease-out forwards;
+  }
+
+  /* ── BOOK JUMP NAV ── */
+  .book-nav {
+    background:white; border-bottom:2px solid var(--border);
+    padding:1rem 2rem; position:sticky; top:70px; z-index:90;
+    display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;
+    justify-content:center;
+  }
+  .book-nav-label { font-size:0.78rem; font-weight:800; color:var(--text-light); letter-spacing:1px; text-transform:uppercase; }
+  .book-nav-link {
+    display:inline-flex; align-items:center; gap:0.4rem;
+    padding:0.4rem 1rem; border-radius:25px;
+    font-size:0.85rem; font-weight:800; text-decoration:none;
+    border:2px solid transparent; transition:all 0.15s;
+  }
+  .bnl-1 { background:var(--book1-light); color:var(--book1-dark); border-color:var(--book1); }
+  .bnl-1:hover { background:var(--book1); color:white; }
+  .bnl-2 { background:var(--book2-light); color:var(--book2-dark); border-color:var(--book2); }
+  .bnl-2:hover { background:var(--book2); color:white; }
+  .bnl-3 { background:var(--book3-light); color:var(--book3-dark); border-color:var(--book3); }
+  .bnl-3:hover { background:var(--book3); color:white; }
+
+  /* ── BOOK SECTION ── */
+  .book-section { padding:4rem 2rem; }
+  .book-section:nth-child(odd) { background:white; }
+  .container { max-width:1100px; margin:0 auto; }
+
+  .book-header {
+    display:flex; align-items:center; gap:1.5rem;
+    margin-bottom:2.5rem; flex-wrap:wrap;
+  }
+  .book-emoji-circle {
+    width:72px; height:72px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:2.2rem; flex-shrink:0;
+    box-shadow:0 6px 20px rgba(0,0,0,0.12);
+  }
+  .book-header-text { }
+  .book-tag {
+    display:inline-block; font-size:0.72rem; font-weight:900;
+    letter-spacing:2px; text-transform:uppercase;
+    padding:0.22rem 0.8rem; border-radius:20px; margin-bottom:0.4rem;
+  }
+  .book-title {
+    font-family:'Fredoka One', cursive;
+    font-size:clamp(1.9rem,3.5vw,2.6rem);
+    line-height:1.1; color:var(--text-dark);
+  }
+  .book-desc { font-size:0.9rem; color:var(--text-light); font-weight:700; margin-top:0.2rem; }
+
+  /* ── MEDIA GRID ── */
+  .media-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+  }
+
+  /* Photo gallery */
+  .media-panel { }
+  .media-panel-label {
+    font-size:0.72rem; font-weight:900; letter-spacing:2px;
+    text-transform:uppercase; margin-bottom:0.75rem;
+    display:flex; align-items:center; gap:0.4rem;
+  }
+  .photo-grid {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:0.6rem;
+  }
+  .photo-slot {
+    aspect-ratio:1/1; border-radius:14px; overflow:hidden;
+    border:2.5px solid var(--border);
+    background:var(--cream);
+    display:flex; align-items:center; justify-content:center;
+    transition:transform 0.2s, box-shadow 0.2s;
+    cursor:pointer;
+  }
+  .photo-slot:hover { transform:translateY(-3px); box-shadow:0 8px 24px var(--shadow); }
+  .photo-slot img { width:100%; height:100%; object-fit:cover; display:block; }
+  .photo-slot-empty {
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:0.3rem; color:var(--text-light); font-size:0.72rem; font-weight:800;
+    text-align:center; padding:0.5rem;
+  }
+  .photo-slot-empty span { font-size:1.6rem; }
+
+  /* Lesson videos */
+  .lesson-video-grid {
+    display:grid; gap:0.75rem;
+  }
+  .lesson-card {
+    background:var(--warm-white);
+    border:2px solid var(--border);
+    border-radius:16px; overflow:hidden;
+    transition:box-shadow 0.2s, transform 0.2s;
+  }
+  .lesson-card:hover { box-shadow:0 8px 28px var(--shadow); transform:translateY(-2px); }
+  .lesson-card-bar { height:5px; width:100%; }
+  .lesson-card-body {
+    display:grid; grid-template-columns:1fr auto;
+    align-items:center; padding:0.8rem 1rem; gap:0.75rem;
+  }
+  .lesson-card-title { font-size:0.92rem; font-weight:900; color:var(--text-dark); }
+  .lesson-card-sub { font-size:0.8rem; color:var(--text-light); font-weight:700; margin-top:0.1rem; }
+  .video-mini-wrap { width:120px; }
+  .video-thumb-mini {
+    width:100%; aspect-ratio:16/9;
+    border-radius:10px; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+    flex-direction:column; gap:0.3rem;
+    cursor:pointer; border:2px solid var(--border);
+    transition:background 0.2s, border-color 0.2s;
+  }
+  .play-btn-mini { font-size:1.4rem; transition:color 0.2s; }
+  .play-label-mini { font-size:0.62rem; font-weight:800; letter-spacing:0.5px; text-transform:uppercase; color:var(--text-light); transition:color 0.2s; }
+  .video-iframe-mini { width:100%; aspect-ratio:16/9; border-radius:10px; overflow:hidden; }
+  .video-iframe-mini iframe { width:100%; height:100%; border:none; }
+
+  /* Local video slot (for class footage) */
+  .local-video-slot {
+    border-radius:14px; overflow:hidden;
+    border:2.5px solid var(--border);
+    transition:transform 0.2s, box-shadow 0.2s;
+  }
+  .local-video-slot:hover { transform:translateY(-3px); box-shadow:0 8px 24px var(--shadow); }
+  .local-video-slot video { width:100%; height:auto; display:block; }
+  .local-video-empty {
+    aspect-ratio:16/9; display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    background:var(--cream); color:var(--text-light);
+    gap:0.4rem; font-size:0.78rem; font-weight:800; text-align:center; padding:1rem;
+  }
+  .local-video-empty span { font-size:2rem; }
+
+  /* ── CHIP CALLOUT ── */
+  .chip-callout {
+    background:linear-gradient(135deg, var(--sun-light) 0%, var(--coral-light) 100%);
+    border:2.5px solid var(--sun);
+    border-radius:20px; padding:1.5rem 1.8rem;
+    display:flex; align-items:center; gap:1.2rem;
+    margin-bottom:2rem; flex-wrap:wrap;
+  }
+  .chip-callout img { width:70px; height:auto; flex-shrink:0; }
+  .chip-callout-text { }
+  .chip-callout-text strong { display:block; font-family:'Fredoka One', cursive; font-size:1.5rem; color:var(--text-dark); margin-bottom:0.2rem; }
+  .chip-callout-text p { font-size:1.2rem; color:var(--text-mid); font-weight:700; line-height:1.5; }
+
+  /* ── FOOTER ── */
+  footer { background:#0f1e33; color:rgba(255,255,255,0.6); padding:2.5rem 2rem; text-align:center; }
+  .footer-logo-wrap { display:flex; align-items:center; justify-content:center; gap:0.8rem; margin-bottom:0.6rem; }
+  .footer-logo-wrap img { height:44px; width:auto; }
+  .footer-logo-wrap span { font-size:1.1rem; font-weight:900; color:white; }
+  footer p { font-size:0.85rem; font-weight:600; }
+  .footer-divider { border:none; border-top:1px solid rgba(255,255,255,0.08); margin:1.2rem 0; }
+  .footer-copy { font-size:0.78rem; color:rgba(255,255,255,0.3); font-weight:600; }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:768px) {
+    .hero-inner { grid-template-columns:1fr; }
+    .chip-wrap { width:160px; margin:0 auto; }
+    .media-grid { grid-template-columns:1fr; }
+    .book-nav { gap:0.4rem; }
+    .photo-grid { grid-template-columns:repeat(2,1fr); }
+    .lesson-card-body { grid-template-columns:1fr; }
+    .video-mini-wrap { width:100%; }
+    .video-thumb-mini { aspect-ratio:16/9; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.png" alt="Bridgeway logo">
+    <div class="nav-logo-text">ABC Bridgeway <span>English School · Yamagata</span></div>
+  </a>
+  <a href="course-books.html" class="nav-back">← Course Books</a>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="hero-stars">
+    <span class="star">⭐</span><span class="star">🌟</span>
+    <span class="star">✨</span><span class="star">⭐</span>
+    <span class="star">🌈</span><span class="star">✨</span>
+    <span class="star">🌟</span><span class="star">⭐</span>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">🐾 Ages 3–5 · Kindergarten Course</div>
+      <h1 class="hero-title">
+        <span class="rainbow-l">Little</span><br>
+        <span class="rainbow-h">Hands</span>
+      </h1>
+      <p class="hero-subtitle">Songs, games, and stories — learning English through play!</p>
+      <p class="hero-jp">歌・ゲーム・絵本で楽しく英語を学ぼう！</p>
+
+      <!-- ICE CREAM ROW -->
+      <div class="icecream-label">🍦 Give Chip an ice cream!</div>
+      <div class="icecream-row" id="icecream-row">
+        <span class="ice-cone" onclick="giveIceCream(this, '🍦')">🍦</span>
+        <span class="ice-cone" onclick="giveIceCream(this, '🍧')">🍧</span>
+        <span class="ice-cone" onclick="giveIceCream(this, '🍨')">🍨</span>
+        <span class="ice-cone" onclick="giveIceCream(this, '🍡')">🍡</span>
+        <span class="ice-cone" onclick="giveIceCream(this, '🧁')">🧁</span>
+        <span class="ice-cone" onclick="giveIceCream(this, '🍰')">🍰</span>
+      </div>
+    </div>
+
+    <div class="chip-wrap" id="chip-wrap">
+      <img src="images/chip-otter.png" alt="Chip the Otter mascot" id="chip-img">
+      <div class="chip-bubble" id="chip-bubble">Hi! I'm Chip! 👋</div>
+      <div class="chip-name">Chip the Otter</div>
+      <div class="chip-hand-ice" id="chip-hand-ice"></div>
+    </div>
+  </div>
+</div>
+
+<!-- BOOK JUMP NAV -->
+<div class="book-nav">
+  <span class="book-nav-label">Jump to:</span>
+  <a href="#book-1" class="book-nav-link bnl-1">📕 Little Hands 1</a>
+  <a href="#book-2" class="book-nav-link bnl-2">📗 Little Hands 2</a>
+  <a href="#book-3" class="book-nav-link bnl-3">📘 Little Hands 3</a>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     BOOK 1 — Little Hands 1
+════════════════════════════════════════════ -->
+<section class="book-section" id="book-1">
+  <div class="container">
+
+    <!-- Book header -->
+    <div class="book-header">
+      <div class="book-emoji-circle" style="background:var(--book1-light); border:2.5px solid var(--book1);">📕</div>
+      <div class="book-header-text">
+        <span class="book-tag" style="background:var(--book1-light); color:var(--book1-dark);">Little Hands · Book 1</span>
+        <div class="book-title" style="color:var(--book1);">Little Hands <span style="color:var(--text-dark);">1</span></div>
+        <div class="book-desc">
+          <!-- ✏️ Add a short description of this book's themes / units -->
+          X Units · Topics: colours, numbers, animals, greetings
+        </div>
+      </div>
+    </div>
+
+    <!-- Chip says… -->
+    <div class="chip-callout">
+      <img src="images/chip-otter1.png" alt="Chip the Otter" style="width:100px;">
+      <!-- ✏️ Replace src above with your actual Chip image path -->
+      <div class="chip-callout-text">
+        <strong>Chip says… 🐾</strong>
+        <p>
+          <!-- ✏️ Add a fun Chip message for this book, e.g. what kids love about it -->
+          In Little Hands 1 we learn our very first English words together — let's go!
+        </p>
+      </div>
+    </div>
+
+    <div class="media-grid" style="grid-template-columns:1fr;">
+
+      <!-- LEFT: Class photos + class videos -->
+      <div class="media-panel">
+        <div class="media-panel-label" style="color:var(--book1);">📷 Class Photos</div>
+
+        <div class="photo-grid" style="margin-bottom:1rem;">
+
+          <!-- ✏️ Add up to 6 photos. Duplicate / remove slots as needed. -->
+          <div class="photo-slot">
+            <img src="images/lh1-photo-1.jpg" alt="Little Hands 1 class"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="photo-slot-empty" style="display:none"><span>📷</span>Photo 1</div>
+          </div>
+          <div class="photo-slot">
+            <img src="images/lh1-photo-2.jpeg" alt="Little Hands 1 class"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="photo-slot-empty" style="display:none"><span>📷</span>Photo 2</div>
+          </div>
+          <div class="photo-slot">
+            <img src="images/lh1-photo-3.jpg" alt="Little Hands 1 class"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="photo-slot-empty" style="display:none"><span>📷</span>Photo 3</div>
+          </div>
+        </div>
+        <div class="media-panel-label" style="color:var(--book1); margin-top:1rem;">🎬 Class Videos</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+
+          <!-- ✏️ Add class footage videos. src="images/lh1-video1.MOV" poster="images/lh1-thumb1.jpg" -->
+          <div class="local-video-slot">
+            <video
+          controls
+          style="width:100%; height:auto; display:block;"
+          poster="images/lh1-thumb1.png">
+          <source src="images/lh1-video1.MOV" type="video/mp4">
+        </video>
+            <!-- Fallback if no video yet: remove the <video> above and uncomment below -->
+            <!-- <div class="local-video-empty"><span>🎬</span>Video coming soon</div> -->
+          </div>
+          <div class="local-video-slot">
+            <video
+          controls
+          style="width:100%; height:auto; display:block;"
+          poster="images/lh1-thumb2.png">
+          <source src="images/lh1-video2.MOV" type="video/mp4">
+        </video>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /media-grid -->
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     BOOK 2 — Little Hands 2
+════════════════════════════════════════════ -->
+<section class="book-section" id="book-2">
+  <div class="container">
+
+    <div class="book-header">
+      <div class="book-emoji-circle" style="background:var(--book2-light); border:2.5px solid var(--book2);">📗</div>
+      <div class="book-header-text">
+        <span class="book-tag" style="background:var(--book2-light); color:var(--book2-dark);">Little Hands · Book 2</span>
+        <div class="book-title" style="color:var(--book2);">Little Hands <span style="color:var(--text-dark);">2</span></div>
+        <div class="book-desc">X Units · Topics: <!-- ✏️ fill in --></div>
+      </div>
+    </div>
+
+    <div class="chip-callout" style="border-color:var(--grass); background:linear-gradient(135deg,var(--grass-light) 0%,var(--sun-light) 100%);">
+      <img src="images/chip-otter2.png" alt="Chip the Otter" style="width:120px;">
+      <div class="chip-callout-text">
+        <strong>Chip says… 🐾</strong>
+        <p><!-- ✏️ Fun Chip message for Book 2 --> Little Hands 2 is even more fun — we sing, play, and learn together!</p>
+      </div>
+    </div>
+
+    <!-- LEFT: Class photos + class videos -->
+      <div class="media-panel">
+        <div class="media-panel-label" style="color:var(--book1);">📷 Class Photos</div>
+
+        <div class="photo-grid" style="margin-bottom:1rem;">
+
+          <!-- ✏️ Add up to 6 photos. Duplicate / remove slots as needed. -->
+          <div class="photo-slot">
+            <img src="images/lh2-photo-1.jpg" alt="Little Hands 1 class"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="photo-slot-empty" style="display:none"><span>📷</span>Photo 1</div>
+          </div>
+          <div class="photo-slot">
+            <img src="images/lh2-photo-2.jpg" alt="Little Hands 1 class"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="photo-slot-empty" style="display:none"><span>📷</span>Photo 2</div>
+          </div>
+          <div class="photo-slot">
+            <img src="images/lh2-photo-3.jpg" alt="Little Hands 1 class"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="photo-slot-empty" style="display:none"><span>📷</span>Photo 3</div>
+          </div>
+        </div>
+        <div class="media-panel-label" style="color:var(--book1); margin-top:1rem;">🎬 Class Videos</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+
+          <!-- ✏️ Add class footage videos. src="images/lh1-video1.MOV" poster="images/lh1-thumb1.jpg" -->
+          <div class="local-video-slot">
+            <video
+          controls
+          style="width:100%; height:auto; display:block;"
+          poster="images/lh2-thumb1.png">
+          <source src="images/lh2-video1.MOV" type="video/mp4">
+        </video>
+            <!-- Fallback if no video yet: remove the <video> above and uncomment below -->
+            <!-- <div class="local-video-empty"><span>🎬</span>Video coming soon</div> -->
+          </div>
+          <div class="local-video-slot">
+            <video
+          controls
+          style="width:100%; height:auto; display:block;"
+          poster="images/lh2-thumb2.png">
+          <source src="images/lh2-video2.MOV" type="video/mp4">
+        </video>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /media-grid -->
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     BOOK 3 — Little Hands 3
+════════════════════════════════════════════ -->
+<section class="book-section" id="book-3">
+  <div class="container">
+
+    <div class="book-header">
+      <div class="book-emoji-circle" style="background:var(--book3-light); border:2.5px solid var(--book3);">📘</div>
+      <div class="book-header-text">
+        <span class="book-tag" style="background:var(--book3-light); color:var(--book3-dark);">Little Hands · Book 3</span>
+        <div class="book-title" style="color:var(--book3);">Little Hands <span style="color:var(--text-dark);">3</span></div>
+        <div class="book-desc">X Units · Topics: <!-- ✏️ fill in --></div>
+      </div>
+    </div>
+
+    <div class="chip-callout" style="border-color:var(--purple); background:linear-gradient(135deg,var(--purple-light) 0%,var(--teal-light) 100%);">
+      <img src="images/chip-otter3.png" alt="Chip the Otter" style="width:120px;">
+      <div class="chip-callout-text">
+        <strong>Chip says… 🐾</strong>
+        <p><!-- ✏️ Chip message for Book 3 --> Wow — you've made it to Little Hands 3! You're amazing. Keep it up! 🎉</p>
+      </div>
+    </div>
+
+    <!-- LEFT: Class photos + class videos -->
+      <div class="media-panel">
+        <div class="media-panel-label" style="color:var(--book1);">📷 Class Photos</div>
+
+        <div class="photo-grid" style="margin-bottom:1rem;">
+
+          <!-- ✏️ Add up to 6 photos. Duplicate / remove slots as needed. -->
+          <div class="photo-slot">
+            <img src="images/lh3-photo-1.jpeg" alt="Little Hands 1 class"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="photo-slot-empty" style="display:none"><span>📷</span>Photo 1</div>
+          </div>
+          <div class="photo-slot">
+            <img src="images/lh3-photo-2.jpg" alt="Little Hands 1 class"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="photo-slot-empty" style="display:none"><span>📷</span>Photo 2</div>
+          </div>
+          <div class="photo-slot">
+            <img src="images/lh3-photo-3.jpg" alt="Little Hands 1 class"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="photo-slot-empty" style="display:none"><span>📷</span>Photo 3</div>
+          </div>
+        </div>
+        <div class="media-panel-label" style="color:var(--book1); margin-top:1rem;">🎬 Class Videos</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+
+          <!-- ✏️ Add class footage videos. src="images/lh1-video1.MOV" poster="images/lh1-thumb1.jpg" -->
+          <div class="local-video-slot">
+            <video
+          controls
+          style="width:100%; height:auto; display:block;"
+          poster="images/lh3-thumb1.png">
+          <source src="images/lh3-video1.MOV" type="video/mp4">
+        </video>
+            <!-- Fallback if no video yet: remove the <video> above and uncomment below -->
+            <!-- <div class="local-video-empty"><span>🎬</span>Video coming soon</div> -->
+          </div>
+          <div class="local-video-slot">
+            <video
+          controls
+          style="width:100%; height:auto; display:block;"
+          poster="images/lh3-thumb2.png">
+          <source src="images/lh3-video2.MOV" type="video/mp4">
+        </video>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /media-grid -->
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo-wrap">
+    <img src="logo.png" alt="Bridgeway logo">
+    <span>ABC Bridgeway English School</span>
+  </div>
+  <p>山形県山形市元木2-2-17 | 023-641-3059</p>
+  <hr class="footer-divider">
+  <p class="footer-copy">© 2026 ABC Bridgeway English School. All rights reserved.</p>
+</footer>
+
+
+<script>
+  // Lazy-load YouTube videos on click (mini player in lesson cards)
+  document.querySelectorAll('.video-wrap-mini').forEach(wrap => {
+    const thumb = wrap.querySelector('.video-thumb-mini');
+    if (!thumb) return;
+    thumb.addEventListener('click', () => {
+      const videoId = wrap.dataset.videoid;
+      if (!videoId || videoId === 'YOUTUBE_ID_HERE') {
+        thumb.innerHTML = '<div style="color:var(--text-mid);font-weight:800;font-size:0.75rem;padding:0.5rem;text-align:center;">📹 Add YouTube ID</div>';
+        return;
+      }
+      const iframeWrap = document.createElement('div');
+      iframeWrap.className = 'video-iframe-mini';
+      iframeWrap.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      wrap.replaceChild(iframeWrap, thumb);
+    });
+  });
+</script>
+
+<script>
+  const chipMessages = [
+    "Yummy! Thank you! 😋",
+    "Ooh, my favourite! 🥰",
+    "So delicious! 🎉",
+    "Wow, thank you!! 😍",
+    "Mmm yummy! 🤤",
+    "You're so kind! 💛",
+    "I love ice cream! 🙌",
+    "Another one?! Yes please! 😄"
+  ];
+  let messageIndex = 0;
+
+  function giveIceCream(el, emoji) {
+    if (el.classList.contains('given')) return;
+
+    // Animate cone flying toward Chip
+    const rect = el.getBoundingClientRect();
+    const chipRect = document.getElementById('chip-wrap').getBoundingClientRect();
+    const flying = document.createElement('div');
+    flying.className = 'cone-flying';
+    flying.textContent = emoji;
+    flying.style.left = rect.left + 'px';
+    flying.style.top = rect.top + 'px';
+    document.body.appendChild(flying);
+    setTimeout(() => flying.remove(), 700);
+
+    // Mark cone as used
+    el.classList.add('given');
+
+    // Show ice cream in Chip's hand
+    const hand = document.getElementById('chip-hand-ice');
+    hand.textContent = emoji;
+    hand.classList.add('show');
+
+    // Update Chip's bubble
+    const bubble = document.getElementById('chip-bubble');
+    bubble.textContent = chipMessages[messageIndex % chipMessages.length];
+    bubble.style.background = '#fff9e0';
+    bubble.style.borderColor = '#2ab04a';
+    messageIndex++;
+
+    // Stop bobbing animation briefly then resume
+    const wrap = document.getElementById('chip-wrap');
+    wrap.style.animation = 'none';
+    wrap.style.transform = 'scale(1.08)';
+    setTimeout(() => {
+      wrap.style.transform = '';
+      wrap.style.animation = 'chipBob 3s ease-in-out infinite';
+    }, 400);
+
+    // Reset after 3 seconds if all cones given, restore cones
+    const cones = document.querySelectorAll('.ice-cone');
+    const allGiven = [...cones].every(c => c.classList.contains('given'));
+    if (allGiven) {
+      setTimeout(() => {
+        cones.forEach(c => c.classList.remove('given'));
+        bubble.textContent = "More please! 🙏";
+      }, 2500);
+    }
+  }
+</script>
+
+</body>
+</html>

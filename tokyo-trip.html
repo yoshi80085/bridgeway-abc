@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tokyo Trip | ABC Bridgeway English School</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lora:ital,wght@0,400;0,600;1,400&family=Noto+Serif+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:       #0d1117;
+    --ink-mid:   #1a2233;
+    --ink-light: #2a3550;
+    --tokyo-red: #c0392b;
+    --tokyo-red-bright: #e74c3c;
+    --gold:      #c8953a;
+    --gold-light:#f5c842;
+    --cream:     #fdf8f2;
+    --warm-white:#fffcf7;
+    --mist:      #e8eef5;
+    --text-dark: #1a2233;
+    --text-mid:  #4a5568;
+    --text-light:#8a9ab0;
+    --sky:#1e6db5; --sky-dark:#154f87;
+    --border-light: rgba(200,149,58,0.25);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Nunito',sans-serif; background:var(--cream); color:var(--text-dark); overflow-x:hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:200;
+    background:rgba(13,17,23,0.95); backdrop-filter:blur(14px);
+    border-bottom:2px solid rgba(192,57,43,0.4);
+    padding:0 2rem; display:flex; align-items:center; justify-content:space-between;
+    height:70px;
+  }
+  .nav-logo { display:flex; align-items:center; gap:0.5rem; text-decoration:none; }
+  .nav-logo img { height:52px; width:auto; }
+  .nav-logo-text { font-size:1.05rem; font-weight:900; color:white; line-height:1.2; }
+  .nav-logo-text span { display:block; font-size:0.72rem; font-weight:700; color:rgba(255,255,255,0.4); letter-spacing:1px; text-transform:uppercase; }
+  .nav-back {
+    background:var(--tokyo-red); color:white;
+    padding:0.55rem 1.4rem; border-radius:4px;
+    font-weight:800; font-size:0.88rem; text-decoration:none;
+    transition:background 0.2s; border:none;
+    letter-spacing:0.5px;
+  }
+  .nav-back:hover { background:var(--tokyo-red-bright); }
+
+  /* ── HERO ── */
+  .hero {
+    padding-top:70px;
+    background:linear-gradient(180deg, #060a12 0%, #0d1520 35%, #111e2e 65%, #0f1a28 100%);
+    position:relative; overflow:hidden;
+    border-bottom:3px solid var(--tokyo-red);
+    min-height:100vh;
+    display:flex; flex-direction:column; justify-content:flex-end;
+  }
+
+  /* Noise grain overlay */
+  .hero::before {
+    content:'';
+    position:absolute; inset:0; z-index:1; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity:0.35;
+  }
+
+  /* Stars */
+  .stars {
+    position:absolute; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      radial-gradient(1px 1px at  7%  8%, rgba(255,255,255,0.9) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 18% 12%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 29%  5%, rgba(255,255,255,0.8) 0%, transparent 100%),
+      radial-gradient(1px 1px at 42% 14%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 55%  7%, rgba(255,255,255,0.85) 0%, transparent 100%),
+      radial-gradient(1px 1px at 67% 10%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(2px 2px at 78%  4%, rgba(255,255,255,0.9) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 16%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 95%  9%, rgba(255,255,255,0.55) 0%, transparent 100%),
+      radial-gradient(1px 1px at 13% 20%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 34% 18%, rgba(255,255,255,0.65) 0%, transparent 100%),
+      radial-gradient(1px 1px at 62%  3%, rgba(255,255,255,0.8) 0%, transparent 100%),
+      radial-gradient(1px 1px at 84%  6%, rgba(255,255,255,0.7) 0%, transparent 100%);
+    animation:starTwinkle 5s ease-in-out infinite alternate;
+  }
+  @keyframes starTwinkle { 0%{opacity:0.7} 100%{opacity:1} }
+
+  /* Red light glow from city */
+  .city-glow {
+    position:absolute; bottom:0; left:0; right:0; height:40%;
+    background:linear-gradient(transparent, rgba(192,57,43,0.08) 60%, rgba(192,57,43,0.18));
+    z-index:2; pointer-events:none;
+  }
+
+  /* ── HERO TEXT ── */
+  .hero-text {
+    position:relative; z-index:10;
+    padding:0 2rem 2.5rem;
+    max-width:1100px; margin:0 auto; width:100%;
+  }
+  .hero-eyebrow {
+    display:inline-flex; align-items:center; gap:0.6rem;
+    font-size:0.78rem; font-weight:800; letter-spacing:3px;
+    text-transform:uppercase; color:var(--tokyo-red-bright);
+    margin-bottom:1rem;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content:''; display:block; height:1px; width:28px;
+    background:var(--tokyo-red-bright);
+  }
+
+  .hero-kanji {
+    font-family:'Noto Serif JP',serif;
+    font-size:clamp(3rem,8vw,7rem);
+    font-weight:900;
+    color:rgba(255,255,255,0.06);
+    letter-spacing:0.1em;
+    line-height:1;
+    position:absolute;
+    right:2rem; bottom:5rem;
+    writing-mode:vertical-rl;
+    user-select:none;
+  }
+
+  .hero-title {
+    font-family:'Lora',serif;
+    font-size:clamp(2.8rem,6vw,5.5rem);
+    font-weight:600;
+    color:white;
+    line-height:1.1;
+    margin-bottom:0.6rem;
+    animation:slideUp 0.8s ease-out both;
+  }
+  .hero-title em {
+    font-style:italic;
+    color:var(--tokyo-red-bright);
+  }
+  .hero-title .gold { color:var(--gold-light); font-style:normal; }
+
+  @keyframes slideUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+  .hero-subtitle {
+    font-family:'Lora',serif; font-style:italic;
+    font-size:clamp(1rem,2vw,1.3rem);
+    color:rgba(255,255,255,0.6);
+    margin-bottom:1rem;
+    animation:slideUp 0.8s 0.15s ease-out both;
+  }
+
+  .hero-tags {
+    display:flex; flex-wrap:wrap; gap:0.5rem;
+    animation:slideUp 0.8s 0.3s ease-out both;
+  }
+  .hero-tag {
+    display:inline-block;
+    padding:0.3rem 0.85rem;
+    border:1px solid rgba(200,149,58,0.5);
+    border-radius:3px;
+    font-size:0.78rem; font-weight:800;
+    color:var(--gold);
+    letter-spacing:1.5px; text-transform:uppercase;
+    background:rgba(200,149,58,0.08);
+  }
+
+  /* ── SVG SKYLINE ── */
+  .skyline-wrap {
+    position:relative; z-index:5;
+    width:100%; max-width:1100px;
+    margin:0 auto;
+  }
+  .skyline-svg { width:100%; height:auto; display:block; }
+
+  /* Window flicker animations */
+  .win-a { animation:winFlick 3.2s ease-in-out infinite; }
+  .win-b { animation:winFlick 4.1s 0.8s ease-in-out infinite; }
+  .win-c { animation:winFlick 2.8s 1.5s ease-in-out infinite; }
+  .win-d { animation:winFlick 5s 0.4s ease-in-out infinite; }
+  .win-e { animation:winFlick 3.6s 2.1s ease-in-out infinite; }
+  @keyframes winFlick {
+    0%,100%{opacity:1} 45%{opacity:0.3} 50%{opacity:1} 55%{opacity:0.5} 60%{opacity:1}
+  }
+  /* Tower beacon */
+  .beacon { animation:beaconPulse 2s ease-in-out infinite; }
+  @keyframes beaconPulse { 0%,100%{opacity:1;r:4} 50%{opacity:0.3;r:6} }
+
+  /* ── SECTION DIVIDER ── */
+  .section-rule {
+    display:flex; align-items:center; gap:1rem;
+    margin-bottom:1.5rem;
+  }
+  .section-rule::before, .section-rule::after {
+    content:''; flex:1; height:1px; background:var(--border-light);
+  }
+  .section-rule-label {
+    font-size:0.72rem; font-weight:800; letter-spacing:2.5px;
+    text-transform:uppercase; color:var(--gold);
+    white-space:nowrap;
+  }
+
+  /* ── INTRO BAND ── */
+  .intro-band {
+    background:var(--ink);
+    padding:3rem 2rem;
+    position:relative; overflow:hidden;
+  }
+  .intro-band::before {
+    content:'東京'; font-family:'Noto Serif JP',serif;
+    font-size:18rem; font-weight:900; color:rgba(255,255,255,0.02);
+    position:absolute; right:-2rem; top:50%; transform:translateY(-50%);
+    line-height:1; pointer-events:none; user-select:none;
+    letter-spacing:-0.05em;
+  }
+  .intro-inner {
+    max-width:1100px; margin:0 auto;
+    display:grid; grid-template-columns:1fr 1fr; gap:3rem;
+    align-items:center;
+  }
+  .intro-left {}
+  .intro-eyebrow {
+    font-size:0.72rem; font-weight:800; letter-spacing:2.5px;
+    text-transform:uppercase; color:var(--tokyo-red-bright);
+    margin-bottom:0.8rem; display:block;
+  }
+  .intro-title {
+    font-family:'Lora',serif; font-size:clamp(1.8rem,3.5vw,2.8rem);
+    font-weight:600; color:white; line-height:1.2; margin-bottom:1rem;
+  }
+  .intro-title em { color:var(--gold-light); font-style:italic; }
+  .intro-body {
+    font-size:0.95rem; color:rgba(255,255,255,0.6);
+    line-height:1.85; font-weight:600;
+  }
+  .intro-right {
+    display:grid; grid-template-columns:1fr 1fr; gap:1rem;
+  }
+  .stat-card {
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(200,149,58,0.2);
+    border-radius:8px; padding:1.2rem;
+    text-align:center;
+  }
+  .stat-num {
+    font-family:'Lora',serif;
+    font-size:2.2rem; font-weight:600;
+    color:var(--gold-light); display:block; line-height:1;
+    margin-bottom:0.3rem;
+  }
+  .stat-label {
+    font-size:0.72rem; font-weight:800;
+    color:rgba(255,255,255,0.4); letter-spacing:1.5px;
+    text-transform:uppercase;
+  }
+  .stat-card.red { border-color:rgba(192,57,43,0.35); }
+  .stat-card.red .stat-num { color:var(--tokyo-red-bright); }
+
+  /* ── CONTENT SECTIONS ── */
+  .content-section {
+    padding:5rem 2rem;
+    background:var(--warm-white);
+  }
+  .content-section.alt { background:var(--mist); }
+  .container { max-width:1100px; margin:0 auto; }
+
+  .section-header { margin-bottom:2.5rem; }
+  .section-kicker {
+    font-size:0.72rem; font-weight:800; letter-spacing:3px;
+    text-transform:uppercase; color:var(--tokyo-red);
+    margin-bottom:0.5rem; display:block;
+  }
+  .section-title {
+    font-family:'Lora',serif;
+    font-size:clamp(1.6rem,3vw,2.4rem);
+    font-weight:600; color:var(--text-dark);
+    line-height:1.2; margin-bottom:0.3rem;
+  }
+  .section-title em { color:var(--tokyo-red); font-style:italic; }
+  .section-sub {
+    font-size:0.92rem; color:var(--text-mid);
+    font-weight:600; line-height:1.7;
+    max-width:580px;
+  }
+  /* Red left-border accent */
+  .section-header { border-left:4px solid var(--tokyo-red); padding-left:1.2rem; }
+
+  /* ── PHOTO GRID ── */
+  .photo-grid {
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:0.75rem;
+  }
+  /* Make first photo span 2 cols wide and 2 rows tall */
+  .photo-grid .photo-item:first-child {
+    grid-column:span 2;
+    grid-row:span 2;
+  }
+
+  .photo-item {
+    position:relative;
+    aspect-ratio:4/3;
+    background:var(--ink-mid);
+    border-radius:4px;
+    overflow:hidden;
+    cursor:pointer;
+  }
+  .photo-item:first-child { aspect-ratio:unset; }
+  .photo-item img {
+    width:100%; height:100%;
+    object-fit:cover; display:block;
+    transition:transform 0.4s ease;
+  }
+  .photo-item:hover img { transform:scale(1.06); }
+
+  /* Placeholder when no image */
+  .photo-placeholder {
+    width:100%; height:100%;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    gap:0.4rem;
+    color:rgba(255,255,255,0.25);
+    font-size:0.75rem; font-weight:700;
+    letter-spacing:1px; text-transform:uppercase;
+    min-height:140px;
+  }
+  .photo-placeholder .ph-icon { font-size:1.8rem; opacity:0.4; }
+
+  /* Caption overlay */
+  .photo-caption-wrap {
+    position:absolute; inset:0;
+    background:linear-gradient(transparent 50%, rgba(10,15,25,0.88));
+    opacity:0; transition:opacity 0.3s;
+    display:flex; align-items:flex-end; padding:0.8rem;
+  }
+  .photo-item:hover .photo-caption-wrap { opacity:1; }
+  .photo-caption-text {
+    font-size:0.8rem; font-weight:700; color:white;
+    line-height:1.4;
+  }
+
+  /* ── VIDEO GRID ── */
+  .video-grid {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1rem;
+  }
+  .video-item {
+    position:relative;
+    background:var(--ink);
+    border-radius:6px; overflow:hidden;
+    border:1px solid rgba(192,57,43,0.25);
+  }
+  .video-thumb {
+    position:relative;
+    aspect-ratio:16/9;
+    background:var(--ink-mid);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; overflow:hidden;
+  }
+  .video-thumb img {
+    width:100%; height:100%; object-fit:cover;
+    display:block; transition:transform 0.4s;
+  }
+  .video-thumb:hover img { transform:scale(1.05); }
+  .video-play {
+    position:absolute;
+    width:52px; height:52px;
+    background:rgba(192,57,43,0.9);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    transition:transform 0.2s, background 0.2s;
+    box-shadow:0 4px 20px rgba(192,57,43,0.5);
+  }
+  .video-thumb:hover .video-play { transform:scale(1.12); background:var(--tokyo-red-bright); }
+  .video-play svg { width:20px; height:20px; fill:white; margin-left:3px; }
+
+  /* Placeholder video tile */
+  .video-placeholder {
+    aspect-ratio:16/9;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:0.5rem;
+    color:rgba(255,255,255,0.2);
+    font-size:0.72rem; font-weight:800;
+    letter-spacing:1px; text-transform:uppercase;
+  }
+  .video-placeholder .ph-icon { font-size:2rem; opacity:0.3; }
+
+  .video-meta {
+    padding:0.75rem 1rem;
+    border-top:1px solid rgba(255,255,255,0.06);
+  }
+  .video-title {
+    font-size:0.85rem; font-weight:800;
+    color:rgba(255,255,255,0.75); margin-bottom:0.15rem;
+  }
+  .video-desc {
+    font-size:0.75rem; color:rgba(255,255,255,0.35); font-weight:600;
+  }
+
+  /* ── VIDEO MODAL ── */
+  .video-modal-overlay {
+    display:none; position:fixed; inset:0; z-index:500;
+    background:rgba(0,0,0,0.9); backdrop-filter:blur(6px);
+    align-items:center; justify-content:center;
+  }
+  .video-modal-overlay.open { display:flex; animation:fadeIn 0.2s; }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  .video-modal-inner {
+    width:90%; max-width:860px; position:relative;
+  }
+  .video-modal-close {
+    position:absolute; top:-2.5rem; right:0;
+    background:none; border:none; color:white;
+    font-size:1.8rem; cursor:pointer; line-height:1;
+    opacity:0.7; transition:opacity 0.2s;
+  }
+  .video-modal-close:hover { opacity:1; }
+  .video-modal-inner iframe, .video-modal-inner video {
+    width:100%; aspect-ratio:16/9;
+    border-radius:6px; border:none;
+    background:black;
+  }
+
+  /* ── TGG HIGHLIGHT ── */
+  .tgg-band {
+    background:var(--ink);
+    padding:4rem 2rem;
+    position:relative; overflow:hidden;
+  }
+  .tgg-band::after {
+    content:'TGG';
+    position:absolute; right:-1rem; top:50%; transform:translateY(-50%);
+    font-family:'Lora',serif; font-size:14rem; font-weight:600;
+    color:rgba(255,255,255,0.02); line-height:1; pointer-events:none;
+    letter-spacing:-0.05em;
+  }
+  .tgg-inner {
+    max-width:1100px; margin:0 auto;
+    display:grid; grid-template-columns:auto 1fr; gap:3rem;
+    align-items:center;
+  }
+  .tgg-badge {
+    width:130px; height:130px; flex-shrink:0;
+    background:var(--tokyo-red);
+    border-radius:50%;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    text-align:center; padding:1rem;
+    box-shadow:0 0 40px rgba(192,57,43,0.4);
+  }
+  .tgg-badge-jp {
+    font-family:'Noto Serif JP',serif;
+    font-size:1.4rem; font-weight:900; color:white; line-height:1;
+  }
+  .tgg-badge-en {
+    font-size:0.6rem; font-weight:800; color:rgba(255,255,255,0.7);
+    letter-spacing:1px; text-transform:uppercase; margin-top:0.3rem;
+  }
+  .tgg-content {}
+  .tgg-label {
+    font-size:0.72rem; font-weight:800; letter-spacing:2.5px;
+    text-transform:uppercase; color:var(--tokyo-red-bright);
+    margin-bottom:0.5rem; display:block;
+  }
+  .tgg-title {
+    font-family:'Lora',serif;
+    font-size:clamp(1.5rem,3vw,2.2rem);
+    color:white; font-weight:600; line-height:1.2; margin-bottom:0.8rem;
+  }
+  .tgg-title em { color:var(--gold-light); font-style:italic; }
+  .tgg-body {
+    font-size:0.92rem; color:rgba(255,255,255,0.6);
+    line-height:1.85; font-weight:600; max-width:600px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background:var(--ink); color:rgba(255,255,255,0.4);
+    padding:2.5rem 2rem; text-align:center;
+    border-top:2px solid rgba(192,57,43,0.3);
+  }
+  .footer-logo-wrap { display:flex; align-items:center; justify-content:center; gap:0.8rem; margin-bottom:0.6rem; }
+  .footer-logo-wrap img { height:44px; width:auto; }
+  .footer-logo-wrap span { font-size:1rem; font-weight:900; color:rgba(255,255,255,0.7); }
+  footer p { font-size:0.85rem; font-weight:600; }
+  .footer-divider { border:none; border-top:1px solid rgba(192,57,43,0.15); margin:1.2rem 0; }
+  .footer-copy { font-size:0.78rem; color:rgba(255,255,255,0.2); font-weight:600; }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px) {
+    .photo-grid { grid-template-columns:repeat(3,1fr); }
+    .photo-grid .photo-item:first-child { grid-column:span 2; }
+    .intro-inner { grid-template-columns:1fr; gap:2rem; }
+    .tgg-inner { grid-template-columns:1fr; }
+    .tgg-badge { margin:0 auto; }
+    .hero-kanji { display:none; }
+  }
+  @media(max-width:640px) {
+    .photo-grid { grid-template-columns:repeat(2,1fr); }
+    .photo-grid .photo-item:first-child { grid-column:span 2; }
+    .video-grid { grid-template-columns:1fr; }
+    .intro-right { grid-template-columns:1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.png" alt="Bridgeway logo">
+    <div class="nav-logo-text">Bridgeway <span>English School</span></div>
+  </a>
+  <a href="index.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<div class="hero">
+  <div class="stars"></div>
+  <div class="city-glow"></div>
+
+  <!-- Watermark kanji -->
+  <div class="hero-kanji">東京</div>
+
+  <!-- SVG TOKYO SKYLINE -->
+  <div class="skyline-wrap">
+    <svg class="skyline-svg" viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="cityGlow" cx="50%" cy="100%" r="50%">
+          <stop offset="0%"   stop-color="#c0392b" stop-opacity="0.22"/>
+          <stop offset="100%" stop-color="#c0392b" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#060a12"/>
+          <stop offset="100%" stop-color="#111e2e"/>
+        </linearGradient>
+        <linearGradient id="towerGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#e8c94a"/>
+          <stop offset="100%" stop-color="#c8953a"/>
+        </linearGradient>
+        <filter id="glow3"><feGaussianBlur stdDeviation="3"/></filter>
+        <filter id="glow8"><feGaussianBlur stdDeviation="8"/></filter>
+      </defs>
+
+      <!-- Ground glow -->
+      <ellipse cx="550" cy="480" rx="600" ry="80" fill="url(#cityGlow)"/>
+
+      <!-- ════ TOKYO SKYTREE (far right, tallest) ════ -->
+      <!-- shaft -->
+      <polygon points="848,480 836,100 860,100" fill="#1a2a3a"/>
+      <!-- narrowing -->
+      <polygon points="836,100 848,60 860,100" fill="#1e3040"/>
+      <!-- tip shaft -->
+      <rect x="845" y="30" width="6" height="35" fill="#2a4055"/>
+      <!-- observation decks -->
+      <rect x="832" y="158" width="32" height="18" rx="4" fill="#253a50"/>
+      <rect x="834" y="220" width="28" height="14" rx="3" fill="#1e3040"/>
+      <!-- rings -->
+      <ellipse cx="848" cy="158" rx="18" ry="5" fill="#2d4a62" opacity="0.7"/>
+      <ellipse cx="848" cy="176" rx="18" ry="4" fill="#2d4a62" opacity="0.5"/>
+      <!-- beacon -->
+      <circle class="beacon" cx="848" cy="28" r="4" fill="#c0392b"/>
+      <circle cx="848" cy="28" r="8" fill="rgba(192,57,43,0.2)" filter="url(#glow3)"/>
+      <!-- windows on skytree deck -->
+      <g fill="#f5c842" opacity="0.6">
+        <rect x="834" y="161" width="3" height="3" rx="1" class="win-a"/>
+        <rect x="840" y="161" width="3" height="3" rx="1" class="win-c"/>
+        <rect x="847" y="161" width="3" height="3" rx="1" class="win-b"/>
+        <rect x="853" y="161" width="3" height="3" rx="1" class="win-d"/>
+      </g>
+
+      <!-- ════ TOKYO TOWER (center-left) ════ -->
+      <g transform="translate(290,0)">
+        <!-- outer legs -->
+        <polygon points="55,480 38,280 72,280" fill="url(#towerGrad)" opacity="0.9"/>
+        <polygon points="55,480 38,280 72,280" fill="#c8953a"/>
+        <line x1="20" y1="480" x2="48" y2="280" stroke="#c8953a" stroke-width="5"/>
+        <line x1="90" y1="480" x2="62" y2="280" stroke="#c8953a" stroke-width="5"/>
+        <!-- platform -->
+        <rect x="28" y="272" width="54" height="10" rx="2" fill="#c8953a"/>
+        <!-- upper section -->
+        <polygon points="55,272 44,160 66,160" fill="#c8953a"/>
+        <!-- upper platform -->
+        <rect x="38" y="155" width="34" height="7" rx="2" fill="#e8b84a"/>
+        <!-- antenna -->
+        <rect x="53" y="60" width="4" height="100" fill="#c8953a"/>
+        <!-- tip -->
+        <rect x="54" y="40" width="2" height="24" fill="#e8c94a"/>
+        <!-- beacon -->
+        <circle class="beacon" cx="55" cy="38" r="3.5" fill="#ff4444"/>
+        <circle cx="55" cy="38" r="7" fill="rgba(255,68,68,0.2)" filter="url(#glow3)"/>
+        <!-- cross braces -->
+        <line x1="20" y1="420" x2="90" y2="420" stroke="#c8953a" stroke-width="2" opacity="0.6"/>
+        <line x1="25" y1="370" x2="85" y2="370" stroke="#c8953a" stroke-width="1.5" opacity="0.5"/>
+        <line x1="30" y1="330" x2="80" y2="330" stroke="#c8953a" stroke-width="1.5" opacity="0.5"/>
+        <!-- diagonal braces -->
+        <line x1="20" y1="480" x2="90" y2="480" stroke="#c8953a" stroke-width="2" opacity="0.4"/>
+        <line x1="32" y1="280" x2="36" y2="480" stroke="#c8953a" stroke-width="1" opacity="0.3"/>
+        <line x1="78" y1="280" x2="74" y2="480" stroke="#c8953a" stroke-width="1" opacity="0.3"/>
+        <!-- tower glow -->
+        <ellipse cx="55" cy="470" rx="50" ry="12" fill="rgba(200,149,58,0.3)" filter="url(#glow8)"/>
+      </g>
+
+      <!-- ════ SENSO-JI GATE SILHOUETTE (far left) ════ -->
+      <g transform="translate(30,280)">
+        <!-- gate body -->
+        <rect x="0" y="80" width="160" height="120" rx="2" fill="#1a1428"/>
+        <!-- roof curve (upswept) -->
+        <path d="M-10,82 Q80,40 170,82 Q145,70 80,62 Q15,70 -10,82Z" fill="#221c35"/>
+        <!-- upper roof -->
+        <path d="M10,62 Q80,22 150,62 Q130,50 80,44 Q30,50 10,62Z" fill="#2a2240"/>
+        <!-- ridgeline -->
+        <rect x="15" y="56" width="130" height="6" rx="3" fill="#342a50"/>
+        <!-- roof tips upswept -->
+        <path d="M-10,82 Q-20,60 -5,58" stroke="#2a2240" stroke-width="3" fill="none"/>
+        <path d="M170,82 Q180,60 165,58" stroke="#2a2240" stroke-width="3" fill="none"/>
+        <!-- columns -->
+        <rect x="18"  y="80" width="12" height="120" rx="2" fill="#150f22"/>
+        <rect x="48"  y="80" width="12" height="120" rx="2" fill="#150f22"/>
+        <rect x="78"  y="80" width="12" height="120" rx="2" fill="#150f22"/>
+        <rect x="108" y="80" width="12" height="120" rx="2" fill="#150f22"/>
+        <rect x="130" y="80" width="12" height="120" rx="2" fill="#150f22"/>
+        <!-- lantern -->
+        <rect x="70" y="88" width="20" height="28" rx="4" fill="#c0392b" opacity="0.8"/>
+        <rect x="73" y="86" width="14" height="4" rx="2" fill="#8b2020"/>
+        <rect x="73" y="116" width="14" height="4" rx="2" fill="#8b2020"/>
+        <!-- lantern glow -->
+        <ellipse cx="80" cy="102" rx="18" ry="16" fill="rgba(192,57,43,0.15)" filter="url(#glow8)"/>
+        <!-- gate arch -->
+        <rect x="55" y="130" width="50" height="70" rx="0" fill="#0d0a1a"/>
+        <path d="M55,130 Q80,115 105,130" fill="#150f22"/>
+        <!-- step -->
+        <rect x="-5" y="196" width="170" height="8" rx="2" fill="#120d1e"/>
+      </g>
+
+      <!-- ════ BUILDINGS — BACKGROUND LAYER ════ -->
+      <!-- Far haze buildings -->
+      <g opacity="0.35" fill="#1a2535">
+        <rect x="500" y="300" width="40" height="180"/>
+        <rect x="548" y="320" width="32" height="160"/>
+        <rect x="590" y="280" width="50" height="200"/>
+        <rect x="650" y="305" width="38" height="175"/>
+        <rect x="700" y="290" width="42" height="190"/>
+        <rect x="752" y="315" width="30" height="165"/>
+        <rect x="790" y="275" width="48" height="205"/>
+        <rect x="950" y="310" width="36" height="170"/>
+        <rect x="996" y="285" width="44" height="195"/>
+        <rect x="1050" y="320" width="50" height="160"/>
+      </g>
+
+      <!-- ════ BUILDINGS — MIDGROUND ════ -->
+      <!-- Left cluster -->
+      <g fill="#1e2d40">
+        <rect x="200" y="340" width="55" height="140"/>
+        <rect x="258" y="310" width="40" height="170"/>
+        <rect x="468" y="330" width="48" height="150"/>
+      </g>
+
+      <!-- Right cluster (around Skytree) -->
+      <g fill="#1a2838">
+        <rect x="880" y="350" width="45" height="130"/>
+        <rect x="930" y="320" width="38" height="160"/>
+        <rect x="975" y="360" width="52" height="120"/>
+        <rect x="1035" y="340" width="40" height="140"/>
+      </g>
+
+      <!-- ════ BUILDINGS — FOREGROUND ════ -->
+      <!-- Modern glass towers center -->
+      <rect x="470" y="240" width="60" height="240" fill="#1e3248" rx="2"/>
+      <rect x="535" y="270" width="48" height="210" fill="#1a2c40" rx="2"/>
+      <rect x="590" y="220" width="70" height="260" fill="#203450" rx="2"/>
+      <rect x="668" y="250" width="55" height="230" fill="#1e3048" rx="2"/>
+      <rect x="730" y="200" width="65" height="280" fill="#1a2c42" rx="2"/>
+      <rect x="800" y="260" width="40" height="220" fill="#1e3248" rx="2"/>
+
+      <!-- Windows on main towers — warm yellow glow -->
+      <g fill="#f5c842" opacity="0.55">
+        <!-- Tower 1 (x470) -->
+        <rect x="478" y="250" width="6" height="8" class="win-a"/>
+        <rect x="490" y="250" width="6" height="8" class="win-c"/>
+        <rect x="502" y="250" width="6" height="8" class="win-b"/>
+        <rect x="478" y="268" width="6" height="8" class="win-d"/>
+        <rect x="490" y="268" width="6" height="8" class="win-e"/>
+        <rect x="502" y="268" width="6" height="8" class="win-a"/>
+        <rect x="478" y="286" width="6" height="8" class="win-c"/>
+        <rect x="502" y="286" width="6" height="8" class="win-b"/>
+        <rect x="478" y="304" width="6" height="8" class="win-d"/>
+        <rect x="490" y="304" width="6" height="8" class="win-e"/>
+        <!-- Tower 3 (x590) -->
+        <rect x="600" y="230" width="7" height="9" class="win-b"/>
+        <rect x="614" y="230" width="7" height="9" class="win-d"/>
+        <rect x="628" y="230" width="7" height="9" class="win-a"/>
+        <rect x="600" y="250" width="7" height="9" class="win-e"/>
+        <rect x="614" y="250" width="7" height="9" class="win-c"/>
+        <rect x="628" y="250" width="7" height="9" class="win-b"/>
+        <rect x="600" y="270" width="7" height="9" class="win-a"/>
+        <rect x="628" y="270" width="7" height="9" class="win-d"/>
+        <rect x="600" y="290" width="7" height="9" class="win-e"/>
+        <rect x="614" y="290" width="7" height="9" class="win-b"/>
+        <rect x="628" y="290" width="7" height="9" class="win-c"/>
+        <!-- Tower 5 (x730) -->
+        <rect x="740" y="210" width="7" height="9" class="win-c"/>
+        <rect x="754" y="210" width="7" height="9" class="win-a"/>
+        <rect x="768" y="210" width="7" height="9" class="win-e"/>
+        <rect x="740" y="230" width="7" height="9" class="win-b"/>
+        <rect x="768" y="230" width="7" height="9" class="win-d"/>
+        <rect x="740" y="250" width="7" height="9" class="win-a"/>
+        <rect x="754" y="250" width="7" height="9" class="win-c"/>
+        <rect x="768" y="250" width="7" height="9" class="win-e"/>
+        <rect x="740" y="270" width="7" height="9" class="win-b"/>
+        <rect x="754" y="270" width="7" height="9" class="win-d"/>
+      </g>
+
+      <!-- Red neon signs on buildings -->
+      <rect x="480" y="360" width="40" height="8" rx="2" fill="rgba(192,57,43,0.7)" filter="url(#glow3)"/>
+      <rect x="600" y="380" width="50" height="8" rx="2" fill="rgba(192,57,43,0.6)" filter="url(#glow3)"/>
+      <rect x="740" y="350" width="45" height="8" rx="2" fill="rgba(192,57,43,0.65)" filter="url(#glow3)"/>
+
+      <!-- Ground / street level -->
+      <rect x="0" y="476" width="1100" height="4" fill="rgba(192,57,43,0.25)"/>
+
+      <!-- Street glow reflections -->
+      <ellipse cx="345" cy="478" rx="80" ry="10" fill="rgba(200,149,58,0.2)" filter="url(#glow8)"/>
+      <ellipse cx="620" cy="478" rx="140" ry="12" fill="rgba(192,57,43,0.15)" filter="url(#glow8)"/>
+      <ellipse cx="848" cy="478" rx="60" ry="8"  fill="rgba(192,57,43,0.12)" filter="url(#glow8)"/>
+
+    </svg>
+  </div>
+
+  <!-- Hero text sits below skyline -->
+  <div class="hero-text">
+    <div class="hero-eyebrow">✦ ABC Bridgeway English School</div>
+    <h1 class="hero-title">
+      Our <em>Tokyo</em> Adventure<br>
+      <span class="gold">東京へ、いざ出発！</span>
+    </h1>
+    <p class="hero-subtitle">Real English. Real Tokyo. An experience our students will never forget.</p>
+    <div class="hero-tags">
+      <span class="hero-tag">🗼Tokyo Skytree</span>
+      <span class="hero-tag">🏙 Tokyo Global Gateway</span>
+      <span class="hero-tag">⛩ Senso-ji</span>
+      <span class="hero-tag">✈️Airplane</span>
+      <span class="hero-tag">🚄 Shinkansen</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════ INTRO BAND ════ -->
+<div class="intro-band">
+  <div class="intro-inner">
+    <div class="intro-left">
+      <span class="intro-eyebrow">✦ The Trip</span>
+      <h2 class="intro-title">Bridgeway goes to <em>Tokyo</em></h2>
+      <p class="intro-body">For the first time, our students stepped off the airplane and into one of the world's most exciting cities — using English the whole way. From navigating to exploring Tokyo Global Gateway, every moment was a real-world English experience wrapped in the energy of Japan's capital.</p>
+    </div>
+    <div class="intro-right">
+      <div class="stat-card">
+        <span class="stat-num">1st</span>
+        <span class="stat-label">Annual Trip</span>
+      </div>
+      <div class="stat-card red">
+        <span class="stat-num">TGG</span>
+        <span class="stat-label">Tokyo Global Gateway</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">東京</span>
+        <span class="stat-label">Tokyo, Japan</span>
+      </div>
+      <div class="stat-card red">
+        <span class="stat-num">✈️</span>
+        <span class="stat-label">By Airplane</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ TGG HIGHLIGHT ════ -->
+<div class="tgg-band">
+  <div class="tgg-inner">
+    <div class="tgg-badge">
+      <div class="tgg-badge-jp">TGG</div>
+      <div class="tgg-badge-en">Tokyo Global<br>Gateway</div>
+    </div>
+    <div class="tgg-content">
+      <span class="tgg-label">✦ Highlight</span>
+      <h2 class="tgg-title">An <em>immersive English</em> world inside Tokyo</h2>
+      <p class="tgg-body">Tokyo Global Gateway is a state-of-the-art English immersion facility where every zone, every staff member, and every interaction happens entirely in English. For our students, it was like stepping into another country — right in the heart of Tokyo. A perfect fit for Bridgeway kids ready to put their English to the real test.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════ PHOTO SECTION ════ -->
+<div class="content-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-kicker">✦ Photo Gallery</span>
+      <h2 class="section-title">Moments from <em>Tokyo</em></h2>
+      <p class="section-sub">12 snapshots from our adventure — landmarks, laughs, and everything in between.</p>
+    </div>
+
+    <div class="photo-grid">
+
+      <!-- Slot 1 — HERO (2×2) -->
+      <div class="photo-item">
+        <div class="photo-frame"><img src="tokyo-trip/tokyo1.jpg"
+          <span class="ph-icon">📷</span>
+          Add hero photo
+        </div>
+        <div class="photo-caption-wrap">
+          <span class="photo-caption-text">✏️ Add caption here</span>
+        </div>
+      </div>
+
+      <!-- Slots 2–12 -->
+      <div class="photo-item">
+       <div class="photo-frame"><img src="tokyo-trip/tokyo2.jpg" <span class="ph-icon">📷</span>Add photo</div>
+        <div class="photo-caption-wrap"><span class="photo-caption-text">✏️ Add caption</span></div>
+      </div>
+      <div class="photo-item">
+        <div class="photo-frame"><img src="tokyo-trip/tokyo3.jpg"<span class="ph-icon">📷</span>Add photo</div>
+        <div class="photo-caption-wrap"><span class="photo-caption-text">✏️ Add caption</span></div>
+      </div>
+      <div class="photo-item">
+        <div class="photo-frame"><img src="tokyo-trip/tokyo4.jpg"<span class="ph-icon">📷</span>Add photo</div>
+        <div class="photo-caption-wrap"><span class="photo-caption-text">✏️ Add caption</span></div>
+      </div>
+      <div class="photo-item">
+        <div class="photo-frame"><img src="tokyo-trip/tokyo5.jpg"><span class="ph-icon">📷</span>Add photo</div>
+        <div class="photo-caption-wrap"><span class="photo-caption-text">✏️ Add caption</span></div>
+      </div>
+      <div class="photo-item">
+        <div class="photo-frame"><img src="tokyo-trip/tokyo6.jpg"><span class="ph-icon">📷</span>Add photo</div>
+        <div class="photo-caption-wrap"><span class="photo-caption-text">✏️ Add caption</span></div>
+      </div>
+      <div class="photo-item">
+        <div class="photo-frame"><img src="tokyo-trip/tokyo7.jpg"><span class="ph-icon">📷</span>Add photo</div>
+        <div class="photo-caption-wrap"><span class="photo-caption-text">✏️ Add caption</span></div>
+      </div>
+      <div class="photo-item">
+        <div class="photo-frame"><img src="tokyo-trip/tokyo8.jpg"><span class="ph-icon">📷</span>Add photo</div>
+        <div class="photo-caption-wrap"><span class="photo-caption-text">✏️ Add caption</span></div>
+      </div>
+      <div class="photo-item">
+       <div class="photo-frame"><img src="tokyo-trip/tokyo9.jpg"><span class="ph-icon">📷</span>Add photo</div>
+        <div class="photo-caption-wrap"><span class="photo-caption-text">✏️ Add caption</span></div>
+      </div>
+      <div class="photo-item">
+        <div class="photo-frame"><img src="tokyo-trip/tokyo10.jpg"><span class="ph-icon">📷</span>Add photo</div>
+        <div class="photo-caption-wrap"><span class="photo-caption-text">✏️ Add caption</span></div>
+      </div>
+      <div class="photo-item">
+        <div class="photo-frame"><img src="tokyo-trip/tokyo11.jpg"><span class="ph-icon">📷</span>Add photo</div>
+        <div class="photo-caption-wrap"><span class="photo-caption-text">✏️ Add caption</span></div>
+      </div>
+      <div class="photo-item">
+        <div class="photo-frame"><img src="tokyo-trip/tokyo12.jpg"><span class="ph-icon">📷</span>Add photo</div>
+        <div class="photo-caption-wrap"><span class="photo-caption-text">✏️ Add caption</span></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ════ VIDEO SECTION ════ -->
+<div class="content-section alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-kicker">✦ Video Memories</span>
+      <h2 class="section-title">Watch the <em>adventure</em> unfold</h2>
+      <p class="section-sub">Three videos from the trip — relive the moments, the city, and the English in action.</p>
+    </div>
+
+    <div class="video-grid">
+
+      <!-- Video 1 -->
+      <div class="video-item">
+  <div class="video-thumb">
+    <video src="tokyo-trip/tokyomov1.MOV" controls style="width:100%;height:100%;object-fit:cover;display:block;"></video>
+  </div>
+  <div class="video-meta">
+    <div class="video-title">✏️ Video title here</div>
+    <div class="video-desc">✏️ Short description</div>
+  </div>
+</div>
+
+      <!-- Video 2 -->
+      <div class="video-item">
+  <div class="video-thumb">
+    <video src="tokyo-trip/tokyomov2.MOV" controls style="width:100%;height:100%;object-fit:cover;display:block;"></video>
+  </div>
+  <div class="video-meta">
+    <div class="video-title">✏️ Video title here</div>
+    <div class="video-desc">✏️ Short description</div>
+  </div>
+</div>
+
+      <!-- Video 3 -->
+      <div class="video-item">
+  <div class="video-thumb">
+    <video src="tokyo-trip/tokyomov3.MOV" controls style="width:100%;height:100%;object-fit:cover;display:block;"></video>
+  </div>
+  <div class="video-meta">
+    <div class="video-title">✏️ Video title here</div>
+    <div class="video-desc">✏️ Short description</div>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<!-- VIDEO MODAL -->
+<div class="video-modal-overlay" id="videoModal">
+  <div class="video-modal-inner">
+    <button class="video-modal-close" onclick="closeVideo()">✕</button>
+    <!--
+      TO ADD YOUR VIDEOS:
+      Option A — YouTube: replace src with your YouTube embed URL
+        e.g. src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+      Option B — Self-hosted: use a <video> tag instead of <iframe>
+        e.g. <video src="videos/tokyo-1.mp4" controls></video>
+    -->
+    <iframe id="videoFrame" src="" allowfullscreen title="Tokyo Trip Video"></iframe>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo-wrap">
+    <img src="logo.png" alt="Bridgeway logo">
+    <span>ABC Bridgeway English School</span>
+  </div>
+  <p>山形県山形市元木2-2-17 | 023-641-3059</p>
+  <hr class="footer-divider">
+  <p class="footer-copy">© 2026 ABC Bridgeway English School. All rights reserved.</p>
+</footer>
+
+<script>
+  // ── VIDEO MODAL ──
+  // Replace these with your actual YouTube embed URLs or video file paths
+  const videoSources = {
+    1: '',  // e.g. 'https://www.youtube.com/embed/XXXXXXXXXX'
+    2: '',
+    3: '',
+  };
+
+  function openVideo(n) {
+    const src = videoSources[n];
+    if (!src) {
+      alert('✏️ Add your video URL to videoSources[' + n + '] in the script.');
+      return;
+    }
+    document.getElementById('videoFrame').src = src + '?autoplay=1';
+    document.getElementById('videoModal').classList.add('open');
+  }
+
+  function closeVideo() {
+    document.getElementById('videoFrame').src = '';
+    document.getElementById('videoModal').classList.remove('open');
+  }
+
+  document.getElementById('videoModal').addEventListener('click', function(e) {
+    if (e.target === this) closeVideo();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeVideo();
+  });
+</script>
+</body>
+</html>

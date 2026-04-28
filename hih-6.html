@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hand in Hand 6 | ABC Bridgeway English School</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:#fdf8f2; --warm-white:#fffcf7;
+    --sky:#1e6db5; --sky-light:#e3eef8; --sky-dark:#154f87;
+    --sun:#f0a500; --sun-light:#fff4e0;
+    --grass:#2ab04a; --grass-light:#e4f5ea;
+    --teal:#00b4cc;
+    --text-dark:#1a2840; --text-mid:#4a5568; --text-light:#8a9ab0;
+    --border:#dde8f0; --shadow:rgba(30,109,181,0.13);
+  }
+  /* Level 6 theme — Caribbean Green */
+.unit-tag { background:#d6f7f2 !important; color:#00967d !important; }
+.unit-title em { color:#00c9a7 !important; }
+.lesson-divider { background:#00c9a7 !important; }
+.video-thumb { background:#d6f7f2 !important; border-color:#00c9a7 !important; }
+.video-thumb:hover { background:#00c9a7 !important; border-color:#00c9a7 !important; }
+.play-btn { color:#00c9a7 !important; }
+.unit-nav-link { background:#fff4e0 !important; color:#a06800 !important; }
+.unit-nav-link:hover { background:#f0a500 !important; color:white !important; }
+.page-header h1 em { color:#00c9a7 !important; }
+.section-tag { color:#00c9a7 !important; }
+.book-level { background:#d6f7f2 !important; color:#00967d !important; }
+.nav-back { background:#00c9a7 !important; }
+.nav-back:hover { background:#00967d !important; }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(255,252,247,0.94); backdrop-filter:blur(12px);
+    border-bottom:2px solid var(--border);
+    padding:0 2rem; display:flex; align-items:center; justify-content:space-between;
+    height:70px;
+  }
+  .nav-logo { display:flex; align-items:center; gap:0.5rem; text-decoration:none; }
+  .nav-logo img { height:52px; width:auto; }
+  .nav-logo-text { font-size:1.05rem; font-weight:900; color:var(--sky-dark); line-height:1.2; }
+  .nav-logo-text span { display:block; font-size:0.72rem; font-weight:700; color:var(--text-light); letter-spacing:1px; text-transform:uppercase; }
+  .nav-back {
+    background:var(--sky); color:white;
+    padding:0.55rem 1.4rem; border-radius:30px;
+    font-weight:800; font-size:0.88rem; text-decoration:none;
+    transition:background 0.2s;
+  }
+  .nav-back:hover { background:var(--sky-dark); }
+
+  /* PAGE HEADER */
+  .page-header {
+    padding:7rem 2rem 2.5rem;
+    text-align:center;
+    background:var(--warm-white);
+    border-bottom:2px solid var(--border);
+  }
+  .page-header .section-tag {
+    display:inline-block; font-size:0.78rem; font-weight:800;
+    letter-spacing:2px; text-transform:uppercase; color:var(--sky); margin-bottom:0.8rem;
+  }
+  .page-header h1 {
+    font-family:'Lora',serif;
+    font-size:clamp(2rem,4vw,3rem);
+    font-weight:600; color:var(--text-dark); margin-bottom:0.8rem;
+  }
+  .page-header h1 em { font-style:italic; color:var(--sky); }
+  .page-header p { font-size:1rem; color:var(--text-mid); font-weight:600; }
+
+  /* UNIT JUMP NAV */
+  .unit-nav {
+    background:white; border-bottom:2px solid var(--border);
+    padding:1rem 2rem; position:sticky; top:70px; z-index:90;
+    display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;
+    justify-content:center;
+  }
+  .unit-nav-label { font-size:0.78rem; font-weight:800; color:var(--text-light); letter-spacing:1px; text-transform:uppercase; margin-right:0.5rem; }
+  .unit-nav-link {
+    display:inline-block; padding:0.3rem 0.75rem;
+    border-radius:20px; font-size:0.82rem; font-weight:800;
+    background:var(--sky-light); color:var(--sky-dark);
+    text-decoration:none; border:2px solid transparent;
+    transition:all 0.15s;
+  }
+  .unit-nav-link:hover { background:var(--sky); color:white; }
+
+  /* UNIT SECTIONS */
+  .unit-section { padding:3rem 2rem; }
+  .unit-section:nth-child(even) { background:white; }
+  .container { max-width:1100px; margin:0 auto; }
+
+  .unit-header { margin-bottom:2rem; }
+  .unit-tag {
+    display:inline-block; font-size:0.75rem; font-weight:800;
+    letter-spacing:1.5px; text-transform:uppercase;
+    padding:0.25rem 0.8rem; border-radius:20px; margin-bottom:0.6rem;
+  }
+  .unit-title {
+    font-family:'Lora',serif;
+    font-size:clamp(1.6rem,3vw,2.2rem);
+    font-weight:600; color:var(--text-dark); margin-bottom:0.3rem;
+  }
+  .unit-title em { font-style:italic; color:var(--sky); }
+  .unit-desc { font-size:0.9rem; color:var(--text-light); font-weight:700; letter-spacing:0.3px; }
+
+  /* LESSONS GRID */
+  .lessons-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    gap:1.5rem;
+  }
+
+  /* LESSON BLOCK */
+  .lesson-block {
+    background:var(--warm-white);
+    border:2px solid var(--border);
+    border-radius:18px;
+    overflow:hidden;
+    transition:box-shadow 0.2s, transform 0.2s;
+  }
+  .lesson-block:hover { box-shadow:0 8px 32px var(--shadow); transform:translateY(-3px); }
+
+  .lesson-divider { height:5px; width:100%; }
+
+  .lesson-header { padding:1rem 1.2rem 0.8rem; }
+  .lesson-title { font-size:1rem; font-weight:900; color:var(--text-dark); margin-bottom:0.2rem; }
+  .lesson-subtitle { font-size:0.85rem; color:var(--text-light); font-weight:600; }
+
+  /* LAZY VIDEO */
+  .video-wrap { padding:0 1.2rem 1.2rem; }
+  .video-thumb {
+    width:100%; aspect-ratio:16/9;
+    background:var(--sky-light);
+    border-radius:12px;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    cursor:pointer; border:2px solid var(--border);
+    transition:background 0.2s, border-color 0.2s;
+    gap:0.5rem;
+  }
+  .video-thumb:hover { background:var(--sky); border-color:var(--sky); }
+  .video-thumb:hover .play-btn { color:white; }
+  .video-thumb:hover .play-label { color:rgba(255,255,255,0.85); }
+  .play-btn { font-size:2.2rem; color:var(--sky); transition:color 0.2s; }
+  .play-label { font-size:0.78rem; font-weight:800; color:var(--text-light); letter-spacing:0.5px; text-transform:uppercase; transition:color 0.2s; }
+  .video-iframe-wrap { width:100%; aspect-ratio:16/9; border-radius:12px; overflow:hidden; }
+  .video-iframe-wrap iframe { width:100%; height:100%; border:none; }
+
+  /* FOOTER */
+  footer { background:#0f1e33; color:rgba(255,255,255,0.6); padding:2.5rem 2rem; text-align:center; }
+  .footer-logo-wrap { display:flex; align-items:center; justify-content:center; gap:0.8rem; margin-bottom:0.6rem; }
+  .footer-logo-wrap img { height:44px; width:auto; }
+  .footer-logo-wrap span { font-size:1.1rem; font-weight:900; color:white; }
+  footer p { font-size:0.85rem; font-weight:600; }
+  .footer-divider { border:none; border-top:1px solid rgba(255,255,255,0.08); margin:1.2rem 0; }
+  .footer-copy { font-size:0.78rem; color:rgba(255,255,255,0.3); font-weight:600; }
+
+  @media(max-width:768px) {
+    .lessons-grid { grid-template-columns:1fr; }
+    .unit-nav { gap:0.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img <img src="logo.png" alt="Bridgeway logo">
+    <div class="nav-logo-text">Bridgeway <span>English School</span></div>
+  </a>
+  <a href="course-books.html" class="nav-back">← Course Books</a>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <img bridge-bg.png>
+  <span class="section-tag">✦ Hand in Hand</span>
+  <h1>Hand in Hand <em>6</em></h1>
+  <p>12 Units &nbsp;·&nbsp; 42 Lessons &nbsp;·&nbsp;</p>
+</div>
+
+<!-- UNIT JUMP NAV -->
+<div class="unit-nav">
+  <span class="unit-nav-label">Jump to:</span>
+  <a href="#unit-1" class="unit-nav-link">U1</a>
+      <a href="#unit-2" class="unit-nav-link">U2</a>
+      <a href="#unit-3" class="unit-nav-link">U3</a>
+      <a href="#unit-4" class="unit-nav-link">U4</a>
+      <a href="#unit-5" class="unit-nav-link">U5</a>
+      <a href="#unit-6" class="unit-nav-link">U6</a>
+      <a href="#unit-7" class="unit-nav-link">U7</a>
+      <a href="#unit-8" class="unit-nav-link">U8</a>
+      <a href="#unit-9" class="unit-nav-link">U9</a>
+      <a href="#unit-10" class="unit-nav-link">U10</a>
+      <a href="#unit-11" class="unit-nav-link">U11</a>
+      <a href="#unit-12" class="unit-nav-link">U12</a>
+      
+</div>
+
+
+  <!-- UNIT 1 -->
+  <section class="unit-section" id="unit-1">
+    <div class="container">
+      <div class="unit-header">
+        <span class="unit-tag" style="background:var(--sky-light); color:var(--sky-dark)">Unit 1</span>
+        <h2 class="unit-title">Unit <em>1</em></h2>
+        <p class="unit-desc">3 Lessons &nbsp;·&nbsp; Hand in Hand Starter</p>
+      </div>
+      <div class="lessons-grid">
+      <!-- U1 L1 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sky)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 1 — Lesson 1</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="2C0K_wNYdHk">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U1 L2 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sky)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 1 — Lesson 2</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U1 L3 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sky)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 1 — Lesson 3</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+  <!-- UNIT 2 -->
+  <section class="unit-section" id="unit-2">
+    <div class="container">
+      <div class="unit-header">
+        <span class="unit-tag" style="background:var(--sun-light); color:#a06800">Unit 2</span>
+        <h2 class="unit-title">Unit <em>2</em></h2>
+        <p class="unit-desc">4 Lessons &nbsp;·&nbsp; Hand in Hand Starter</p>
+      </div>
+      <div class="lessons-grid">
+      <!-- U2 L1 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 2 — Lesson 1</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U2 L2 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 2 — Lesson 2</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U2 L3 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 2 — Lesson 3</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U2 L4 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 2 — Lesson 4</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+  <!-- UNIT 3 -->
+  <section class="unit-section" id="unit-3">
+    <div class="container">
+      <div class="unit-header">
+        <span class="unit-tag" style="background:var(--sky-light); color:var(--sky-dark)">Unit 3</span>
+        <h2 class="unit-title">Unit <em>3</em></h2>
+        <p class="unit-desc">3 Lessons &nbsp;·&nbsp; Hand in Hand Starter</p>
+      </div>
+      <div class="lessons-grid">
+      <!-- U3 L1 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sky)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 3 — Lesson 1</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U3 L2 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sky)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 3 — Lesson 2</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U3 L3 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sky)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 3 — Lesson 3</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+  <!-- UNIT 4 -->
+  <section class="unit-section" id="unit-4">
+    <div class="container">
+      <div class="unit-header">
+        <span class="unit-tag" style="background:var(--sun-light); color:#a06800">Unit 4</span>
+        <h2 class="unit-title">Unit <em>4</em></h2>
+        <p class="unit-desc">4 Lessons &nbsp;·&nbsp; Hand in Hand Starter</p>
+      </div>
+      <div class="lessons-grid">
+      <!-- U4 L1 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 4 — Lesson 1</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U4 L2 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 4 — Lesson 2</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U4 L3 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 4 — Lesson 3</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U4 L4 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 4 — Lesson 4</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+  <!-- UNIT 5 -->
+  <section class="unit-section" id="unit-5">
+    <div class="container">
+      <div class="unit-header">
+        <span class="unit-tag" style="background:var(--sky-light); color:var(--sky-dark)">Unit 5</span>
+        <h2 class="unit-title">Unit <em>5</em></h2>
+        <p class="unit-desc">3 Lessons &nbsp;·&nbsp; Hand in Hand Starter</p>
+      </div>
+      <div class="lessons-grid">
+      <!-- U5 L1 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sky)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 5 — Lesson 1</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U5 L2 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sky)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 5 — Lesson 2</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U5 L3 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sky)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 5 — Lesson 3</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+  <!-- UNIT 6 -->
+  <section class="unit-section" id="unit-6">
+    <div class="container">
+      <div class="unit-header">
+        <span class="unit-tag" style="background:var(--sun-light); color:#a06800">Unit 6</span>
+        <h2 class="unit-title">Unit <em>6</em></h2>
+        <p class="unit-desc">4 Lessons &nbsp;·&nbsp; Hand in Hand Starter</p>
+      </div>
+      <div class="lessons-grid">
+      <!-- U6 L1 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 6 — Lesson 1</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U6 L2 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 6 — Lesson 2</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U6 L3 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 6 — Lesson 3</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U6 L4 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 6 — Lesson 4</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+  <!-- UNIT 7 -->
+  <section class="unit-section" id="unit-7">
+    <div class="container">
+      <div class="unit-header">
+        <span class="unit-tag" style="background:var(--sky-light); color:var(--sky-dark)">Unit 7</span>
+        <h2 class="unit-title">Unit <em>7</em></h2>
+        <p class="unit-desc">3 Lessons &nbsp;·&nbsp; Hand in Hand Starter</p>
+      </div>
+      <div class="lessons-grid">
+      <!-- U7 L1 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sky)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 7 — Lesson 1</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U7 L2 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sky)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 7 — Lesson 2</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U7 L3 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sky)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 7 — Lesson 3</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+  <!-- UNIT 8 -->
+  <section class="unit-section" id="unit-8">
+    <div class="container">
+      <div class="unit-header">
+        <span class="unit-tag" style="background:var(--sun-light); color:#a06800">Unit 8</span>
+        <h2 class="unit-title">Unit <em>8</em></h2>
+        <p class="unit-desc">4 Lessons &nbsp;·&nbsp; Hand in Hand Starter</p>
+      </div>
+      <div class="lessons-grid">
+      <!-- U8 L1 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 8 — Lesson 1</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U8 L2 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 8 — Lesson 2</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U8 L3 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 8 — Lesson 3</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U8 L4 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 8 — Lesson 4</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+  <!-- UNIT 9 -->
+  <section class="unit-section" id="unit-9">
+    <div class="container">
+      <div class="unit-header">
+        <span class="unit-tag" style="background:var(--sky-light); color:var(--sky-dark)">Unit 9</span>
+        <h2 class="unit-title">Unit <em>9</em></h2>
+        <p class="unit-desc">3 Lessons &nbsp;·&nbsp; Hand in Hand Starter</p>
+      </div>
+      <div class="lessons-grid">
+      <!-- U9 L1 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sky)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 9 — Lesson 1</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U9 L2 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sky)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 9 — Lesson 2</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U9 L3 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sky)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 9 — Lesson 3</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+  <!-- UNIT 10 -->
+  <section class="unit-section" id="unit-10">
+    <div class="container">
+      <div class="unit-header">
+        <span class="unit-tag" style="background:var(--sun-light); color:#a06800">Unit 10</span>
+        <h2 class="unit-title">Unit <em>10</em></h2>
+        <p class="unit-desc">4 Lessons &nbsp;·&nbsp; Hand in Hand Starter</p>
+      </div>
+      <div class="lessons-grid">
+      <!-- U10 L1 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 10 — Lesson 1</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U10 L2 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 10 — Lesson 2</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U10 L3 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 10 — Lesson 3</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U10 L4 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 10 — Lesson 4</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+  <!-- UNIT 11 -->
+  <section class="unit-section" id="unit-11">
+    <div class="container">
+      <div class="unit-header">
+        <span class="unit-tag" style="background:var(--sky-light); color:var(--sky-dark)">Unit 11</span>
+        <h2 class="unit-title">Unit <em>11</em></h2>
+        <p class="unit-desc">3 Lessons &nbsp;·&nbsp; Hand in Hand Starter</p>
+      </div>
+      <div class="lessons-grid">
+      <!-- U11 L1 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sky)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 11 — Lesson 1</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U11 L2 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sky)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 11 — Lesson 2</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U11 L3 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sky)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 11 — Lesson 3</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+  <!-- UNIT 12 -->
+  <section class="unit-section" id="unit-12">
+    <div class="container">
+      <div class="unit-header">
+        <span class="unit-tag" style="background:var(--sun-light); color:#a06800">Unit 12</span>
+        <h2 class="unit-title">Unit <em>12</em></h2>
+        <p class="unit-desc">4 Lessons &nbsp;·&nbsp; Hand in Hand Starter</p>
+      </div>
+      <div class="lessons-grid">
+      <!-- U12 L1 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 12 — Lesson 1</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U12 L2 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 12 — Lesson 2</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U12 L3 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 12 — Lesson 3</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      <!-- U12 L4 -->
+      <div class="lesson-block">
+        <div class="lesson-divider" style="background:var(--sun)"></div>
+        <div class="lesson-header">
+          <div class="lesson-title">Unit 12 — Lesson 4</div>
+          <div class="lesson-subtitle">Subtitle goes here</div>
+        </div>
+        <div class="video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-thumb">
+            <div class="play-btn">▶</div>
+            <div class="play-label">Click to play</div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo-wrap">
+    <img <img src="logo.png" alt="Bridgeway logo">
+    <span>ABC Bridgeway English School</span>
+  </div>
+  <p>山形県山形市元木2-2-17 | 023-641-3059</p>
+  <hr class="footer-divider">
+  <p class="footer-copy">© 2026 ABC Bridgeway English School. All rights reserved.</p>
+</footer>
+
+<script>
+  // Lazy load videos on click
+  document.querySelectorAll('.video-wrap').forEach(wrap => {
+    const thumb = wrap.querySelector('.video-thumb');
+    if (!thumb) return;
+    thumb.addEventListener('click', () => {
+      const videoId = wrap.dataset.videoid;
+      if (!videoId || videoId === 'YOUTUBE_ID_HERE') {
+        thumb.innerHTML = '<div style="color:var(--sky-dark);font-weight:800;font-size:0.9rem;padding:1rem;text-align:center;">📹 Add YouTube video ID to activate</div>';
+        return;
+      }
+      const iframeWrap = document.createElement('div');
+      iframeWrap.className = 'video-iframe-wrap';
+      iframeWrap.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      wrap.replaceChild(iframeWrap, thumb);
+    });
+  });
+</script>
+
+</body>
+</html>

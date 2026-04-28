@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABC Bridgeway English School | Yamagata</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fdf8f2;
+    --warm-white: #fffcf7;
+    --sky: #1e6db5;
+    --sky-light: #e3eef8;
+    --sky-dark: #154f87;
+    --sun: #f0a500;
+    --sun-light: #fff4e0;
+    --grass: #2ab04a;
+    --grass-light: #e4f5ea;
+    --teal: #00b4cc;
+    --coral: #f07060;
+    --text-dark: #1a2840;
+    --text-mid: #4a5568;
+    --text-light: #8a9ab0;
+    --border: #dde8f0;
+    --shadow: rgba(30,109,181,0.13);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Nunito',sans-serif; background:var(--cream); color:var(--text-dark); overflow-x:hidden; }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(255,252,247,0.94); backdrop-filter:blur(12px);
+    border-bottom:2px solid var(--border);
+    padding:0 2rem; display:flex; align-items:center; justify-content:space-between;
+    height:70px;
+  }
+  .nav-logo { display:flex; align-items:center; gap:0.5rem; text-decoration:none; }
+  .nav-logo img { height:52px; width:auto; }
+  .nav-logo-text { font-size:1.05rem; font-weight:900; color:var(--sky-dark); line-height:1.2; }
+  .nav-logo-text span { display:block; font-size:0.72rem; font-weight:700; color:var(--text-light); letter-spacing:1px; text-transform:uppercase; }
+  .nav-links { display:flex; gap:2rem; list-style:none; }
+  .nav-links a { text-decoration:none; font-weight:700; font-size:0.9rem; color:var(--text-mid); transition:color 0.2s; }
+  .nav-links a:hover { color:var(--sky); }
+  .nav-cta {
+    background:var(--sky); color:white;
+    padding:0.55rem 1.4rem; border-radius:30px;
+    font-weight:800; font-size:0.88rem; text-decoration:none;
+    transition:background 0.2s, transform 0.15s;
+    box-shadow:0 4px 14px rgba(30,109,181,0.35);
+  }
+  .nav-cta:hover { background:var(--sky-dark); transform:translateY(-1px); }
+
+  /* HERO */
+  #hero {
+    min-height:100vh; padding-top:70px;
+    background:var(--warm-white);
+    background-image: url('images/bridge-bg.png');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 1200px auto;
+    display:flex; align-items:center; justify-content:center;
+    position:relative; overflow:hidden;
+  }
+  .hero-blobs { position:absolute; inset:0; pointer-events:none; }
+  .blob { position:absolute; border-radius:50%; filter:blur(55px); opacity:0.3; }
+  .blob-1 { width:500px; height:500px; background:var(--sky-light); top:-100px; right:-100px; animation:float1 9s ease-in-out infinite; }
+  .blob-2 { width:360px; height:360px; background:var(--sun-light); bottom:-80px; left:-80px; animation:float2 11s ease-in-out infinite; }
+  .blob-3 { width:240px; height:240px; background:var(--grass-light); top:45%; left:52%; animation:float1 13s ease-in-out infinite reverse; }
+  @keyframes float1 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-22px)} }
+  @keyframes float2 { 0%,100%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-16px) rotate(4deg)} }
+
+  .hero-inner { max-width:880px; padding:.1rem 2rem; text-align:center; position:relative; z-index:1; }
+  .hero-logo-big { margin:0 auto 2rem; animation:popIn 0.6s cubic-bezier(.34,1.56,.64,1) both; }
+ .hero-logo-big img { height:140px; width:auto; max-width:90vw; filter:drop-shadow(0 8px 24px rgba(30,109,181,0.2)); }
+  .hero-wordmark {
+  font-family:'Lora',serif;
+  font-size:clamp(2.5rem, 10vw, 8rem);
+  font-weight:600;
+  color:var(--sky-dark);
+  letter-spacing:-1px;
+}
+  @media (max-width: 600px) {
+    .hero-logo-big img { height:100px; }
+    #hero { background-size: 100% auto; }
+  }
+  @keyframes popIn { from{opacity:0;transform:scale(0.7)} to{opacity:1;transform:scale(1)} }
+  @keyframes slideUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:0.5rem;
+    background:var(--sky-light); color:var(--sky-dark);
+    border:2px solid var(--sky); border-radius:30px;
+    padding:0.4rem 1.1rem; font-size:0.85rem; font-weight:800;
+    margin-top:1.5rem; margin-bottom:1.6rem; letter-spacing:0.4px;
+    animation:slideUp 0.6s 0.1s ease-out both;
+  }
+  .hero-title {
+    font-family:'Lora',serif;
+    font-size:clamp(2.4rem,5.5vw,3.8rem);
+    font-weight:600; line-height:1.2;
+    color:var(--text-dark); margin-bottom:1.2rem;
+    animation:slideUp 0.6s 0.2s ease-out both;
+  }
+  .hero-title em { font-style:italic; color:var(--sky); }
+  .hero-title .underline { position:relative; display:inline-block; }
+  .hero-title .underline::after {
+    content:''; position:absolute; bottom:3px; left:0; right:0; height:7px;
+    background:var(--sun); opacity:0.4; border-radius:4px; z-index:-1;
+  }
+  .hero-sub {
+    font-size:1.1rem; color:var(--text-mid); max-width:540px;
+    margin:0 auto 2rem; line-height:1.75; font-weight:600;
+    animation:slideUp 0.6s 0.3s ease-out both;
+  }
+  .hero-jp {
+    font-size:0.95rem; color:var(--text-light); margin-bottom:2.2rem;
+    font-weight:700; letter-spacing:0.5px;
+    animation:slideUp 0.6s 0.35s ease-out both;
+  }
+  .hero-btns {
+    display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;
+    animation:slideUp 0.6s 0.4s ease-out both;
+  }
+  .btn-primary {
+    background:var(--sky); color:white;
+    padding:0.85rem 2rem; border-radius:40px;
+    font-weight:800; font-size:1rem; text-decoration:none;
+    box-shadow:0 6px 20px rgba(30,109,181,0.4);
+    transition:transform 0.15s, box-shadow 0.15s;
+  }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 10px 28px rgba(30,109,181,0.45); }
+  .btn-secondary {
+    background:transparent; color:var(--sky-dark);
+    padding:0.85rem 2rem; border-radius:40px;
+    font-weight:800; font-size:1rem; text-decoration:none;
+    border:2.5px solid var(--sky); transition:background 0.15s;
+  }
+  .btn-secondary:hover { background:var(--sky-light); }
+  .hero-phone {
+    margin-top:2rem; font-size:1.4rem; font-weight:900; color:var(--sky-dark);
+    animation:slideUp 0.6s 0.5s ease-out both;
+  }
+  .hero-phone a { color:inherit; text-decoration:none; }
+  .hero-phone a:hover { color:var(--sky); }
+  .hero-phone-label { font-size:0.78rem; font-weight:700; color:var(--text-light); letter-spacing:1px; text-transform:uppercase; margin-bottom:0.2rem; }
+
+  /* SECTIONS */
+  section { padding:6rem 2rem; }
+  .section-tag { display:inline-block; font-size:0.78rem; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--sky); margin-bottom:0.8rem; }
+  .section-title { font-family:'Lora',serif; font-size:clamp(1.8rem,3.8vw,2.7rem); font-weight:600; color:var(--text-dark); margin-bottom:1.1rem; line-height:1.25; }
+  .section-title em { color:var(--sky); font-style:italic; }
+  .section-sub { font-size:1.05rem; color:var(--text-mid); max-width:560px; line-height:1.7; font-weight:600; }
+  .container { max-width:1100px; margin:0 auto; }
+
+  /* ABOUT */
+  #about { background:var(--sky-light); }
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; margin-top:3rem; }
+  .about-card-main {
+    background:white; border-radius:20px; padding:2.2rem;
+    box-shadow:0 8px 40px var(--shadow); border:2px solid var(--border);
+    position:relative;
+  }
+  .about-card-main .emoji-big { font-size:3rem; margin-bottom:0.8rem; display:block; }
+  .about-card-main h3 { font-size:1.2rem; font-weight:900; color:var(--sky-dark); margin-bottom:0.5rem; }
+  .about-card-main p { color:var(--text-mid); line-height:1.65; font-weight:600; font-size:0.95rem; }
+  .about-card-main .jp-text { font-size:0.88rem; color:var(--text-light); margin-top:0.8rem; line-height:1.6; }
+  .floating-chip {
+    position:absolute; background:white; border-radius:14px; padding:0.65rem 1rem;
+    box-shadow:0 4px 20px rgba(0,0,0,0.1);
+    display:flex; align-items:center; gap:0.4rem;
+    font-size:0.82rem; font-weight:800; color:var(--text-dark); white-space:nowrap;
+  }
+  .chip-1 { top:-16px; right:-18px; border:2px solid var(--sun); }
+  .chip-2 { bottom:-16px; left:-18px; border:2px solid var(--grass); }
+  .values-list { list-style:none; display:flex; flex-direction:column; gap:1.2rem; margin-top:1.5rem; }
+  .values-list li { display:flex; align-items:flex-start; gap:1rem; }
+  .val-icon { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.3rem; flex-shrink:0; }
+  .val-text strong { display:block; font-weight:800; color:var(--text-dark); margin-bottom:0.2rem; }
+  .val-text span { font-size:0.88rem; color:var(--text-mid); font-weight:600; line-height:1.5; }
+
+  /* COURSES */
+  #courses { background:white; }
+  .courses-intro { display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:1rem; }
+  .curriculum-note {
+    background:var(--sky-light); border:2px solid var(--sky); border-radius:14px;
+    padding:0.8rem 1.2rem; font-size:0.85rem; font-weight:700; color:var(--sky-dark);
+    max-width:340px; line-height:1.5;
+  }
+  .courses-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:1.4rem; margin-top:2.5rem; }
+  .course-card {
+    border-radius:20px; padding:1.8rem;
+    border:2.5px solid var(--border); background:var(--warm-white);
+    transition:transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    position:relative; overflow:hidden;
+  }
+  .course-card::before { content:''; position:absolute; top:0; left:0; right:0; height:5px; border-radius:20px 20px 0 0; }
+  .course-card.blue::before { background:var(--sky); }
+  .course-card.gold::before { background:var(--sun); }
+  .course-card.green::before { background:var(--grass); }
+  .course-card.teal::before { background:var(--teal); }
+  .course-card:hover { transform:translateY(-5px); box-shadow:0 12px 40px var(--shadow); border-color:var(--sky); }
+  .course-emoji { font-size:2.2rem; margin-bottom:0.8rem; display:block; }
+  .course-level { display:inline-block; font-size:0.72rem; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; padding:0.2rem 0.7rem; border-radius:20px; margin-bottom:0.7rem; }
+  .lv-kinder { background:var(--grass-light); color:#1a7a35; }
+  .lv-kids { background:var(--sky-light); color:var(--sky-dark); }
+  .lv-junior { background:var(--sun-light); color:#a06800; }
+  .lv-adult { background:#fce8e8; color:#c0392b; }
+  .course-card h3 { font-size:1.15rem; font-weight:900; margin-bottom:0.5rem; color:var(--text-dark); }
+  .course-card p { font-size:0.9rem; color:var(--text-mid); line-height:1.6; font-weight:600; }
+  .course-meta { display:flex; align-items:center; gap:1rem; margin-top:1rem; font-size:0.8rem; color:var(--text-light); font-weight:700; }
+
+  /* EVENTS */
+  #events { background:var(--cream); }
+  .events-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.2rem; margin-top:2.5rem; }
+  .event-card {
+    background:white; border-radius:18px; padding:1.6rem;
+    border:2px solid var(--border); text-align:center;
+    transition:transform 0.2s, box-shadow 0.2s;
+    a.event-card { text-decoration:none; display:block; }
+  }
+  .event-card:hover { transform:translateY(-4px); box-shadow:0 8px 30px var(--shadow); }
+  .event-card .event-emoji { font-size:2.4rem; margin-bottom:0.7rem; display:block; }
+  .event-card h3 { font-size:1rem; font-weight:900; margin-bottom:0.4rem; color:var(--text-dark); }
+  .event-card p { font-size:0.85rem; color:var(--text-mid); line-height:1.55; font-weight:600; }
+
+/* CALENDAR */
+#calendar { background: var(--sky-light); }
+.calendar-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+.calendar-slot {
+  background: white;
+  border-radius: 20px;
+  border: 2.5px solid var(--border);
+  overflow: hidden;
+  box-shadow: 0 6px 24px var(--shadow);
+}
+.calendar-slot-label {
+  background: var(--sky);
+  color: white;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 0.6rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.calendar-slot img { width: 100%; display: block; }
+.calendar-slot-empty {
+  aspect-ratio: 3/4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-light);
+  font-size: 0.88rem;
+  font-weight: 700;
+  gap: 0.5rem;
+  padding: 2rem;
+  text-align: center;
+}
+.calendar-slot-empty span { font-size: 2.5rem; }
+@media(max-width: 680px) {
+  .calendar-grid { grid-template-columns: 1fr; }
+}
+
+  /* INSTAGRAM */
+  #instagram { background:white; }
+  .instagram-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.8rem; margin-top:2.5rem; }
+  .ig-placeholder {
+    aspect-ratio:1; border-radius:14px;
+    background:var(--sky-light); border:2px dashed var(--sky);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    font-size:1.6rem; color:var(--sky); gap:0.4rem;
+    transition:background 0.2s;
+  }
+  .ig-placeholder:hover { background:var(--sky); color:white; }
+  .ig-placeholder span { font-size:0.72rem; font-weight:800; letter-spacing:0.5px; text-transform:uppercase; }
+  .ig-cta { text-align:center; margin-top:1.5rem; }
+  .ig-link {
+    display:inline-flex; align-items:center; gap:0.5rem;
+    background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+    color:white; padding:0.75rem 1.8rem; border-radius:30px;
+    font-weight:800; font-size:0.92rem; text-decoration:none;
+    box-shadow:0 4px 16px rgba(220,39,67,0.35); transition:transform 0.15s;
+  }
+  .ig-link:hover { transform:translateY(-2px); }
+
+  /* CONTACT */
+  #contact { background:var(--sky-dark); }
+  #contact .section-tag { color:rgba(255,255,255,0.6); }
+  #contact .section-title { color:white; }
+  #contact .section-sub { color:rgba(255,255,255,0.75); }
+  .contact-grid { display:grid; grid-template-columns:1fr 1.3fr; gap:4rem; align-items:start; margin-top:3rem; }
+  .contact-info-list { display:flex; flex-direction:column; gap:1.3rem; margin-top:1rem; }
+  .contact-info-item { display:flex; align-items:flex-start; gap:1rem; }
+  .contact-icon {
+    width:46px; height:46px; border-radius:14px;
+    background:rgba(255,255,255,0.12); display:flex;
+    align-items:center; justify-content:center; font-size:1.3rem;
+    flex-shrink:0; border:2px solid rgba(255,255,255,0.2);
+  }
+  .contact-info-item strong { display:block; font-weight:800; color:white; margin-bottom:0.15rem; }
+  .contact-info-item span { font-size:0.9rem; color:rgba(255,255,255,0.7); font-weight:600; line-height:1.5; }
+  .contact-info-item a { color:rgba(255,255,255,0.9); }
+  .contact-form {
+    background:white; border-radius:24px; padding:2.4rem;
+  }
+  .contact-form h3 { font-size:1.25rem; font-weight:900; margin-bottom:1.5rem; color:var(--text-dark); }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  .form-group { display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1rem; }
+  label { font-size:0.8rem; font-weight:800; color:var(--text-mid); letter-spacing:0.3px; }
+  input, select, textarea {
+    font-family:'Nunito',sans-serif;
+    padding:0.75rem 1rem; border-radius:12px;
+    border:2px solid var(--border); background:var(--warm-white);
+    font-size:0.92rem; font-weight:600; color:var(--text-dark);
+    transition:border-color 0.2s; outline:none; width:100%;
+  }
+  input:focus, select:focus, textarea:focus { border-color:var(--sky); }
+  textarea { resize:vertical; min-height:100px; }
+  .submit-btn {
+    width:100%; background:var(--sky); color:white;
+    border:none; padding:1rem; border-radius:14px;
+    font-family:'Nunito',sans-serif;
+    font-size:1rem; font-weight:800; cursor:pointer;
+    transition:background 0.2s, transform 0.15s;
+    box-shadow:0 6px 20px rgba(30,109,181,0.35); margin-top:0.4rem;
+  }
+  .submit-btn:hover { background:var(--sky-dark); transform:translateY(-1px); }
+
+  /* MAP STRIP */
+  .map-strip { background:var(--sky-dark); padding:0 2rem 4rem; }
+  .map-embed { border-radius:20px; overflow:hidden; border:3px solid rgba(255,255,255,0.15); }
+  .map-embed iframe { width:100%; height:320px; display:block; border:none; }
+
+  /* FOOTER */
+  footer { background:#0f1e33; color:rgba(255,255,255,0.6); padding:3rem 2rem 2rem; text-align:center; }
+  .footer-logo-wrap { display:flex; align-items:center; justify-content:center; gap:0.8rem; margin-bottom:0.8rem; }
+  .footer-logo-wrap img { height:48px; width:auto; }
+  .footer-logo-wrap span { font-size:1.2rem; font-weight:900; color:white; }
+  footer p { font-size:0.88rem; line-height:1.65; font-weight:600; max-width:420px; margin:0 auto; }
+  .footer-links { display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap; margin:1.5rem 0; list-style:none; }
+  .footer-links a { color:rgba(255,255,255,0.55); text-decoration:none; font-size:0.85rem; font-weight:700; transition:color 0.2s; }
+  .footer-links a:hover { color:var(--sky-light); }
+  .footer-divider { border:none; border-top:1px solid rgba(255,255,255,0.08); margin:1.5rem 0; }
+  .footer-copy { font-size:0.78rem; color:rgba(255,255,255,0.3); font-weight:600; }
+
+  /* PHOTO BANNER */
+  #banner {
+    margin-top:70px;
+    position:relative; overflow:hidden;
+    height:420px;
+    background: linear-gradient(135deg, var(--sky-dark) 0%, var(--sky) 50%, var(--teal) 100%);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .slide {
+  position:absolute; inset:0;
+  background-size:cover; background-position:center;
+  opacity:0; transition:opacity 1.2s ease-in-out;
+}
+.slide.active { opacity:1; }
+.banner-dots {
+  position:absolute; bottom:70px; left:50%;
+  transform:translateX(-50%);
+  display:flex; gap:0.6rem; z-index:2;
+}
+.dot {
+  width:10px; height:10px; border-radius:50%;
+  background:rgba(255,255,255,0.5);
+  cursor:pointer; border:2px solid rgba(255,255,255,0.8);
+  transition:background 0.3s;
+}
+.dot.active { background:white; }
+  #banner .banner-photo {
+    position:absolute; inset:0;
+    background-image: url('main1.JPG');
+    background-size:cover; background-position:center;
+    opacity:1; /* ✏️ Change to 1 once you add a real photo */
+    transition:opacity 0.3s;
+  }
+  #banner .banner-overlay {
+    position:absolute; inset:0;
+    background:linear-gradient(to bottom, rgba(15,30,51,0.55) 0%, rgba(15,30,51,0.75) 100%);
+  }
+  #banner .banner-inner {
+    position:relative; z-index:1;
+    text-align:center; padding:2rem;
+    animation:slideUp 0.7s 0.1s ease-out both;
+  }
+  #banner .banner-label {
+    display:inline-block;
+    background:rgba(255,255,255,0.15);
+    border:2px solid rgba(255,255,255,0.35);
+    color:white; border-radius:30px;
+    padding:0.35rem 1rem; font-size:0.8rem;
+    font-weight:800; letter-spacing:1.5px;
+    text-transform:uppercase; margin-bottom:1.2rem;
+    backdrop-filter:blur(6px);
+  }
+  #banner h1 {
+    font-family:'Lora',serif;
+    font-size:clamp(2.2rem,5vw,3.6rem);
+    font-weight:600; color:white; line-height:1.2;
+    margin-bottom:1rem;
+    text-shadow:0 2px 20px rgba(0,0,0,0.3);
+  }
+  #banner h1 em { font-style:italic; color:#7dd3fc; }
+  #banner p {
+    font-size:1.1rem; color:rgba(255,255,255,0.88);
+    font-weight:600; max-width:520px; margin:0 auto 1.8rem;
+    line-height:1.65;
+  }
+  #banner .banner-btns {
+    display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;
+  }
+  #banner .banner-btn-primary {
+    background:white; color:var(--sky-dark);
+    padding:0.85rem 2rem; border-radius:40px;
+    font-weight:900; font-size:0.95rem; text-decoration:none;
+    box-shadow:0 6px 20px rgba(0,0,0,0.2);
+    transition:transform 0.15s, box-shadow 0.15s;
+  }
+  #banner .banner-btn-primary:hover { transform:translateY(-2px); box-shadow:0 10px 28px rgba(0,0,0,0.25); }
+  #banner .banner-btn-secondary {
+    background:transparent; color:white;
+    padding:0.85rem 2rem; border-radius:40px;
+    font-weight:800; font-size:0.95rem; text-decoration:none;
+    border:2.5px solid rgba(255,255,255,0.7);
+    transition:background 0.15s;
+  }
+  #banner .banner-btn-secondary:hover { background:rgba(255,255,255,0.15); }
+  /* banner wave */
+  #banner .banner-wave {
+    position:absolute; bottom:-2px; left:0; right:0;
+  }
+
+  @media(max-width:768px){
+    .nav-links { display:none; }
+    .about-grid, .contact-grid { grid-template-columns:1fr; gap:2.5rem; }
+    .form-row { grid-template-columns:1fr; }
+    .instagram-grid { grid-template-columns:repeat(2,1fr); }
+    section { padding:4rem 1.2rem; }
+    .map-strip { padding:0 1.2rem 3rem; }
+    .courses-intro { flex-direction:column; }
+    #banner { height:340px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <img <img src="logo.png" alt="Bridgeway logo">
+    <div class="nav-logo-text">Bridgeway <span>English School</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="about.html">Teachers</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">無料体験 Free Trial →</a>
+</nav>
+
+<!-- ============================================
+  ✏️ PHOTO BANNER
+  To add your classroom photo:
+  1. Put your photo in the same folder as this file
+  2. Replace 'YOUR_CLASSROOM_PHOTO.jpg' with your filename
+  3. Change opacity:0 to opacity:1 in the CSS above
+================================================ -->
+<!-- PHOTO BANNER -->
+<div id="banner">
+  <div class="slide active" style="background-image:url('images/main1.JPG')"></div>
+  <div class="slide" style="background-image:url('images/main2.jpg')"></div>
+  <div class="slide" style="background-image:url('images/main3.JPG')"></div>
+  <div class="slide" style="background-image:url('images/main4.jpg')"></div>
+  <div class="slide" style="background-image:url('images/main5.jpg')"></div>
+  <div class="banner-overlay"></div>
+  <div class="banner-inner">
+    <div class="banner-label">🌟 Yamagata City · Since 2012</div>
+    <h1>Where children <em>fall in love</em><br>with English</h1>
+    <p>ずっと身につく英会話 — step-by-step lessons from kindergarten through junior high that build real, lasting fluency.</p>
+    <div class="banner-btns">
+      <a href="#contact" class="banner-btn-primary">無料体験 Book Free Trial</a>
+      <a href="#courses" class="banner-btn-secondary">View Courses ↓</a>
+    </div>
+  </div>
+
+  <svg class="banner-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;display:block;width:100%">
+    <path d="M-10,40 C360,80 1080,0 1450,40 L1450,60 L-10,60 Z" fill="#fdf8f2"/>
+  </svg>
+</div>
+
+
+<section id="hero">
+  <div class="hero-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-logo-strip">
+  <div class="hero-wordmark">Bridgeway</div>
+</div>
+    <div class="hero-badge">⭐ Yamagata City's English School for Kids &amp; Families</div>
+    <h1 class="hero-title">
+      English that <em>lasts</em><br>a <span class="underline">lifetime</span>
+    </h1>
+    <p class="hero-sub">お子様の可能性に、架け橋を — Let's build a bridge together to reach your potential.</p>
+    <p class="hero-jp">山形市の子どもたちのための英会話教室</p>
+    <div class="hero-btns">
+      <a href="#courses" class="btn-primary">View Courses</a>
+      <a href="#contact" class="btn-secondary">Book a Free Trial</a>
+    </div>
+    <div class="hero-phone">
+      <div class="hero-phone-label">Call Us</div>
+      <a href="tel:0236413059">📞 023-641-3059</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div style="max-width:600px">
+      <span class="section-tag">✦ About Us</span>
+      <h2 class="section-title">Growing up <em>in English</em></h2>
+      <p class="section-sub">ABC Bridgeway's step-by-step curriculum takes children from their earliest English words all the way through high school and beyond — building real fluency that stays with them for life.</p>
+    </div>
+    <div style="margin-top:1.5rem;">
+  <a href="about.html" class="btn-primary" style="display:inline-block;">
+    👋 Meet the Teachers →
+  </a>
+</div>
+    <div class="about-grid">
+      <div style="position:relative">
+        <div class="about-card-main">
+          <span class="emoji-big">📖</span>
+          <h3>A Curriculum Built to Last</h3>
+          <p>From Little Hands to Hand in Hand Elementary level series - Each level reviews and builds on what students already know — so nothing is ever forgotten.</p>
+          <p class="jp-text">幼児期→小学生→中学生と年齢に合わせてステップアップしていくレッスン方式。英語を話せる「成功体験」を通して、グローバル社会で活きる土台を作ります。</p>
+        </div>
+        <div class="floating-chip chip-1">☀️ Small friendly classes</div>
+        <div class="floating-chip chip-2">🌱 Lessons that stick</div>
+      </div>
+      <div>
+        <div style="position:relative; display:flex; align-items:center; justify-content:center;">
+  <img src="images/book.png" alt="Bridgeway book" style="
+    width:380px;
+    max-width:100%;
+    opacity:0.9;
+    filter:drop-shadow(0 12px 30px rgba(30,109,181,0.2));
+  ">
+</div>
+        <ul class="values-list">
+          <li>
+            <div class="val-icon" style="background:var(--sky-light)">🗣️</div>
+            <div class="val-text">
+              <strong>Communication First</strong>
+              <span>Real speaking and listening skills built through fun, interactive activities — not just textbook drills.</span>
+            </div>
+          </li>
+          <li>
+            <div class="val-icon" style="background:var(--sun-light)">🧡</div>
+            <div class="val-text">
+              <strong>Warm &amp; Encouraging</strong>
+              <span>Every student succeeds at their own pace in a kind, pressure-free classroom.</span>
+            </div>
+          </li>
+          <li>
+            <div class="val-icon" style="background:var(--grass-light)">🌍</div>
+            <div class="val-text">
+              <strong>Cross-Cultural Understanding</strong>
+              <span>We help children embrace diversity and develop the global mindset they'll need for the future.</span>
+            </div>
+          </li>
+          <li>
+            <div class="val-icon" style="background:#e8f0fe">🎉</div>
+            <div class="val-text">
+              <strong>Events &amp; Real Experiences</strong>
+              <span>Halloween parties, summer camps, Tokyo trips and more — English comes alive outside the classroom too.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section id="courses">
+  <div class="container">
+    <div class="courses-intro">
+      <div>
+        <span class="section-tag">✦ Our Courses</span>
+        <h2 class="section-title">The right class for <em>every age</em></h2>
+        <p class="section-sub">Our curriculum is designed to grow with your child — starting from kindergarten and continuing right through junior high school.</p>
+      </div>
+      <div class="curriculum-note">
+        📚 Our core programmes use the <strong>Hand in Hand</strong> series — a proven spiral curriculum that revisits and deepens learning at every stage.
+      </div>
+    </div>
+    <div class="courses-grid">
+      <a class="course-card green" href="course-books.html#little-hands">
+          <img src="images/little-hands-series.png" alt="Hand in Hand Starter" style="width:100%; border-radius:10px; margin-bottom:1rem;">
+        <span class="course-level lv-kinder">Kindergarten</span>
+        <h3>Little Hands (Levels 1–3)</h3>
+        <p>Our gentlest introduction to English — songs, stories, and play-based activities that build a joyful first connection with the language.</p>
+        <div class="course-meta"><span>🎈 Ages 3–5</span><span>👥 Small groups</span></div>
+      </a>
+      <a class="course-card blue" href="course-books.html#hand-in-hand">
+        <img src="images/hand-in-hand-series.png" style="width:150%; border-radius:10px; margin-bottom:1rem; padding-right:130px; margin-right:10px;">
+        <span class="course-level lv-kids">Primary School</span>
+        <h3>Hand in Hand (Starter – Level 6)</h3>
+        <p>A step-by-step spiral curriculum that reviews and builds. Each level adds new vocabulary, grammar and communication skills on a solid foundation.</p>
+        <div class="course-meta"><span>📚 Ages 6–12</span><span>👥 Small groups</span></div>
+      </a>
+      <a class="course-card gold" href="course-books.html#junior">
+        <img src="images/first-hand-series.png" alt="Hand in Hand Starter" style="width:100%; border-radius:10px; margin-bottom:1rem;">
+        <span class="course-level lv-junior">Junior High</span>
+        <h3>First Hand Access / My Next Grammar</h3>
+        <p>Bridge to academic English — reading, writing, grammar, and conversation skills that prepare students for high school and beyond.</p>
+        <div class="course-meta"><span>📖 Ages 12–15</span><span>👥 Small groups</span></div>
+      </a>
+      <a class="course-card teal" href="course-books.html#adult">
+        <img src="images/communication-strategies-series.jpg" alt="Hand in Hand Starter" style="width:100%; border-radius:10px; margin-bottom:1rem;">
+        <span class="course-level lv-adult">Adults</span>
+        <h3>Adult Conversation</h3>
+        <p>Friendly, relaxed English conversation classes for parents and adults. Build practical confidence for travel, work, or everyday life.</p>
+        <div class="course-meta"><span>💬 All levels</span><span>👤 Flexible schedule</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events">
+  <div class="container">
+    <span class="section-tag">✦ Events &amp; Activities</span>
+    <h2 class="section-title">English <em>beyond</em> the classroom</h2>
+    <p class="section-sub">Special events are a huge part of life at ABC Bridgeway — they make memories and make English real.</p>
+    <div class="events-grid">
+    <a class="event-card" href="halloween.html">
+      <span class="event-emoji">🎃</span>
+      <h3>Halloween Party</h3>
+      <p>Costumes, games, and spooky fun — our annual Halloween event is a student favourite every October.</p>
+   </a>
+    <a class="event-card" href="summer-camp.html">
+      <span class="event-emoji">⛺</span>
+       <h3>English Summer Camp</h3>
+      <p>Two days of outdoor adventures, campfires, and English immersion in the beautiful Yamagata countryside.</p>
+    </a>
+      <a class="event-card" href="tokyo-trip.html">
+        <span class="event-emoji">🗼</span>
+        <h3>Tokyo English Trip</h3>
+        <p>A real-world English experience in Tokyo — including visits to TGG (Tokyo Global Gateway).</p>
+      </a>
+      <div class="event-card">
+        <span class="event-emoji">🎄</span>
+        <h3>Seasonal Events</h3>
+        <p>Christmas, Easter, and other cultural celebrations bring English to life in fun, memorable ways year-round.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALENDAR -->
+<section id="calendar">
+  <div class="container">
+    <span class="section-tag">✦ Lesson Schedule</span>
+    <h2 class="section-title">Lesson <em>Calendar</em></h2>
+    <p class="section-sub">レッスンカレンダー — our bi-monthly lesson schedule.</p>
+    <div class="calendar-grid">
+
+      <!-- ====================================================
+        CALENDAR SLOT 1 — Current calendar
+        ✏️ Update the label text and swap the image file each period.
+        Image file should be placed in your /images/ folder.
+      ===================================================== -->
+      <div class="calendar-slot">
+        <div class="calendar-slot-label">📅 April – May 2026</div>
+        <img src="images/calendar-1.jpg" alt="April–May 2026 lesson calendar">
+      </div>
+
+      <!-- ====================================================
+        CALENDAR SLOT 2 — Next/overlapping calendar
+        ✏️ When you only have one calendar, replace the <img> below
+           with this empty placeholder instead:
+
+           <div class="calendar-slot-empty">
+             <span>📅</span>
+             Next calendar coming soon
+           </div>
+      ===================================================== -->
+      <div class="calendar-slot">
+        <div class="calendar-slot-label">📅 June – July 2026</div>
+        <img src="images/calendar-2.jpg" alt="June–July 2026 lesson calendar">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section id="instagram">
+  <div class="container">
+    <span class="section-tag">✦ Life at ABC Bridgeway</span>
+    <h2 class="section-title">See our <em>classroom</em> in action</h2>
+    <p class="section-sub">Follow us on Instagram for daily moments from our lessons, events, and student achievements.</p>
+    <div class="instagram-grid">
+      <div class="ig-placeholder">
+  <img src="images/photo1.JPG" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">
+</div>
+      <div class="ig-placeholder">
+  <img src="images/photo2.JPG" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">
+</div>
+      <div class="ig-placeholder">
+  <img src="images/photo3.JPG" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">
+</div>
+      <div class="ig-placeholder">
+  <img src="images/photo4.JPG" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">
+</div>
+      <div class="ig-placeholder">
+  <img src="images/photo5.JPEG" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">
+</div>
+      <div class="ig-placeholder">
+  <img src="images/photo6.JPG" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">
+</div>
+    </div>
+    <div class="ig-cta">
+      <a href="https://www.instagram.com/abc_eikaiwa/" target="_blank" class="ig-link">
+        📸 Follow @abc_eikaiwa on Instagram
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <span class="section-tag">✦ Contact &amp; Enrollment</span>
+    <h2 class="section-title">Come and <em>say hello</em></h2>
+    <p class="section-sub">The first lesson is free — no pressure, just come and see if we're the right fit for your child.</p>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-info-list">
+          <div class="contact-info-item">
+            <div class="contact-icon">📞</div>
+            <div><strong>Phone</strong><span><a href="tel:0236413059">023-641-3059</a></span></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon">📍</div>
+            <div><strong>Address</strong><span>山形県山形市元木2-2-17<br>〒990-2447 Yamagata City, Yamagata</span></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon">🌐</div>
+            <div><strong>Website</strong><span><a href="https://abc-eikaiwa.com" target="_blank">abc-eikaiwa.com</a></span></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon">🎁</div>
+            <div><strong>Free Trial Lesson</strong><span>First lesson is completely free.<br>No obligation — just come and try!</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- ✏️ NETLIFY FORM — works automatically when hosted on Netlify -->
+      <div class="contact-form">
+        <h3>✉️ Send us a message / お問い合わせ</h3>
+        <form name="application" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you">
+          <!-- Netlify honeypot spam filter — leave this hidden -->
+          <input type="hidden" name="form-name" value="contact">
+          <p style="display:none"><input name="bot-field"></p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Your Name / お名前</label>
+              <input type="text" id="name" name="name" placeholder="e.g. 田中 優美" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone / 電話番号</label>
+              <input type="tel" id="phone" name="phone" placeholder="090-XXXX-XXXX">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email / メールアドレス</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="age">Child's Age / お子さまの年齢</label>
+            <select id="age" name="age">
+              <option value="">Select / 選択してください...</option>
+              <option>3–5 years old (Little Hands)</option>
+              <option>6–8 years old (Hand in Hand Starter–2)</option>
+              <option>9–11 years old (Hand in Hand 3–6)</option>
+              <option>12–15 years old (Junior course)</option>
+              <option>Adult / 大人</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message / メッセージ</label>
+            <textarea id="message" name="message" placeholder="Any questions or notes? / ご質問やご要望があればどうぞ..."></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Send Message / 送信する →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<div class="map-strip">
+  <div class="container">
+    <div class="map-embed">
+      <iframe
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3134.3818493779627!2d140.3185453757976!3d38.22424577187554!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5f8bb434bc00d32d%3A0x3b86300c45611b4d!2s2-ch%C5%8Dme-2-17%20Motoki%2C%20Yamagata%2C%20990-2447!5e0!3m2!1sen!2sjp!4v1776481015716!5m2!1sen!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo-wrap">
+    <img src="logo.png" alt="Bridgeway logo">
+    <span>ABC Bridgeway English School</span>
+  </div>
+  <p>山形県山形市元木2-2-17 | 023-641-3059<br>ずっと身につく英会話 — English that lasts a lifetime.</p>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#instagram">Instagram</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://abc-eikaiwa.com" target="_blank">Current Site</a></li>
+  </ul>
+  <hr class="footer-divider">
+  <p class="footer-copy">© 2026 ABC Bridgeway English School. All rights reserved.</p>
+</footer>
+<script>
+  let current = 0;
+  const slides = document.querySelectorAll('.slide');
+  
+  function goToSlide(n) {
+    slides[current].classList.remove('active');
+  
+    current = n;
+    slides[current].classList.add('active');
+  
+  }
+
+  function nextSlide() {
+    goToSlide((current + 1) % slides.length);
+  }
+
+  setInterval(nextSlide, 4000);
+</script>
+</body>
+</html>

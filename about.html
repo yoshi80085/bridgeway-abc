@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meet the Teachers | ABC Bridgeway English School</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fdf8f2;
+    --warm-white: #fffcf7;
+    --sky: #1e6db5;
+    --sky-light: #e3eef8;
+    --sky-dark: #154f87;
+    --sun: #f0a500;
+    --sun-light: #fff4e0;
+    --grass: #2ab04a;
+    --grass-light: #e4f5ea;
+    --teal: #00b4cc;
+    --coral: #f07060;
+    --text-dark: #1a2840;
+    --text-mid: #4a5568;
+    --text-light: #8a9ab0;
+    --border: #dde8f0;
+    --shadow: rgba(30,109,181,0.13);
+  }
+  .profile-slide {
+  position:absolute; inset:0;
+  background-size:cover; background-position:center top;
+  opacity:0; transition:opacity 1.2s ease-in-out;
+}
+.profile-slide.active { opacity:1; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Nunito',sans-serif; background:var(--cream); color:var(--text-dark); }
+.gallery-slot {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.gallery-slot:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px var(--shadow);
+}
+
+.video-hover {
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 14px;
+}
+.video-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px var(--shadow);
+}
+@media(max-width:820px) {
+  .teacher-grid,
+  .teacher-grid.reverse {
+    grid-template-columns:1fr;
+    gap:2.5rem;
+  }
+  .teacher-grid.reverse .teacher-photo-col,
+  .teacher-grid.reverse .teacher-bio-col { order:unset; }
+  .teacher-photo-wrap { 
+    aspect-ratio:4/3; 
+    max-height:320px;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .teacher-name-card {
+    max-width: 320px;
+    margin: 0.8rem auto 0;
+  }
+  .teacher-flag {
+    left: 50%;
+    transform: translateX(calc(-50% + 160px));
+  }
+}
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(255,252,247,0.94); backdrop-filter:blur(12px);
+    border-bottom:2px solid var(--border);
+    padding:0 2rem; display:flex; align-items:center; justify-content:space-between;
+    height:70px;
+  }
+  .nav-logo { display:flex; align-items:center; gap:0.5rem; text-decoration:none; }
+  .nav-logo img { height:52px; width:auto; }
+  .nav-logo-text { font-size:1.05rem; font-weight:900; color:var(--sky-dark); line-height:1.2; }
+  .nav-logo-text span { display:block; font-size:0.72rem; font-weight:700; color:var(--text-light); letter-spacing:1px; text-transform:uppercase; }
+  .nav-back {
+    background:var(--sky); color:white;
+    padding:0.55rem 1.4rem; border-radius:30px;
+    font-weight:800; font-size:0.88rem; text-decoration:none;
+    transition:background 0.2s;
+  }
+  .nav-back:hover { background:var(--sky-dark); }
+
+  /* PAGE HEADER */
+  .page-header {
+    padding:7rem 2rem 4rem;
+    text-align:center;
+    background:var(--sky-dark);
+    position:relative;
+    overflow:hidden;
+  }
+  .page-header-bg {
+  position:absolute; inset:0;
+  background-image: url('images/about1.jpg');
+  background-size:cover; background-position:center;
+  opacity:0.5;
+}
+  .page-header::before {
+    content:''; position:absolute; inset:0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(30,109,181,0.5) 0%, transparent 70%),
+                radial-gradient(ellipse at 20% 80%, rgba(0,180,204,0.3) 0%, transparent 60%);
+  }
+  .page-header-inner { position:relative; z-index:1; }
+  .section-tag {
+    display:inline-block; font-size:0.78rem; font-weight:800;
+    letter-spacing:2px; text-transform:uppercase;
+    color:rgba(255,255,255,0.65); margin-bottom:0.8rem;
+  }
+  .page-header h1 {
+    font-family:'Lora',serif;
+    font-size:clamp(2rem,4vw,3.2rem);
+    font-weight:600; color:white; margin-bottom:1rem; line-height:1.2;
+  }
+  .page-header h1 em { font-style:italic; color:#7dd3fc; }
+  .page-header p {
+    font-size:1.05rem; color:rgba(255,255,255,0.78);
+    max-width:520px; margin:0 auto; line-height:1.7; font-weight:600;
+  }
+  .header-wave {
+    position:absolute; bottom:-2px; left:0; right:0;
+  }
+
+  /* TEACHER SECTIONS */
+  .teacher-section {
+    padding:5rem 2rem;
+  }
+  .teacher-section:nth-child(even) { background:white; }
+  .container { max-width:1060px; margin:0 auto; }
+
+  .teacher-grid {
+    display:grid;
+    grid-template-columns:340px 1fr;
+    gap:4rem;
+    align-items:start;
+  }
+  .teacher-grid.reverse { grid-template-columns:1fr 340px; }
+  .teacher-grid.reverse .teacher-photo-col { order:2; }
+  .teacher-grid.reverse .teacher-bio-col { order:1; }
+
+  /* PHOTO COLUMN */
+  .teacher-photo-col { position:relative; }
+  .teacher-photo-wrap {
+    border-radius:24px; overflow:hidden;
+    border:3px solid var(--border);
+    box-shadow:0 12px 48px var(--shadow);
+    aspect-ratio:3/4;
+    background:var(--sky-light);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .teacher-photo-wrap img {
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .teacher-photo-placeholder {
+    display:flex; flex-direction:column; align-items:center;
+    justify-content:center; gap:0.5rem;
+    color:var(--text-light); font-size:0.85rem; font-weight:700;
+    text-align:center; padding:2rem;
+  }
+  .teacher-photo-placeholder span { font-size:4rem; }
+
+  .teacher-flag {
+    position:absolute; top:16px; right:16px;
+    background:white; border-radius:12px;
+    padding:0.5rem 0.8rem; font-size:1.4rem;
+    box-shadow:0 4px 16px rgba(0,0,0,0.12);
+    border:2px solid var(--border);
+  }
+  .teacher-name-card {
+    margin-top:1.2rem;
+    background:var(--sky-dark); color:white;
+    border-radius:16px; padding:1.2rem 1.4rem;
+    text-align:center;
+  }
+  .teacher-name-card h2 {
+    font-family:'Lora',serif;
+    font-size:1.4rem; font-weight:600; margin-bottom:0.2rem;
+  }
+  .teacher-name-card .jp-name {
+    font-size:1rem; font-weight:700; color:rgba(255,255,255,0.7);
+    margin-bottom:0.6rem;
+  }
+  .teacher-role {
+    display:inline-block;
+    background:rgba(255,255,255,0.15);
+    border:1.5px solid rgba(255,255,255,0.3);
+    border-radius:20px; padding:0.3rem 0.9rem;
+    font-size:0.78rem; font-weight:800;
+    letter-spacing:0.5px; text-transform:uppercase;
+  }
+
+  /* BIO COLUMN */
+  .teacher-bio-col {}
+  .bio-tag {
+    display:inline-block; font-size:0.78rem; font-weight:800;
+    letter-spacing:2px; text-transform:uppercase;
+    color:var(--sky); margin-bottom:0.6rem;
+  }
+  .bio-headline {
+    font-family:'Lora',serif;
+    font-size:clamp(1.6rem,3vw,2.2rem);
+    font-weight:600; color:var(--text-dark);
+    margin-bottom:1.2rem; line-height:1.25;
+  }
+  .bio-headline em { font-style:italic; color:var(--sky); }
+  .bio-text {
+    font-size:1rem; color:var(--text-mid);
+    line-height:1.8; font-weight:600;
+    margin-bottom:1rem;
+  }
+
+  /* CREDENTIAL CHIPS */
+  .creds { display:flex; flex-wrap:wrap; gap:0.7rem; margin:1.6rem 0; }
+  .cred-chip {
+    display:flex; align-items:center; gap:0.5rem;
+    background:var(--warm-white); border:2px solid var(--border);
+    border-radius:12px; padding:0.55rem 1rem;
+    font-size:0.82rem; font-weight:800; color:var(--text-dark);
+  }
+  .cred-chip .chip-icon { font-size:1rem; }
+
+  /* INTEREST CARDS */
+  .interests { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:0.8rem; margin-top:1.6rem; }
+  .interest-card {
+    background:var(--warm-white); border:2px solid var(--border);
+    border-radius:14px; padding:1rem;
+    text-align:center;
+  }
+  .interest-card .i-emoji { font-size:1.8rem; margin-bottom:0.4rem; display:block; }
+  .interest-card strong { display:block; font-size:0.85rem; font-weight:800; color:var(--text-dark); margin-bottom:0.2rem; }
+  .interest-card span { font-size:0.78rem; color:var(--text-mid); font-weight:600; line-height:1.4; }
+
+  /* CTA BANNER */
+  .cta-banner {
+    background:var(--sky); padding:4rem 2rem; text-align:center;
+  }
+  .cta-banner h2 {
+    font-family:'Lora',serif;
+    font-size:clamp(1.6rem,3vw,2.2rem);
+    font-weight:600; color:white; margin-bottom:0.8rem;
+  }
+  .cta-banner h2 em { font-style:italic; color:#bfdfff; }
+  .cta-banner p { color:rgba(255,255,255,0.82); font-weight:600; margin-bottom:1.8rem; font-size:1rem; }
+  .cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+  .btn-white {
+    background:white; color:var(--sky-dark);
+    padding:0.85rem 2rem; border-radius:40px;
+    font-weight:800; font-size:0.95rem; text-decoration:none;
+    box-shadow:0 6px 20px rgba(0,0,0,0.15);
+    transition:transform 0.15s, box-shadow 0.15s;
+  }
+  .btn-white:hover { transform:translateY(-2px); box-shadow:0 10px 28px rgba(0,0,0,0.2); }
+  .btn-outline-white {
+    background:transparent; color:white;
+    padding:0.85rem 2rem; border-radius:40px;
+    font-weight:800; font-size:0.95rem; text-decoration:none;
+    border:2.5px solid rgba(255,255,255,0.7);
+    transition:background 0.15s;
+  }
+  .btn-outline-white:hover { background:rgba(255,255,255,0.15); }
+
+  /* FOOTER */
+  footer { background:#0f1e33; color:rgba(255,255,255,0.6); padding:2.5rem 2rem; text-align:center; }
+  .footer-logo-wrap { display:flex; align-items:center; justify-content:center; gap:0.8rem; margin-bottom:0.6rem; }
+  .footer-logo-wrap img { height:44px; width:auto; }
+  .footer-logo-wrap span { font-size:1.1rem; font-weight:900; color:white; }
+  footer p { font-size:0.85rem; font-weight:600; }
+  .footer-divider { border:none; border-top:1px solid rgba(255,255,255,0.08); margin:1.2rem 0; }
+  .footer-copy { font-size:0.78rem; color:rgba(255,255,255,0.3); font-weight:600; }
+
+  @media(max-width:820px) {
+    .teacher-grid,
+    .teacher-grid.reverse {
+      grid-template-columns:1fr;
+      gap:2.5rem;
+    }
+    .teacher-grid.reverse .teacher-photo-col,
+    .teacher-grid.reverse .teacher-bio-col { order:unset; }
+    .teacher-photo-wrap { aspect-ratio:4/3; max-height:320px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.png" alt="Bridgeway logo">
+    <div class="nav-logo-text">Bridgeway <span>English School</span></div>
+  </a>
+  <a href="index.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-bg"></div>
+  <div class="page-header-inner">
+    <span class="section-tag">✦ Meet the Teachers</span>
+    <h1>The people behind <em>Bridgeway</em></h1>
+    <p>ABC Bridgeway is a small, close-knit school — and that's exactly how we like it. Get to know the teachers your child will learn with.</p>
+  </div>
+  <svg class="header-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;display:block;width:100%">
+    <path d="M-10,40 C360,80 1080,0 1450,40 L1450,60 L-10,60 Z" fill="#fdf8f2"/>
+  </svg>
+</div>
+
+<!-- ALEX -->
+<section class="teacher-section" id="alex">
+  <div class="container">
+    <div class="teacher-grid">
+
+      <div class="teacher-photo-col">
+        <!-- ✏️ Replace alex.jpg with your actual photo filename -->
+        <div class="teacher-photo-wrap" style="position:relative;">
+  <div class="profile-slide active" style="background-image:url('images/alex-1.jpg')"></div>
+  <div class="profile-slide" style="background-image:url('images/alex-2.jpg')"></div>
+  <div class="profile-slide" style="background-image:url('images/alex-3.jpg')"></div>
+  <div class="profile-slide" style="background-image:url('images/alex-4.JPG')"></div>
+</div>
+        <div class="teacher-flag">🇺🇸</div>
+        <div class="teacher-name-card">
+          <h2>Alex Brock</h2>
+          <div class="jp-name">アレックス・ブロック</div>
+          <span class="teacher-role">Lead English Instructor</span>
+        </div>
+      </div>
+
+      <div class="teacher-bio-col">
+        <span class="bio-tag">✦ From Maryland to Yamagata</span>
+        <h2 class="bio-headline">A lifelong love of Japan —<br>and of <em>teaching</em></h2>
+
+        <p class="bio-text">
+          Alex grew up in Maryland, USA, with a deep fascination for Japanese culture that started early — watching Dragon Ball and Pokémon as a kid, he was drawn into a world that felt both wonderfully different and genuinely exciting. That curiosity never faded, and eventually it led him all the way to Yamagata, where he has been teaching English to children and families since 2011.
+        </p>
+        <p class="bio-text">
+          Alex's approach to teaching comes from his background in Psychology — he understands how people learn, what motivates them, and how to build confidence in a way that lasts. His classes are warm, encouraging, and genuinely fun. He believes that when a child feels safe to make mistakes and try again, real language learning happens.
+        </p>
+        <p class="bio-text">
+          Outside the classroom, Alex is a musician and creative maker. He plays guitar and has a deep interest in design — an interest that has led him to create his own musical board games from scratch. His students often discover that English and creativity go hand in hand.
+        </p>
+
+        <div class="creds">
+          <div class="cred-chip"><span class="chip-icon">🎓</span> B.A. Psychology — Towson University, Baltimore</div>
+          <div class="cred-chip"><span class="chip-icon">📜</span> TESOL Certified (100-hour)</div>
+          <div class="cred-chip"><span class="chip-icon">👶</span> TEYL — Teaching English to Young Learners</div>
+          <div class="cred-chip"><span class="chip-icon">📅</span> Teaching since 2011</div>
+        </div>
+
+        <div class="interests">
+          <div class="interest-card">
+            <span class="i-emoji">🎸</span>
+            <strong>Music</strong>
+            <span>Guitarist and lifelong music lover</span>
+          </div>
+          <div class="interest-card">
+            <span class="i-emoji">🎲</span>
+            <strong>Board Games</strong>
+            <span>Designer of original musical board games</span>
+          </div>
+          <div class="interest-card">
+            <span class="i-emoji">✏️</span>
+            <strong>Design</strong>
+            <span>Passionate about creative making</span>
+          </div>
+          <div class="interest-card">
+            <span class="i-emoji">🐉</span>
+            <strong>Japanese Culture</strong>
+            <span>Anime fan since Dragon Ball & Pokémon</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- KYOKO -->
+<section class="teacher-section" id="kyoko">
+  <div class="container">
+    <div class="teacher-grid reverse">
+
+      <div class="teacher-photo-col">
+        <!-- ✏️ Replace kyoko.jpg with your actual photo filename -->
+        <div class="teacher-photo-wrap">
+          <img src="images/kyoko.jpg" alt="Kyoko Sakurada"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="teacher-photo-placeholder" style="display:none">
+            <span>👩‍🏫</span>
+            Photo coming soon
+          </div>
+        </div>
+        <div class="teacher-flag">🇯🇵</div>
+        <div class="teacher-name-card">
+          <h2>Kyoko Sakurada</h2>
+          <div class="jp-name">櫻田 恭子</div>
+          <span class="teacher-role">Japanese Instructor & School Administrator</span>
+        </div>
+      </div>
+
+      <div class="teacher-bio-col">
+        <span class="bio-tag">✦ Yamagata Born and Raised</span>
+        <h2 class="bio-headline">Bringing English <em>closer</em><br>to home</h2>
+
+        <p class="bio-text">
+          Kyoko was born and raised right here in Yamagata City, and has spent over fifteen years helping local children find their feet in English. Her teaching career began in 2008 at Peppy Kids Club, where she developed a strong foundation in communicative English instruction for young learners.
+        </p>
+        <p class="bio-text">
+          From 2019 to 2025, Kyoko served as a 派遣外国語指導員 (dispatched foreign language instructor) for the Yamagata Prefectural Board of Education — working across multiple elementary schools in the Murayama district, including schools in Ōe, Sagae, and beyond. She supported classroom English lessons for students from Grade 3 through Grade 6, working alongside classroom teachers to make English accessible and enjoyable for every child.
+        </p>
+        <p class="bio-text">
+          At ABC Bridgeway, Kyoko handles Japanese-language support, grammar instruction, and school administration — making sure every parent and student always has someone they can talk to, in the language they're most comfortable with.
+        </p>
+
+        <div class="creds">
+          <div class="cred-chip"><span class="chip-icon">🏫</span> Teaching since 2008</div>
+          <div class="cred-chip"><span class="chip-icon">🏛️</span> 山形県教育庁 Dispatched Instructor (2019–2025)</div>
+          <div class="cred-chip"><span class="chip-icon">📚</span> Elementary English Specialist (Gr. 3–6)</div>
+          <div class="cred-chip"><span class="chip-icon">🗾</span> Yamagata City Native</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-banner">
+  <h2>Ready to meet us <em>in person?</em></h2>
+  <p>The first lesson is completely free. Come and see if we're the right fit for your child.</p>
+  <div class="cta-btns">
+    <a href="index.html#contact" class="btn-white">📬 Book a Free Trial</a>
+    <a href="index.html#courses" class="btn-outline-white">View Courses →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo-wrap">
+    <img src="logo.png" alt="Bridgeway logo">
+    <span>ABC Bridgeway English School</span>
+  </div>
+  <p>山形県山形市元木2-2-17 | 023-641-3059</p>
+  <hr class="footer-divider">
+  <p class="footer-copy">© 2026 ABC Bridgeway English School. All rights reserved.</p>
+</footer>
+<script>
+  let profileCurrent = 0;
+  const profileSlides = document.querySelectorAll('.profile-slide');
+  setInterval(() => {
+    profileSlides[profileCurrent].classList.remove('active');
+    profileCurrent = (profileCurrent + 1) % profileSlides.length;
+    profileSlides[profileCurrent].classList.add('active');
+  }, 8000);
+</script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Superlative Stadium</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #eef2f3; display: flex; flex-direction: column; align-items: center; padding: 20px; box-sizing: border-box; width: 100%; }
+        .controls { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; width: 100%; box-sizing: border-box; }
+        .btn-random { width: 100%; margin-top: 8px; padding: 7px 10px; font-size: 12px; font-weight: bold; border-radius: 6px; border: 2px dashed #aaa; background: #f0f4ff; color: #555; cursor: pointer; transition: 0.2s; }
+        .btn-random:hover { background: #e0e8ff; border-color: #7a9df0; color: #333; }
+
+        /* Track wrapper scales the fixed-size track to fit screen */
+        #track-wrapper {
+            width: 100%;
+            max-width: 844px; /* 800px track + 22px border each side */
+            overflow: hidden;
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+        }
+        #track-scale {
+            transform-origin: top center;
+            /* scale set by JS */
+        }
+
+        .racer-card { width: 220px; padding: 15px; border-radius: 12px; background: #f8f9fa; border-top: 6px solid #ccc; box-sizing: border-box; }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .controls { flex-direction: column; align-items: stretch; padding: 12px; }
+            .racer-card { width: 100%; }
+            input { width: 100%; box-sizing: border-box; }
+        }
+        #card1 { border-color: #e74c3c; } /* Red */
+        #card2 { border-color: #3498db; } /* Blue */
+        #card3 { border-color: #f1c40f; } /* Yellow */
+
+        .input-row { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+        input { padding: 10px; border: 2px solid #ddd; border-radius: 6px; font-size: 14px; width: 90%; }
+       
+        .manual-speed-area { display: none; background: #fffbe6; padding: 8px; border: 1px dashed #ffe58f; border-radius: 6px; margin-top: 10px; }
+        .manual-speed-area label { font-size: 11px; font-weight: bold; color: #856404; }
+
+        .mystery-badge { background: #34495e; color: white; padding: 4px 8px; border-radius: 20px; font-size: 11px; font-weight: bold; display: inline-block; }
+
+        #track-container {
+            position: relative; width: 800px; height: 400px; background: #27ae60;
+            border-radius: 200px; border: 22px solid #34495e;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.4);
+        }
+
+        #finish-line {
+            position: absolute; left: 50%; top: 0; width: 10px; height: 115px;
+            background: repeating-linear-gradient(0deg, #fff, #fff 10px, #000 10px, #000 20px);
+            transform: translateX(-50%); z-index: 1;
+        }
+
+        .animal-icon {
+            position: absolute; font-size: 42px; width: 50px; height: 50px;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 5; text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            transform: scaleX(-1);
+        }
+
+        .btn-main { padding: 12px 24px; font-weight: bold; border-radius: 8px; border: none; cursor: pointer; font-size: 14px; transition: 0.2s; }
+        .btn-go { background: #2ecc71; color: white; }
+        .btn-reset { background: #95a5a6; color: white; margin-top: 10px; }
+       
+        #results-display { font-size: 18px; text-align: center; color: #2c3e50; margin-bottom: 10px; min-height: 80px; line-height: 1.4; }
+        .fastest { color: #27ae60; font-weight: bold; font-size: 1.2em; }
+    </style>
+</head>
+<body>
+
+    <div id="results-display">Who will be the <b>fastest</b>? Enter 3 animals!</div>
+
+    <div class="controls">
+        <div class="racer-card" id="card1">
+            <div class="input-row">
+                <label><b>🔴 Racer 1:</b></label>
+                <input type="text" id="name1" placeholder="Animal name..." oninput="lookup(1)">
+            </div>
+            <div id="mystery1" class="mystery-badge">Speed: ???</div>
+            <div id="manual1" class="manual-speed-area">
+                <label>Manual Speed:</label>
+                <input type="number" id="spd1" value="0">
+            </div>
+            <button class="btn-random" onclick="randomAnimal(1)">🎲 Random Animal</button>
+        </div>
+
+        <div class="racer-card" id="card2">
+            <div class="input-row">
+                <label><b>🔵 Racer 2:</b></label>
+                <input type="text" id="name2" placeholder="Animal name..." oninput="lookup(2)">
+            </div>
+            <div id="mystery2" class="mystery-badge">Speed: ???</div>
+            <div id="manual2" class="manual-speed-area">
+                <label>Manual Speed:</label>
+                <input type="number" id="spd2" value="0">
+            </div>
+            <button class="btn-random" onclick="randomAnimal(2)">🎲 Random Animal</button>
+        </div>
+
+        <div class="racer-card" id="card3">
+            <div class="input-row">
+                <label><b>🟡 Racer 3:</b></label>
+                <input type="text" id="name3" placeholder="Animal name..." oninput="lookup(3)">
+            </div>
+            <div id="mystery3" class="mystery-badge">Speed: ???</div>
+            <div id="manual3" class="manual-speed-area">
+                <label>Manual Speed:</label>
+                <input type="number" id="spd3" value="0">
+            </div>
+            <button class="btn-random" onclick="randomAnimal(3)">🎲 Random Animal</button>
+        </div>
+
+        <div style="display:flex; flex-direction:column; justify-content:center;">
+            <button class="btn-main btn-go" onclick="startRace()">START RACE</button>
+            <button class="btn-main btn-reset" onclick="resetRace()">RESET</button>
+        </div>
+    </div>
+
+    <div id="track-wrapper">
+      <div id="track-scale">
+        <div id="track-container">
+            <div id="finish-line"></div>
+            <div id="icon1" class="animal-icon">🐾</div>
+            <div id="icon2" class="animal-icon">🐾</div>
+            <div id="icon3" class="animal-icon">🐾</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+        const zoo = {
+            "cheetah": { s: 110, i: "🐆" }, "lion": { s: 80, i: "🦁" }, "tiger": { s: 65, i: "🐅" },
+            "horse": { s: 70, i: "🐎" }, "rabbit": { s: 45, i: "🐇" }, "elephant": { s: 40, i: "🐘" },
+            "giraffe": { s: 50, i: "🦒" }, "zebra": { s: 65, i: "🦓" }, "kangaroo": { s: 65, i: "🦘" },
+            "sloth": { s: 0.2, i: "🦥" }, "human": { s: 44, i: "🏃" }, "dog": { s: 45, i: "🐕" },
+            "cat": { s: 48, i: "🐈" }, "pig": { s: 17, i: "🐖" }, "falcon": { s: 320, i: "🦅" },
+            "penguin": { s: 10, i: "🐧" }, "ostrich": { s: 70, i: "🐦" }, "turtle": { s: 0.5, i: "🐢" },
+            "snake": { s: 15, i: "🐍" }, "shark": { s: 50, i: "🦈" }, "whale": { s: 35, i: "🐋" },
+            "bee": { s: 25, i: "🐝" }, "dragonfly": { s: 55, i: "🛸" }, "snail": { s: 0.05, i: "🐌" },
+            "t-rex": { s: 27, i: "🦖" }, "ant": { s: 0.3, i: "🐜" }, "crab": { s: 6, i: "🦀" }, "panda": { s: 50, i: "🐼" }, "deer": { s: 64, i: "🦌" }, "rhinoceros": { s: 64, i: "🦏" },
+			"hippopotamus": { s: 30, i: "🦛" }, "fox": { s: 68, i: "🦊" }, "wolf": { s: 60, i: "🐺" },
+			"elephant": { s: 40, i: "🐘" }, "cow": { s: 40, i: "🐄" }, "monkey": { s: 35, i: "🐒" },
+			"gorilla": { s: 40, i: "🦍" }, "dolphin": { s: 60, i: "🐬" }, "frog": { s: 20, i: "🐸" },
+        };
+
+        let racing = false;
+        let progress = [0, 0, 0];
+        let lastTime = 0;
+        let hiddenSpeeds = [0, 0, 0];
+
+        function randomAnimal(id) {
+            const keys = Object.keys(zoo);
+            const name = keys[Math.floor(Math.random() * keys.length)];
+            const input = document.getElementById('name' + id);
+            input.value = name.charAt(0).toUpperCase() + name.slice(1);
+            lookup(id);
+        }
+
+        function lookup(id) {
+            const name = document.getElementById('name' + id).value.toLowerCase().trim();
+            const manualArea = document.getElementById('manual' + id);
+            const iconEl = document.getElementById('icon' + id);
+            const badge = document.getElementById('mystery' + id);
+
+            if (zoo[name]) {
+                hiddenSpeeds[id-1] = zoo[name].s;
+                iconEl.innerText = zoo[name].i;
+                badge.style.display = "inline-block";
+                manualArea.style.display = "none";
+            } else {
+                badge.style.display = "none";
+                manualArea.style.display = "block";
+                iconEl.innerText = "🐾";
+                hiddenSpeeds[id-1] = 0;
+            }
+        }
+
+        function getPosition(prog, laneOffset) {
+            const trackWidth = 800;
+            const straightLen = 400;
+            const radius = 130 + laneOffset;
+            const semiCircum = Math.PI * radius;
+            const totalLength = (2 * straightLen) + (2 * semiCircum);
+            const d = prog * totalLength;
+           
+            const centerX = trackWidth / 2;
+            const halfStraight = straightLen / 2;
+            const rightCircleX = centerX + halfStraight;
+            const leftCircleX = centerX - halfStraight;
+           
+            let x, y;
+            if (d < halfStraight) {
+                x = centerX + d; y = 50 + laneOffset;
+            } else if (d < halfStraight + semiCircum) {
+                let theta = (d - halfStraight) / radius - Math.PI/2;
+                x = rightCircleX + radius * Math.cos(theta);
+                y = 200 + radius * Math.sin(theta);
+            } else if (d < halfStraight + semiCircum + straightLen) {
+                x = rightCircleX - (d - halfStraight - semiCircum);
+                y = 350 - laneOffset;
+            } else if (d < halfStraight + (2 * semiCircum) + straightLen) {
+                let theta = (d - halfStraight - semiCircum - straightLen) / radius + Math.PI/2;
+                x = leftCircleX + radius * Math.cos(theta);
+                y = 200 + radius * Math.sin(theta);
+            } else {
+                x = leftCircleX + (d - halfStraight - (2 * semiCircum) - straightLen);
+                y = 50 + laneOffset;
+            }
+            return {x: x - 25, y: y - 25};
+        }
+
+        function update(timestamp) {
+            if (!racing) return;
+            if (!lastTime) lastTime = timestamp;
+            const dt = (timestamp - lastTime) / 1000;
+            lastTime = timestamp;
+
+            let s = [
+                hiddenSpeeds[0] || parseFloat(document.getElementById('spd1').value) || 0,
+                hiddenSpeeds[1] || parseFloat(document.getElementById('spd2').value) || 0,
+                hiddenSpeeds[2] || parseFloat(document.getElementById('spd3').value) || 0
+            ];
+
+            const timeScale = 0.0015;
+            for(let i=0; i<3; i++) {
+                progress[i] += s[i] * dt * timeScale;
+                const p = getPosition(Math.min(progress[i], 1), i * 35 - 35);
+                const el = document.getElementById('icon' + (i+1));
+                el.style.left = p.x + 'px'; el.style.top = p.y + 'px';
+            }
+
+            if (progress.some(p => p >= 1)) {
+                racing = false;
+                revealResults(s);
+            } else {
+                requestAnimationFrame(update);
+            }
+        }
+
+        function revealResults(speeds) {
+            const names = [
+                document.getElementById('name1').value || "Racer 1",
+                document.getElementById('name2').value || "Racer 2",
+                document.getElementById('name3').value || "Racer 3"
+            ];
+
+            // Combine names and speeds to sort them
+            let racers = names.map((name, i) => ({ name, speed: speeds[i] }));
+            racers.sort((a, b) => b.speed - a.speed);
+
+            const fastest = racers[0];
+            const slowest = racers[2];
+
+            document.getElementById('results-display').innerHTML = `
+                <div class="fastest">🏆 The FASTEST is the ${fastest.name.toUpperCase()}!</div>
+                <div>The <b>slowest</b> is the ${slowest.name.toUpperCase()}.</div>
+                <div style="font-size:14px; margin-top:5px;">
+                    ${racers[0].name}: ${racers[0].speed} km/h |
+                    ${racers[1].name}: ${racers[1].speed} km/h |
+                    ${racers[2].name}: ${racers[2].speed} km/h
+                </div>
+            `;
+        }
+
+        function startRace() {
+            if (racing) return;
+            document.getElementById('results-display').innerText = "🏁 AND THEY'RE OFF!";
+            racing = true; lastTime = 0;
+            requestAnimationFrame(update);
+        }
+
+        function resetRace() {
+            racing = false; progress = [0, 0, 0];
+            document.getElementById('results-display').innerHTML = "Who will be the <b>fastest</b>? Enter 3 animals!";
+            for(let i=0; i<3; i++) {
+                const p = getPosition(0, i * 35 - 35);
+                document.getElementById('icon' + (i+1)).style.left = p.x + 'px';
+                document.getElementById('icon' + (i+1)).style.top = p.y + 'px';
+            }
+        }
+
+        // Scale track to fit screen width
+        function scaleTrack() {
+            const wrapper = document.getElementById('track-wrapper');
+            const scaler = document.getElementById('track-scale');
+            const fullWidth = 844; // 800 + 22*2 border
+            const fullHeight = 444; // 400 + 22*2 border
+            const available = wrapper.clientWidth;
+            const scale = Math.min(1, available / fullWidth);
+            scaler.style.transform = `scale(${scale})`;
+            scaler.style.width = fullWidth + 'px';
+            scaler.style.height = fullHeight + 'px';
+            wrapper.style.height = (fullHeight * scale) + 'px';
+        }
+        scaleTrack();
+        window.addEventListener('resize', scaleTrack);
+
+        resetRace();
+    </script>
+</body>
+</html>
