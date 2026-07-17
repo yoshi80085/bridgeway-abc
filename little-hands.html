@@ -465,28 +465,21 @@
         <div class="media-panel-label" style="color:var(--book1); margin-top:1rem;">🎬 Class Videos</div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
 
-          <!-- ✏️ Add class footage videos. src="images/lh1-video1.MOV" poster="images/lh1-thumb1.jpg" -->
-          <div class="local-video-slot">
-            <video
-          controls
-          style="width:100%; height:auto; display:block;"
-          poster="images/lh1-thumb1.png">
-          <source src="images/lh1-video1.MOV" type="video/mp4">
-        </video>
-            <!-- Fallback if no video yet: remove the <video> above and uncomment below -->
-            <!-- <div class="local-video-empty"><span>🎬</span>Video coming soon</div> -->
-          </div>
-          <div class="local-video-slot">
-            <video
-          controls
-          style="width:100%; height:auto; display:block;"
-          poster="images/lh1-thumb2.png">
-          <source src="images/lh1-video2.MOV" type="video/mp4">
-        </video>
-          </div>
+          <div style="margin-top: 0.8rem;">
+  <div class="video-hover" style="border-radius:14px; overflow:hidden; border:2px solid var(--border);">
+    <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden;">
+      <iframe
+        id="random-video-section1"
+        src=""
+        style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</div>
 
-        </div>
-      </div>
+</div>
+</div>
     </div><!-- /media-grid -->
   </div>
 </section>
@@ -541,26 +534,18 @@
         <div class="media-panel-label" style="color:var(--book1); margin-top:1rem;">🎬 Class Videos</div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
 
-          <!-- ✏️ Add class footage videos. src="images/lh1-video1.MOV" poster="images/lh1-thumb1.jpg" -->
-          <div class="local-video-slot">
-            <video
-          controls
-          style="width:100%; height:auto; display:block;"
-          poster="images/lh2-thumb1.png">
-          <source src="images/lh2-video1.MOV" type="video/mp4">
-        </video>
-            <!-- Fallback if no video yet: remove the <video> above and uncomment below -->
-            <!-- <div class="local-video-empty"><span>🎬</span>Video coming soon</div> -->
-          </div>
-          <div class="local-video-slot">
-            <video
-          controls
-          style="width:100%; height:auto; display:block;"
-          poster="images/lh2-thumb2.png">
-          <source src="images/lh2-video2.MOV" type="video/mp4">
-        </video>
-          </div>
-
+          <div style="margin-top: 0.8rem;">
+  <div class="video-hover" style="border-radius:14px; overflow:hidden; border:2px solid var(--border);">
+    <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden;">
+      <iframe
+        id="random-video-section2"
+        src=""
+        style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</div>
         </div>
       </div>
     </div><!-- /media-grid -->
@@ -617,27 +602,18 @@
         <div class="media-panel-label" style="color:var(--book1); margin-top:1rem;">🎬 Class Videos</div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
 
-          <!-- ✏️ Add class footage videos. src="images/lh1-video1.MOV" poster="images/lh1-thumb1.jpg" -->
-          <div class="local-video-slot">
-            <video
-          controls
-          style="width:100%; height:auto; display:block;"
-          poster="images/lh3-thumb1.png">
-          <source src="images/lh3-video1.MOV" type="video/mp4">
-        </video>
-            <!-- Fallback if no video yet: remove the <video> above and uncomment below -->
-            <!-- <div class="local-video-empty"><span>🎬</span>Video coming soon</div> -->
-          </div>
-          <div class="local-video-slot">
-            <video
-          controls
-          style="width:100%; height:auto; display:block;"
-          poster="images/lh3-thumb2.png">
-          <source src="images/lh3-video2.MOV" type="video/mp4">
-        </video>
-          </div>
-
-        </div>
+          <div style="margin-top: 0.8rem;">
+  <div class="video-hover" style="border-radius:14px; overflow:hidden; border:2px solid var(--border);">
+    <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden;">
+      <iframe
+        id="random-video-section3"
+        src=""
+        style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</div>
       </div>
     </div><!-- /media-grid -->
   </div>
@@ -735,6 +711,23 @@
       }, 2500);
     }
   }
+  // Section 1 random video
+const section1Videos = ["q0shOiJYduI", "wtRyrId-bRo"];
+document.getElementById("random-video-section1").src = 
+  "https://www.youtube.com/embed/" + 
+  section1Videos[Math.floor(Math.random() * section1Videos.length)] + "?rel=0";
+
+// Section 2 random video
+const section2Videos = ["3BFQ-s0cgCc", "9c28qa7uaHU"];
+document.getElementById("random-video-section2").src = 
+  "https://www.youtube.com/embed/" + 
+  section2Videos[Math.floor(Math.random() * section2Videos.length)] + "?rel=0";
+
+// Section 3 random video
+const section3Videos = ["QLWFOG3oJvg", "pWDFils1OVw"];
+document.getElementById("random-video-section3").src = 
+  "https://www.youtube.com/embed/" + 
+  section3Videos[Math.floor(Math.random() * section3Videos.length)] + "?rel=0";
 </script>
 
 </body>

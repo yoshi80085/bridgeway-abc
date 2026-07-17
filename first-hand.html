@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Firsthand | ABC Bridgeway English School</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:#fdf8f2; --warm-white:#fffcf7;
+    --sky:#1e6db5; --sky-light:#e3eef8; --sky-dark:#154f87;
+    --sun:#f0a500; --sun-light:#fff4e0;
+    --grass:#2ab04a; --grass-light:#e4f5ea;
+    --teal:#00b4cc;
+    /* Junior theme — deep teal/slate */
+    --jh:#0f7b72; --jh-dark:#095c55; --jh-light:#e0f4f2;
+    --jh-accent:#00c2a8; --jh-gold:#f5c842;
+    --text-dark:#1a2840; --text-mid:#4a5568; --text-light:#8a9ab0;
+    --border:#cde8e5; --shadow:rgba(15,123,114,0.15);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Nunito',sans-serif; background:var(--cream); color:var(--text-dark); }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(255,252,247,0.94); backdrop-filter:blur(12px);
+    border-bottom:2px solid var(--border);
+    padding:0 2rem; display:flex; align-items:center; justify-content:space-between;
+    height:70px;
+  }
+  .nav-logo { display:flex; align-items:center; gap:0.5rem; text-decoration:none; }
+  .nav-logo img { height:52px; width:auto; }
+  .nav-logo-text { font-size:1.05rem; font-weight:900; color:var(--sky-dark); line-height:1.2; }
+  .nav-logo-text span { display:block; font-size:0.72rem; font-weight:700; color:var(--text-light); letter-spacing:1px; text-transform:uppercase; }
+  .nav-back {
+    background:var(--jh); color:white;
+    padding:0.55rem 1.4rem; border-radius:30px;
+    font-weight:800; font-size:0.88rem; text-decoration:none;
+    transition:background 0.2s;
+  }
+  .nav-back:hover { background:var(--jh-dark); }
+
+  /* PAGE HEADER — dark hero */
+  .page-header {
+    padding:7rem 2rem 2.5rem;
+    text-align:center;
+    background:linear-gradient(135deg, #0d2e2b 0%, #0f4f48 55%, #0a3d38 100%);
+    border-bottom:2px solid var(--jh-dark);
+    position:relative;
+    overflow:hidden;
+  }
+  .page-header::before {
+    content:'';
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size:40px 40px;
+    pointer-events:none;
+  }
+  .page-header .section-tag {
+    display:inline-block; font-size:0.78rem; font-weight:800;
+    letter-spacing:2px; text-transform:uppercase;
+    color:var(--jh-accent); margin-bottom:0.8rem; position:relative;
+  }
+  .page-header h1 {
+    font-family:'Lora',serif;
+    font-size:clamp(2rem,4vw,3rem);
+    font-weight:600; color:white; margin-bottom:0.6rem; position:relative;
+  }
+  .page-header h1 em { font-style:italic; color:var(--jh-accent); }
+  .page-header .header-sub {
+    font-size:1rem; color:rgba(255,255,255,0.65); font-weight:700;
+    margin-bottom:1.4rem; position:relative;
+  }
+  .header-badge {
+    display:inline-flex; align-items:center; gap:0.4rem;
+    background:rgba(255,255,255,0.08); border:1.5px solid rgba(255,255,255,0.15);
+    border-radius:30px; padding:0.35rem 1rem; position:relative;
+    font-size:0.78rem; font-weight:800; color:rgba(255,255,255,0.6);
+    letter-spacing:0.5px;
+  }
+
+  /* INTRO — "this is what we do" presentation */
+  .intro-section {
+    background:white;
+    border-bottom:2px solid var(--border);
+    padding:3.5rem 2rem;
+  }
+  .intro-inner {
+    max-width:1100px; margin:0 auto;
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:3rem; align-items:center;
+  }
+  .intro-text .section-tag {
+    display:inline-block; font-size:0.78rem; font-weight:800;
+    letter-spacing:2px; text-transform:uppercase; color:var(--jh); margin-bottom:0.8rem;
+  }
+  .intro-text h2 {
+    font-family:'Lora',serif;
+    font-size:clamp(1.5rem,2.8vw,2.1rem);
+    font-weight:600; color:var(--text-dark); margin-bottom:1rem;
+  }
+  .intro-text h2 em { font-style:italic; color:var(--jh); }
+  .intro-text p {
+    font-size:0.97rem; color:var(--text-mid);
+    line-height:1.9; font-weight:600; margin-bottom:1.3rem;
+  }
+  .intro-chips { display:flex; flex-wrap:wrap; gap:0.5rem; }
+  .intro-chip {
+    background:var(--jh-light); color:var(--jh-dark);
+    border-radius:20px; padding:0.35rem 0.9rem;
+    font-size:0.82rem; font-weight:800;
+    border:1.5px solid var(--border);
+  }
+
+  /* MEDIA: featured video + photo strip */
+  .intro-media { display:flex; flex-direction:column; gap:0.8rem; }
+  .feature-video {
+    border-radius:16px; overflow:hidden;
+    border:2.5px solid var(--border);
+    box-shadow:0 8px 30px var(--shadow);
+    transition:transform 0.2s, box-shadow 0.2s;
+  }
+  .feature-video:hover { transform:translateY(-4px); box-shadow:0 14px 38px var(--shadow); }
+  .feature-video .ratio { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; }
+  .feature-video iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+  .feature-video .video-placeholder {
+    position:absolute; inset:0;
+    background:linear-gradient(135deg, #0d2e2b, #0f4f48);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:0.6rem; cursor:pointer;
+  }
+  .feature-video .play-circle {
+    width:60px; height:60px; border-radius:50%;
+    background:var(--jh-accent); color:#0d2e2b;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.6rem; padding-left:5px;
+    transition:transform 0.2s;
+  }
+  .feature-video .video-placeholder:hover .play-circle { transform:scale(1.1); }
+  .feature-video .ph-label { color:rgba(255,255,255,0.7); font-size:0.8rem; font-weight:800; letter-spacing:1px; text-transform:uppercase; }
+
+  .photo-strip { display:grid; grid-template-columns:repeat(3, 1fr); gap:0.7rem; }
+  .photo-slot {
+    aspect-ratio:1/1; border-radius:12px; overflow:hidden;
+    border:2px solid var(--border); background:var(--jh-light);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .photo-slot img { width:100%; height:100%; object-fit:cover; display:block; }
+  .photo-slot-empty {
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:0.3rem; color:var(--text-light); font-size:0.72rem; font-weight:700; text-align:center;
+  }
+  .photo-slot-empty span { font-size:1.5rem; }
+
+  /* BOOK SERIES HIGHLIGHTS */
+  .series-section { background:var(--cream); padding:3.5rem 2rem; }
+  .series-inner { max-width:1100px; margin:0 auto; }
+  .series-head { text-align:center; margin-bottom:2.2rem; }
+  .series-head .section-tag {
+    display:inline-block; font-size:0.78rem; font-weight:800;
+    letter-spacing:2px; text-transform:uppercase; color:var(--jh); margin-bottom:0.6rem;
+  }
+  .series-head h2 {
+    font-family:'Lora',serif;
+    font-size:clamp(1.5rem,2.8vw,2.1rem);
+    font-weight:600; color:var(--text-dark); margin-bottom:0.6rem;
+  }
+  .series-head h2 em { font-style:italic; color:var(--jh); }
+  .series-head p {
+    font-size:0.95rem; color:var(--text-mid); font-weight:600;
+    line-height:1.7; max-width:620px; margin:0 auto;
+  }
+  .book-grid {
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:1.2rem;
+  }
+  .book-card {
+    background:white; border-radius:18px; padding:1.6rem 1.4rem;
+    border:2.5px solid var(--border);
+    position:relative; overflow:hidden;
+    transition:transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+  .book-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:5px;
+    border-radius:18px 18px 0 0; background:var(--jh);
+  }
+  .book-card:hover { transform:translateY(-5px); box-shadow:0 12px 36px var(--shadow); border-color:var(--jh); }
+  .book-card.current { border-color:var(--jh); box-shadow:0 6px 28px var(--shadow); }
+  .book-card.current::before { background:var(--jh-accent); }
+  .book-num {
+    font-family:'Lora',serif; font-size:2.2rem; font-weight:600;
+    color:var(--jh-light); line-height:1; margin-bottom:0.5rem;
+  }
+  .book-card.current .book-num { color:var(--jh-accent); }
+  .book-card h3 { font-size:1.05rem; font-weight:900; color:var(--text-dark); margin-bottom:0.15rem; }
+  .book-level-label { font-size:0.72rem; font-weight:800; color:var(--jh); letter-spacing:1px; text-transform:uppercase; margin-bottom:0.7rem; }
+  .book-card p { font-size:0.85rem; color:var(--text-mid); line-height:1.55; font-weight:600; }
+  .current-pill {
+    display:inline-block; font-size:0.66rem; font-weight:800;
+    background:var(--jh-accent); color:#0d2e2b;
+    border-radius:12px; padding:0.18rem 0.6rem; margin-top:0.8rem;
+    letter-spacing:0.5px;
+  }
+
+  /* WHAT YOU GAIN — small strip */
+  .gain-section { background:white; padding:3.5rem 2rem; border-top:2px solid var(--border); border-bottom:2px solid var(--border); }
+  .gain-inner { max-width:1100px; margin:0 auto; text-align:center; }
+  .gain-inner .section-tag {
+    display:inline-block; font-size:0.78rem; font-weight:800;
+    letter-spacing:2px; text-transform:uppercase; color:var(--jh); margin-bottom:0.6rem;
+  }
+  .gain-inner h2 {
+    font-family:'Lora',serif; font-size:clamp(1.5rem,2.8vw,2.1rem);
+    font-weight:600; color:var(--text-dark); margin-bottom:2rem;
+  }
+  .gain-inner h2 em { font-style:italic; color:var(--jh); }
+  .gain-grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:1.5rem; }
+  .gain-item { text-align:center; }
+  .gain-icon {
+    width:60px; height:60px; border-radius:16px; margin:0 auto 0.9rem;
+    background:var(--jh-light); display:flex; align-items:center; justify-content:center;
+    font-size:1.8rem;
+  }
+  .gain-item h4 { font-size:0.95rem; font-weight:900; color:var(--text-dark); margin-bottom:0.3rem; }
+  .gain-item p { font-size:0.82rem; color:var(--text-mid); font-weight:600; line-height:1.5; }
+
+  /* TAIKEN CTA */
+  .taiken-section {
+    background:linear-gradient(135deg, #0d2e2b 0%, #0f4f48 55%, #0a3d38 100%);
+    padding:4rem 2rem; text-align:center; position:relative; overflow:hidden;
+  }
+  .taiken-section::before {
+    content:''; position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size:40px 40px; pointer-events:none;
+  }
+  .taiken-section h2 {
+    font-family:'Lora',serif; font-size:clamp(1.6rem,3vw,2.3rem);
+    font-weight:600; color:white; margin-bottom:0.7rem; position:relative;
+  }
+  .taiken-section h2 em { font-style:italic; color:var(--jh-accent); }
+  .taiken-section p {
+    font-size:1rem; color:rgba(255,255,255,0.7); font-weight:600;
+    margin-bottom:1.8rem; position:relative; line-height:1.7;
+  }
+  .taiken-btn {
+    display:inline-block; position:relative;
+    background:var(--jh-accent); color:#0d2e2b;
+    padding:1.1rem 2.6rem; border-radius:40px;
+    font-weight:900; font-size:1.05rem; text-decoration:none;
+    box-shadow:0 8px 26px rgba(0,194,168,0.4);
+    transition:transform 0.15s, box-shadow 0.15s, background 0.15s;
+  }
+  .taiken-btn:hover {
+    background:#00d9bc; transform:translateY(-3px);
+    box-shadow:0 12px 32px rgba(0,194,168,0.5);
+  }
+  .taiken-note {
+    margin-top:1rem; font-size:0.82rem; color:rgba(255,255,255,0.5);
+    font-weight:700; position:relative;
+  }
+
+  /* FOOTER */
+  footer { background:#0f1e33; color:rgba(255,255,255,0.6); padding:2.5rem 2rem; text-align:center; }
+  .footer-logo-wrap { display:flex; align-items:center; justify-content:center; gap:0.8rem; margin-bottom:0.6rem; }
+  .footer-logo-wrap img { height:44px; width:auto; }
+  .footer-logo-wrap span { font-size:1.1rem; font-weight:900; color:white; }
+  footer p { font-size:0.85rem; font-weight:600; }
+  .footer-divider { border:none; border-top:1px solid rgba(255,255,255,0.08); margin:1.2rem 0; }
+  .footer-copy { font-size:0.78rem; color:rgba(255,255,255,0.3); font-weight:600; }
+
+  @media(max-width:768px) {
+    .intro-inner { grid-template-columns:1fr; gap:2rem; }
+    .book-grid { grid-template-columns:repeat(2, 1fr); }
+    .gain-grid { grid-template-columns:repeat(2, 1fr); gap:1.5rem 1rem; }
+    .page-header { padding:7rem 1.2rem 2rem; }
+  }
+  @media(max-width:460px) {
+    .book-grid { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.png" alt="Bridgeway logo">
+    <div class="nav-logo-text">Bridgeway <span>English School</span></div>
+  </a>
+  <a href="course-books.html" class="nav-back">← Course Books</a>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <span class="section-tag">✦ 中学生・高校生コース · Junior &amp; Senior High</span>
+  <h1>English <em>Firsthand</em></h1>
+  <p class="header-sub">Real English. Real topics. Real confidence.</p>
+  <span class="header-badge">🎓 中学生〜高校生 &nbsp;·&nbsp; 少人数制 &nbsp;·&nbsp; 週1回 50分</span>
+</div>
+
+<!-- INTRO: THIS IS WHAT WE DO -->
+<section class="intro-section">
+  <div class="intro-inner">
+    <div class="intro-text">
+      <span class="section-tag">✦ このクラスについて</span>
+      <h2>This is what we <em>do</em></h2>
+      <p>
+        中学生・高校生クラスでは、Pearsonの「English Firsthand」シリーズを使い、実際に「使える英語」を身につけます。旅行・SNS・音楽・環境問題など、生徒にとって身近でリアルなテーマを題材に、話す・聞く・読む・書くの4技能をバランスよく伸ばします。入門から中上級まで4段階のレベルがあり、中学1年生から高校生まで、一人ひとりに合ったレベルで学べます。少人数制だからこそ、しっかり英語を口に出して練習できる環境です。
+      </p>
+      <div class="intro-chips">
+        <span class="intro-chip">🗣️ スピーキング中心</span>
+        <span class="intro-chip">🎧 ネイティブの音声</span>
+        <span class="intro-chip">📱 リアルな話題</span>
+        <span class="intro-chip">📐 文法もしっかり</span>
+        <span class="intro-chip">📝 高校・受験準備</span>
+      </div>
+    </div>
+
+    <div class="intro-media">
+      <!-- Featured intro video -->
+      <div class="feature-video">
+        <div class="ratio" id="intro-video-wrap" data-videoid="YOUTUBE_ID_HERE">
+          <div class="video-placeholder">
+            <div class="play-circle">▶</div>
+            <div class="ph-label">クラスの様子を見る</div>
+          </div>
+        </div>
+      </div>
+      <!-- Photo strip -->
+      <div class="photo-strip">
+        <div class="photo-slot">
+          <img src="images/junior-photo-1.jpg" alt="Class photo"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="photo-slot-empty" style="display:none"><span>📷</span>Photo 1</div>
+        </div>
+        <div class="photo-slot">
+          <img src="images/junior-photo-2.jpg" alt="Class photo"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="photo-slot-empty" style="display:none"><span>📷</span>Photo 2</div>
+        </div>
+        <div class="photo-slot">
+          <img src="images/junior-photo-3.jpg" alt="Class photo"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="photo-slot-empty" style="display:none"><span>📷</span>Photo 3</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK SERIES HIGHLIGHTS -->
+<section class="series-section">
+  <div class="series-inner">
+    <div class="series-head">
+      <span class="section-tag">✦ シリーズ案内</span>
+      <h2>Four books. One <em>journey.</em></h2>
+      <p>English Firsthandは4段階構成。基礎から始め、少しずつ世界が広がるテーマと表現で、中学生から高校生まで英語力が自然にレベルアップしていきます。</p>
+    </div>
+    <div class="book-grid">
+
+      <div class="book-card current">
+        <div class="book-num">01</div>
+        <h3>Access</h3>
+        <div class="book-level-label">入門 · 中学生 · A1–A2</div>
+        <p>英会話のスタートライン。自己紹介や日常の話題で、英語で話す自信を育てます。</p>
+        <span class="current-pill">現在使用中</span>
+      </div>
+
+      <div class="book-card">
+        <div class="book-num">02</div>
+        <h3>Success</h3>
+        <div class="book-level-label">初級 · 中学生 · A2</div>
+        <p>身近なテーマを広げながら、より自然な会話表現と基礎文法を定着させます。</p>
+      </div>
+
+      <div class="book-card">
+        <div class="book-num">03</div>
+        <h3>Level 1</h3>
+        <div class="book-level-label">中級 · 中学〜高校 · A2–B1</div>
+        <p>社会・文化・環境などの話題で、自分の意見を英語で伝える力を磨きます。</p>
+      </div>
+
+      <div class="book-card">
+        <div class="book-num">04</div>
+        <h3>Level 2</h3>
+        <div class="book-level-label">中上級 · 高校生 · B1</div>
+        <p>大学受験や実社会へのブリッジ。ディスカッションやプレゼンで実践的な英語を完成させます。</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHAT STUDENTS GAIN -->
+<section class="gain-section">
+  <div class="gain-inner">
+    <span class="section-tag">✦ このクラスで身につく力</span>
+    <h2>More than just <em>textbook English</em></h2>
+    <div class="gain-grid">
+      <div class="gain-item">
+        <div class="gain-icon">🗣️</div>
+        <h4>話す自信</h4>
+        <p>毎回のレッスンで英語を口に出し、自分の言葉で伝える力を養います。</p>
+      </div>
+      <div class="gain-item">
+        <div class="gain-icon">🌍</div>
+        <h4>広い視野</h4>
+        <p>世界の文化や社会問題に触れ、英語で考える習慣が身につきます。</p>
+      </div>
+      <div class="gain-item">
+        <div class="gain-icon">📐</div>
+        <h4>確かな文法</h4>
+        <p>学校の授業や定期テストにもつながる文法力をしっかり固めます。</p>
+      </div>
+      <div class="gain-item">
+        <div class="gain-icon">📝</div>
+        <h4>受験準備</h4>
+        <p>高校・大学入試や英検にも対応できる、実践的な英語力を育てます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TAIKEN CTA -->
+<section class="taiken-section">
+  <h2>まずは<em>無料体験</em>から</h2>
+  <p>英語が「使える」感覚を、ぜひ一度体験してください。<br>初回レッスンは無料です。お気軽にお申し込みください。</p>
+  <a href="index.html#contact" class="taiken-btn">🎁 無料体験レッスンを申し込む</a>
+  <div class="taiken-note">体験レッスン無料 · 入会の義務はありません</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo-wrap">
+    <img src="logo.png" alt="Bridgeway logo">
+    <span>ABC Bridgeway English School</span>
+  </div>
+  <p>山形県山形市元木2-2-17 | 023-641-3059</p>
+  <hr class="footer-divider">
+  <p class="footer-copy">© 2026 ABC Bridgeway English School. All rights reserved.</p>
+</footer>
+
+<script>
+  // Lazy-load the featured intro video on click
+  const introWrap = document.getElementById('intro-video-wrap');
+  if (introWrap) {
+    const ph = introWrap.querySelector('.video-placeholder');
+    ph.addEventListener('click', () => {
+      const videoId = introWrap.dataset.videoid;
+      if (!videoId || videoId === 'YOUTUBE_ID_HERE') {
+        ph.innerHTML = '<div style="color:rgba(255,255,255,0.85);font-weight:800;font-size:0.85rem;padding:1rem;text-align:center;">📹 YouTube動画IDを設定してください</div>';
+        return;
+      }
+      introWrap.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+    });
+  }
+</script>
+
+</body>
+</html>

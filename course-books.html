@@ -18,7 +18,23 @@
   * { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior:smooth; }
   body { font-family:'Nunito',sans-serif; background:var(--cream); color:var(--text-dark); }
-
+.trial-btn {
+  display: inline-block;
+  background: var(--sky);
+  color: white;
+  padding: 0.95rem 2.2rem;
+  border-radius: 40px;
+  font-weight: 800;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(30,109,181,0.4);
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+}
+.trial-btn:hover {
+  background: var(--sky-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(30,109,181,0.45);
+}
   /* NAV */
   nav {
     position:fixed; top:0; left:0; right:0; z-index:100;
@@ -179,56 +195,62 @@
     <img src="logo.png" alt="Bridgeway logo">
     <div class="nav-logo-text">Bridgeway <span>English School</span></div>
   </a>
-  <a href="index.html" class="nav-back">← Back to Home</a>
+  <a href="index.html" class="nav-back">← ホームへ戻る</a>
 </nav>
 
 <!-- PAGE HEADER -->
 <div class="page-header">
-  <span class="section-tag">✦ Our Curriculum</span>
+  <span class="section-tag">✦ カリキュラム案内</span>
   <h1>Course <em>Books</em></h1>
-  <p>Every class at ABC Bridgeway uses carefully chosen textbooks designed to grow with your child. Click any book to learn more.</p>
+  <p>ABC Bridgewayでは、お子様の成長に合わせて選ばれた教材を使用しています。各コースをクリックして詳細をご覧ください。</p>
+<!-- BOOK A FREE TRIAL BUTTON -->
+<div style="text-align:center; padding: 2rem 2rem 0;">
+  <a href="index.html#contact" class="trial-btn">
+    🎁 無料体験レッスンを申し込む
+  </a>
+</div>
 </div>
 
 <!-- LITTLE HANDS -->
 <section class="books-section" id="little-hands">
   <div class="container">
-    <span class="section-label">🌱 Kindergarten · Ages 3-5</span>
+    <span class="section-label">🌱 幼稚園・保育園 · 3〜5歳</span>
     <h2>Little <em>Hands</em></h2>
-    <p class="section-desc">Our gentlest introduction to English — song-based, play-driven lessons that build a joyful first connection with the language.</p>
+    <p class="section-desc">英語との初めての出会いに。歌・ゲーム・あそびを通じて、楽しく自然に英語が好きになれるクラスです。現在契約幼稚園でのみのレッスンとなります。</p>
     <div class="price-card">
       <div class="price-item">
         <div class="price-label">月謝 Monthly Fee</div>
-        <div class="price-amount"><sup>¥</sup>7,000</div>
-        <div class="price-sub">per month · 50 min lesson</div>
+        <div class="price-amount"><sup>¥</sup>7,000 (¥5,500)</div>
+        <div class="price-sub">月1回50分レッスン</div>
       </div>
       <div class="price-item">
         <div class="price-label">レッスン回数</div>
         <div class="price-amount">42</div>
-        <div class="price-sub">lessons per year</div>
+        <div class="price-sub">年間レッスン数</div>
       </div>
-      <div class="price-note">🎈 Ages 3–5 · Small groups</div>
+      <div class="price-note">🎈 3〜5歳 · 少人数制</div>
     </div>
     <div class="books-grid">
       <a class="book-card green" href="little-hands.html#book-1">
         <img src="images/little-hands-1-cover.jpg" alt="Little Hands 1" style="width:100%; border-radius:10px; margin-bottom:1rem;">
         <span class="book-level lv-kinder">Level 1</span>
         <h3>Little Hands 1</h3>
-        <p>First words, colours, numbers, and simple greetings through songs and games.</p>
-        <div class="book-link-hint">Learn more →</div>
+        <p>はじめての英単語、色、数字、あいさつを歌やゲームで楽しく学びます。</p>
+        <div class="book-link-hint">詳しく見る →</div>
       </a>
       <a class="book-card green" href="little-hands.html#book-2">
         <img src="images/little-hands-2-cover.jpg" alt="Hand in Hand Starter" style="width:100%; border-radius:10px; margin-bottom:1rem;">
         <span class="book-level lv-kinder">Level 2</span>
         <h3>Little Hands 2</h3>
-        <p>Building on Level 1 — more vocabulary, simple sentences, and classroom language.</p>
-        <div class="book-link-hint">Learn more →</div>
+        <p>Level 1を土台に、語彙を増やしながら簡単な文やクラスルーム英語を学びます。</p>
+        <div class="book-link-hint">詳しく見る →</div>
       </a>
       <a class="book-card green" href="little-hands.html#book-3">
         <img src="images/little-hands-3-cover.jpg" alt="Hand in Hand Starter" style="width:100%; border-radius:10px; margin-bottom:1rem;">
         <span class="book-level lv-kinder">Level 3</span>
         <h3>Little Hands 3</h3>
-        <p>Confidence in speaking and listening, ready to transition into Hand in Hand.</p>
-        <div class="book-link-hint">Learn more →</div>
+        <p>自信をもって話す・聞くができるようになり、Hand in Handへの移行準備が整います。</p>
+        <div class="book-link-hint">詳しく見る →</div>
       </a>
     </div>
   </div>
@@ -237,71 +259,71 @@
 <!-- HAND IN HAND -->
 <section class="books-section" id="hand-in-hand">
   <div class="container">
-    <span class="section-label">✋ Primary School · Ages 6–12</span>
+    <span class="section-label">✋ 小学生 · 6〜12歳</span>
     <h2>Hand in <em>Hand</em></h2>
-    <p class="section-desc">A spiral curriculum that revisits and deepens. Each level builds naturally on the last — nothing is ever forgotten.</p>
+    <p class="section-desc">スパイラル式カリキュラムで、くり返しながら深く定着。各レベルが前のレベルの上に自然に積み上がるので、学んだことを忘れません。</p>
     <div class="price-card">
       <div class="price-item">
         <div class="price-label">月謝 Monthly Fee</div>
         <div class="price-amount"><sup>¥</sup>7,000</div>
-        <div class="price-sub">per month · 50 min lesson</div>
+        <div class="price-sub">月1回50分レッスン</div>
       </div>
       <div class="price-item">
         <div class="price-label">レッスン回数</div>
         <div class="price-amount">42</div>
-        <div class="price-sub">lessons per year</div>
+        <div class="price-sub">年間レッスン数</div>
       </div>
-      <div class="price-note">📚 Elementary School · Small groups</div>
+      <div class="price-note">📚 小学生 · 少人数制</div>
     </div>
     <div class="books-grid">
   <a class="book-card blue" href="hih-starter.html">
   <img src="images/hih-starter-cover.jpg" alt="Hand in Hand Starter" style="width:100%; border-radius:10px; margin-bottom:1rem;">
   <span class="book-level lv-kids">Starter</span>
   <h3>Hand in Hand Starter</h3>
-  <p>The bridge from Little Hands — first structured reading, writing, and conversation.</p>
-  <div class="book-link-hint">Go to lessons →</div>
+  <p>Little Handsからの橋渡し。読む・書く・話すの基礎をはじめて体系的に学びます。</p>
+  <div class="book-link-hint">レッスンへ →</div>
 </a>
   <a class="book-card blue" href="hih-1.html">
     <img src="images/hih-1-cover.jpg" alt="Hand in Hand Starter" style="width:100%; border-radius:10px; margin-bottom:1rem;">
     <span class="book-level lv-kids">Level 1</span>
     <h3>Hand in Hand 1</h3>
-    <p>Building core vocabulary and simple sentence structures through fun, engaging activities.</p>
-    <div class="book-link-hint">Go to lessons →</div>
+    <p>楽しいアクティビティを通じて、基本語彙と簡単な文構造を身につけます。</p>
+    <div class="book-link-hint">レッスンへ →</div>
   </a>
   <a class="book-card blue" href="hih-2.html">
     <img src="images/hih-2-cover.jpg" alt="Hand in Hand Starter" style="width:100%; border-radius:10px; margin-bottom:1rem;">
     <span class="book-level lv-kids">Level 2</span>
     <h3>Hand in Hand 2</h3>
-    <p>Expanding grammar and communication skills with growing confidence in speaking and listening.</p>
-    <div class="book-link-hint">Learn more →</div>
+    <p>文法と表現力を広げながら、話す・聞く力にさらに自信をつけていきます。</p>
+    <div class="book-link-hint">詳しく見る →</div>
   </a>
   <a class="book-card blue" href="hih-3.html">
     <img src="images/hih-3-cover.WEBP" alt="Hand in Hand Starter" style="width:100%; border-radius:10px; margin-bottom:1rem;">
     <span class="book-level lv-kids">Level 3</span>
     <h3>Hand in Hand 3</h3>
-    <p>Deeper reading comprehension and more complex sentence patterns introduced naturally.</p>
-    <div class="book-link-hint">Learn more →</div>
+    <p>読解力を深め、より複雑な文のパターンを自然な形で学んでいきます。</p>
+    <div class="book-link-hint">詳しく見る →</div>
   </a>
   <a class="book-card blue" href="hih-4.html">
     <img src="images/hih-4-cover.webp" alt="Hand in Hand Starter" style="width:100%; border-radius:10px; margin-bottom:1rem;">
     <span class="book-level lv-kids">Level 4</span>
     <h3>Hand in Hand 4</h3>
-    <p>Students begin expressing opinions and ideas with greater fluency and accuracy.</p>
-    <div class="book-link-hint">Learn more →</div>
+    <p>自分の意見や考えをより流暢に、正確に表現できるようになります。</p>
+    <div class="book-link-hint">詳しく見る →</div>
   </a>
   <a class="book-card blue" href="hih-5.html">
     <img src="images/hih-5-cover.webp" alt="Hand in Hand Starter" style="width:100%; border-radius:10px; margin-bottom:1rem;">
     <span class="book-level lv-kids">Level 5</span>
     <h3>Hand in Hand 5</h3>
-    <p>Advanced primary English — rich vocabulary, reading texts, and confident conversation.</p>
-    <div class="book-link-hint">Learn more →</div>
+    <p>応用的な英語へ — 豊かな語彙・読解・自信ある会話力を磨きます。</p>
+    <div class="book-link-hint">詳しく見る →</div>
   </a>
   <a class="book-card blue" href="hih-6.html">
     <img src="images/hih-6-cover.webp" alt="Hand in Hand Starter" style="width:100%; border-radius:10px; margin-bottom:1rem;">
     <span class="book-level lv-kids">Level 6</span>
     <h3>Hand in Hand 6</h3>
-    <p>The final primary level — students graduate ready for junior high English with confidence.</p>
-    <div class="book-link-hint">Learn more →</div>
+    <p>小学生コースの集大成。中学英語へ自信を持って進める実力を身につけます。</p>
+    <div class="book-link-hint">詳しく見る →</div>
   </a>
 </div>
     </div>
@@ -315,58 +337,58 @@
 
       <!-- JUNIOR -->
       <div style="background:white; border-radius:20px; padding:2rem; border:2px solid var(--border);">
-        <span class="section-label">🎓 Junior High - High School</span>
+        <span class="section-label">🎓 中学生・高校生</span>
         <h2 class="books-section" style="font-family:'Lora',serif; font-size:clamp(1.4rem,2.5vw,2rem); font-weight:600; color:var(--text-dark); margin-bottom:0.6rem;">Junior High <em style="font-style:italic; color:var(--sky);">Series</em></h2>
-        <p class="section-desc">Academic English that prepares students for high school, exams, and real-world communication.</p>
+        <p class="section-desc">高校受験・英語試験・実社会でのコミュニケーションに備える、本格的な英語力を育てます。</p>
         <div class="price-card">
           <div class="price-item">
             <div class="price-label">月謝 Monthly Fee</div>
             <div class="price-amount"><sup>¥</sup>7,500</div>
-            <div class="price-sub">per month · 50 min lesson</div>
+            <div class="price-sub">月1回50分レッスン</div>
           </div>
           <div class="price-item">
             <div class="price-label">レッスン回数</div>
             <div class="price-amount">42</div>
-            <div class="price-sub">lessons per year</div>
+            <div class="price-sub">年間レッスン数</div>
           </div>
-          <div class="price-note">🎓 Ages 12–15 · Small groups</div>
+          <div class="price-note">🎓 12〜15歳 · 少人数制</div>
         </div>
         <div class="books-grid">
           <a class="book-card gold" href="#">
             <img src="images/first-hand-series.png" alt="First Hand Access" style="width:100%; border-radius:10px; margin-bottom:1rem;">
             <span class="book-level lv-junior">Junior High</span>
             <h3>First Hand Access</h3>
-            <p>Reading, writing, and grammar for junior high students — bridging primary and academic English.</p>
-            <div class="book-link-hint">Learn more →</div>
+            <p>中学生向けの読む・書く・文法を体系的に学び、小学英語と本格的な学習英語をつなぎます。</p>
+            <div class="book-link-hint">詳しく見る →</div>
           </a>
         </div>
       </div>
 
       <!-- ADULT -->
       <div style="background:var(--warm-white); border-radius:20px; padding:2rem; border:2px solid var(--border);">
-        <span class="section-label">👩‍👧 Adults · All Levels</span>
+        <span class="section-label">👩‍👧 大人 · 全レベル対応</span>
         <h2 class="books-section" style="font-family:'Lora',serif; font-size:clamp(1.4rem,2.5vw,2rem); font-weight:600; color:var(--text-dark); margin-bottom:0.6rem;">Adult <em style="font-style:italic; color:var(--sky);">Conversation</em></h2>
-        <p class="section-desc">Flexible, communicative materials chosen to match each adult student's goals and level.</p>
+        <p class="section-desc">一人ひとりの目標とレベルに合わせて教材を選定。フレキシブルで実践的な大人の英会話クラスです。</p>
         <div class="price-card">
           <div class="price-item">
             <div class="price-label">月謝 Monthly Fee</div>
             <div class="price-amount"><sup>¥</sup>7,700</div>
-            <div class="price-sub">per month · 50 min lesson</div>
+            <div class="price-sub">月1回50分レッスン</div>
           </div>
           <div class="price-item">
             <div class="price-label">プライベート (5回)</div>
             <div class="price-amount"><sup>¥</sup>25,000</div>
-            <div class="price-sub">5 private lessons</div>
+            <div class="price-sub">プライベートレッスン5回分</div>
           </div>
-          <div class="price-note">💬 All levels · Flexible schedule</div>
+          <div class="price-note">💬 レベル問わず · フレキシブル</div>
         </div>
         <div class="books-grid">
           <a class="book-card teal" href="#">
-            <span class="book-emoji">📓</span>
-            <span class="book-level lv-adult">Adults</span>
-            <h3>Adult Conversation Materials</h3>
-            <p>Curated materials for travel, daily life, workplace English, and free conversation practice.</p>
-            <div class="book-link-hint">Learn more →</div>
+            <img src="images/communication-strategies-series.jpg" alt="First Hand Access" style="width:100%; border-radius:10px; margin-bottom:1rem;">
+            <span class="book-level lv-adult">大人</span>
+            <h3>大人向け英会話教材</h3>
+            <p>旅行・日常会話・ビジネス英語など、目的に合わせたオリジナル教材でフリートークも楽しめます。</p>
+            <div class="book-link-hint">詳しく見る →</div>
           </a>
         </div>
       </div>
@@ -382,17 +404,23 @@
       <div class="fees-item">
         <h3>🎌 入会金 Registration Fee</h3>
         <div class="fees-amount">¥10,000</div>
-        <p>Paid once at enrolment.<br>各種割引あり — discounts available.</p>
+        <p>入会時に一度だけお支払いください。<br>各種割引あり — 詳しくはお問い合わせください。</p>
       </div>
       <div class="fees-item">
         <h3>📦 年間教材・運営協力金 Annual Materials Fee</h3>
         <div class="fees-amount">¥10,000</div>
-        <p>Paid at enrolment, then every April.<br>Covers teaching materials and classroom operation.</p>
+        <p>入会時および毎年4月にお支払いください。<br>教材費・教室運営費として使用します。</p>
       </div>
       <div class="fees-item">
         <h3>🎁 無料体験 Free Trial</h3>
         <div class="fees-amount">¥0</div>
-        <p>First lesson is completely free.<br>No obligation — just come and try!</p>
+        <p>初回レッスンは無料です。<br>お気軽にご参加ください！</p>
+        <!-- BOOK A FREE TRIAL BUTTON -->
+<div style="text-align:center; padding: 2rem 2rem 0;">
+  <a href="index.html#contact" class="trial-btn">
+    🎁 無料体験レッスンを申し込む
+  </a>
+</div>
       </div>
     </div>
   </div>
