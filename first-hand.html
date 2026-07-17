@@ -117,7 +117,7 @@
     border:1.5px solid var(--border);
   }
 
-  /* MEDIA: featured video + photo strip */
+  /* MEDIA: class videos */
   .intro-media { display:flex; flex-direction:column; gap:0.8rem; }
   .feature-video {
     border-radius:16px; overflow:hidden;
@@ -143,19 +143,6 @@
   }
   .feature-video .video-placeholder:hover .play-circle { transform:scale(1.1); }
   .feature-video .ph-label { color:rgba(255,255,255,0.7); font-size:0.8rem; font-weight:800; letter-spacing:1px; text-transform:uppercase; }
-
-  .photo-strip { display:grid; grid-template-columns:repeat(3, 1fr); gap:0.7rem; }
-  .photo-slot {
-    aspect-ratio:1/1; border-radius:12px; overflow:hidden;
-    border:2px solid var(--border); background:var(--jh-light);
-    display:flex; align-items:center; justify-content:center;
-  }
-  .photo-slot img { width:100%; height:100%; object-fit:cover; display:block; }
-  .photo-slot-empty {
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    gap:0.3rem; color:var(--text-light); font-size:0.72rem; font-weight:700; text-align:center;
-  }
-  .photo-slot-empty span { font-size:1.5rem; }
 
   /* BOOK SERIES HIGHLIGHTS */
   .series-section { background:var(--cream); padding:3.5rem 2rem; }
@@ -312,7 +299,7 @@
       <span class="section-tag">✦ このクラスについて</span>
       <h2>This is what we <em>do</em></h2>
       <p>
-        中学生・高校生クラスでは、Pearsonの「English Firsthand」シリーズを使い、実際に「使える英語」を身につけます。旅行・SNS・音楽・環境問題など、生徒にとって身近でリアルなテーマを題材に、話す・聞く・読む・書くの4技能をバランスよく伸ばします。入門から中上級まで4段階のレベルがあり、中学1年生から高校生まで、一人ひとりに合ったレベルで学べます。少人数制だからこそ、しっかり英語を口に出して練習できる環境です。
+        中学生・高校生クラスでは、Pearsonの「English Firsthand」シリーズを使い、実際に「使える英語」を身につけます。English Firsthandは30年以上にわたり世界中で愛用されてきたコミュニケーション重視のカリキュラムで、ペアワークやタスク活動を通して「自分の言葉で伝える」練習を重ねるのが特長です。旅行・SNS・音楽・環境問題など、生徒にとって身近でリアルなテーマを題材に、話す・聞く・読む・書くの4技能をバランスよく伸ばします。入門から中上級まで4段階のレベルがあり、中学1年生から高校生まで、一人ひとりに合ったレベルで学べます。少人数制だからこそ、しっかり英語を口に出して練習できる環境です。
       </p>
       <div class="intro-chips">
         <span class="intro-chip">🗣️ スピーキング中心</span>
@@ -324,31 +311,22 @@
     </div>
 
     <div class="intro-media">
-      <!-- Featured intro video -->
+      <!-- Class video 1 -->
       <div class="feature-video">
-        <div class="ratio" id="intro-video-wrap" data-videoid="YOUTUBE_ID_HERE">
-          <div class="video-placeholder">
+        <div class="ratio" data-videoid="GkjHOQTeD0U">
+          <div class="video-placeholder" style="background:linear-gradient(rgba(13,46,43,0.5),rgba(13,46,43,0.5)), url('https://img.youtube.com/vi/GkjHOQTeD0U/hqdefault.jpg') center/cover;">
             <div class="play-circle">▶</div>
-            <div class="ph-label">クラスの様子を見る</div>
+            <div class="ph-label">クラスの様子を見る ①</div>
           </div>
         </div>
       </div>
-      <!-- Photo strip -->
-      <div class="photo-strip">
-        <div class="photo-slot">
-          <img src="images/junior-photo-1.jpg" alt="Class photo"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="photo-slot-empty" style="display:none"><span>📷</span>Photo 1</div>
-        </div>
-        <div class="photo-slot">
-          <img src="images/junior-photo-2.jpg" alt="Class photo"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="photo-slot-empty" style="display:none"><span>📷</span>Photo 2</div>
-        </div>
-        <div class="photo-slot">
-          <img src="images/junior-photo-3.jpg" alt="Class photo"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="photo-slot-empty" style="display:none"><span>📷</span>Photo 3</div>
+      <!-- Class video 2 -->
+      <div class="feature-video">
+        <div class="ratio" data-videoid="hB7p4021uRs">
+          <div class="video-placeholder" style="background:linear-gradient(rgba(13,46,43,0.5),rgba(13,46,43,0.5)), url('https://img.youtube.com/vi/hB7p4021uRs/hqdefault.jpg') center/cover;">
+            <div class="play-circle">▶</div>
+            <div class="ph-label">クラスの様子を見る ②</div>
+          </div>
         </div>
       </div>
     </div>
@@ -448,20 +426,16 @@
 </footer>
 
 <script>
-  // Lazy-load the featured intro video on click
-  const introWrap = document.getElementById('intro-video-wrap');
-  if (introWrap) {
-    const ph = introWrap.querySelector('.video-placeholder');
+  // Lazy-load class videos on click
+  document.querySelectorAll('.feature-video .ratio[data-videoid]').forEach(wrap => {
+    const ph = wrap.querySelector('.video-placeholder');
     ph.addEventListener('click', () => {
-      const videoId = introWrap.dataset.videoid;
-      if (!videoId || videoId === 'YOUTUBE_ID_HERE') {
-        ph.innerHTML = '<div style="color:rgba(255,255,255,0.85);font-weight:800;font-size:0.85rem;padding:1rem;text-align:center;">📹 YouTube動画IDを設定してください</div>';
-        return;
-      }
-      introWrap.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+      const videoId = wrap.dataset.videoid;
+      wrap.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
     });
-  }
+  });
 </script>
 
 </body>
 </html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
