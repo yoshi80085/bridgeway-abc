@@ -320,6 +320,52 @@
     box-shadow:0 16px 54px rgba(30,109,181,0.22);
     border-color:var(--sky);
   }
+  /* ── rotating photo backdrop (same idea as the top banner) ──
+     The .has-photos class is added by JS only once a photo has actually
+     loaded, so if the summer-2026 folder ever goes missing the card simply
+     stays as the light warm-white version below. */
+  .album-slides {
+    position:absolute; inset:0; z-index:0;
+    overflow:hidden; border-radius:inherit;
+  }
+  .album-slide {
+    position:absolute; inset:0;
+    background-size:cover; background-position:center;
+    opacity:0; transition:opacity 1.4s ease-in-out;
+  }
+  .album-slide.active { opacity:1; }
+  .album-veil {
+    position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:linear-gradient(100deg,
+      rgba(6,20,34,0.93) 0%, rgba(6,20,34,0.82) 44%, rgba(6,20,34,0.58) 100%);
+  }
+
+  .album-card.has-photos {
+    background:#0a1b2b;
+    border-color:rgba(255,255,255,0.3);
+  }
+  .album-card.has-photos:hover { border-color:var(--sun); }
+  .album-card.has-photos .album-card-glow { display:none; }
+  .album-card.has-photos .album-card-body { text-shadow:0 2px 16px rgba(0,0,0,0.5); }
+  .album-card.has-photos .album-eyebrow { color:var(--sun); }
+  .album-card.has-photos .album-title   { color:#fff; }
+  .album-card.has-photos .album-title em{ color:#7dd3fc; }
+  .album-card.has-photos .album-sub     { color:rgba(255,255,255,0.9); }
+  .album-card.has-photos .album-note    { color:rgba(255,255,255,0.62); }
+  .album-card.has-photos .album-chip.count {
+    background:rgba(255,255,255,0.16); color:#fff;
+    border:1.5px solid rgba(255,255,255,0.35);
+  }
+  .album-card.has-photos .album-chip.lock { background:var(--sun); color:#4a3200; }
+  .album-card.has-photos .album-cta {
+    background:#fff; color:var(--sky-dark); border-color:#fff; text-shadow:none;
+  }
+  .album-card.has-photos:hover .album-cta { background:var(--sun); color:#4a3200; }
+
+  @media(prefers-reduced-motion:reduce){
+    .album-slide { transition:none; }
+  }
+
   /* soft pastel wash, echoing the floating blobs in the hero */
   .album-card-glow {
     position:absolute; inset:0; pointer-events:none;
@@ -1149,6 +1195,91 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') closeLightbox();
   });
+
+  /* ══════════════════════════════════════════════════════
+     📷 SUMMER 2026 CARD — ROTATING PHOTO BACKDROP
+     ══════════════════════════════════════════════════════
+     Cycles a dimmed camp photo behind the album card, the same
+     way the banner at the top of the page cycles.
+
+     ✏️ TO CHANGE THE PHOTOS
+     Edit the list below. Each entry is a file in
+     summer-2026/thumbs/ with the .webp left off.
+
+     ⚠️ KEEP THIS LIST CURATED. The album itself is behind a
+     passcode, but this home page is public — so only photos
+     that are fine for anyone to see belong in this list.
+     The ones here were chosen for having no clear faces.
+  ══════════════════════════════════════════════════════ */
+  (function () {
+    var ALBUM_PHOTOS = [
+      'bonfire-8',   'bonfire-10', 'bonfire-11',
+      'firebuild-9', 'firebuild-10',
+      'monster-1',   'monster-3',
+      'orientation-1','teacher-2', 'waterslide-2'
+    ];
+
+    var FOLDER = 'summer-2026/thumbs/';
+    var EXT    = '.webp';
+    var DELAY  = 4500;   // ms between photos
+    var SHOW   = 6;      // how many of the list to use per visit
+
+    var card = document.getElementById('summer2026Card');
+    if (!card) return;
+
+    // Shuffle, so a repeat visitor doesn't see the same run of photos.
+    var picks = ALBUM_PHOTOS.slice();
+    for (var i = picks.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = picks[i]; picks[i] = picks[j]; picks[j] = tmp;
+    }
+    picks = picks.slice(0, Math.min(SHOW, picks.length));
+
+    var layer = document.createElement('div');
+    layer.className = 'album-slides';
+    var veil = document.createElement('div');
+    veil.className = 'album-veil';
+    card.insertBefore(veil, card.firstChild);
+    card.insertBefore(layer, card.firstChild);
+
+    var slides = [], idx = 0, timer = null;
+    var reduce = window.matchMedia &&
+                 window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function start() { if (!timer && !reduce) timer = setInterval(next, DELAY); }
+
+    function next() {
+      if (slides.length < 2) return;
+      slides[idx].classList.remove('active');
+      idx = (idx + 1) % slides.length;
+      slides[idx].classList.add('active');
+    }
+
+    // Only photos that actually load get added — a missing file is skipped
+    // rather than showing as a blank frame in the rotation.
+    picks.forEach(function (name) {
+      var probe = new Image();
+      probe.onload = function () {
+        var s = document.createElement('div');
+        s.className = 'album-slide';
+        s.style.backgroundImage = 'url("' + FOLDER + name + EXT + '")';
+        layer.appendChild(s);
+        slides.push(s);
+        if (slides.length === 1) {
+          s.classList.add('active');
+          card.classList.add('has-photos');   // flips the card to banner styling
+        }
+        start();
+      };
+      probe.src = FOLDER + name + EXT;
+    });
+
+    // No point cycling while nobody's looking.
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) { clearInterval(timer); timer = null; }
+      else start();
+    });
+  })();
 
   /* ══════════════════════════════════════════════════════
      🔒 SUMMER 2026 ALBUM — PASSCODE PROMPT
