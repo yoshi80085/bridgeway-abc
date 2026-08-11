@@ -302,6 +302,122 @@
   .event-card:hover { transform:translateY(-4px); box-shadow:0 8px 30px var(--shadow); }
   .event-card .event-emoji { font-size:2.4rem; margin-bottom:0.7rem; display:block; }
   .event-card h3 { font-size:1rem; font-weight:900; margin-bottom:0.4rem; color:var(--text-dark); }
+  /* ── FEATURED PHOTO ALBUM ──
+     Uses the same light palette as the rest of the page:
+     warm-white card, soft pastel blobs like the hero, sky + sun accents. */
+  #album { padding:3.5rem 2rem 1rem; }
+  .album-card {
+    position:relative; display:block; overflow:hidden;
+    border-radius:24px; text-decoration:none;
+    padding:3rem 2.4rem;
+    background:var(--warm-white);
+    border:2.5px solid var(--border);
+    box-shadow:0 8px 40px var(--shadow);
+    transition:transform 0.28s cubic-bezier(.2,.8,.3,1), box-shadow 0.28s, border-color 0.28s;
+  }
+  .album-card:hover {
+    transform:translateY(-5px);
+    box-shadow:0 16px 54px rgba(30,109,181,0.22);
+    border-color:var(--sky);
+  }
+  /* soft pastel wash, echoing the floating blobs in the hero */
+  .album-card-glow {
+    position:absolute; inset:0; pointer-events:none;
+    background:
+      radial-gradient(460px 240px at 90% 12%, var(--sky-light), transparent 72%),
+      radial-gradient(340px 200px at 4% 96%, var(--sun-light), transparent 72%);
+    opacity:0.9;
+  }
+  .album-card-body { position:relative; z-index:2; max-width:640px; }
+  .album-eyebrow {
+    display:inline-block; font-size:0.78rem; font-weight:800;
+    letter-spacing:2px; text-transform:uppercase;
+    color:var(--sky); margin-bottom:0.8rem;
+  }
+  .album-title {
+    font-family:'Lora',serif; font-weight:600;
+    font-size:clamp(1.8rem,3.8vw,2.7rem);
+    color:var(--text-dark); line-height:1.25; margin-bottom:1.1rem;
+  }
+  .album-title em { font-style:italic; color:var(--sky); }
+  .album-sub {
+    font-size:1.05rem; font-weight:600; line-height:1.7;
+    color:var(--text-mid); margin-bottom:1.4rem;
+  }
+  .album-meta { display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1.6rem; }
+  .album-chip {
+    font-size:0.78rem; font-weight:800;
+    padding:0.34rem 0.9rem; border-radius:30px;
+  }
+  .album-chip.count { background:var(--sky-light); color:var(--sky-dark); }
+  .album-chip.lock  { background:var(--sun-light); color:#a06800; }
+  .album-cta {
+    display:inline-block;
+    background:var(--sky); color:white;
+    font-size:0.95rem; font-weight:900;
+    padding:0.8rem 1.9rem; border-radius:30px;
+    border:2px solid var(--sky-dark);
+    transition:background 0.2s, transform 0.2s;
+  }
+  .album-card:hover .album-cta { background:var(--sky-dark); transform:translateX(3px); }
+  .album-note {
+    margin-top:0.9rem; font-size:0.82rem; font-weight:600;
+    color:var(--text-light);
+  }
+  @media(max-width:640px) {
+    #album { padding:2.5rem 1.2rem 0.5rem; }
+    .album-card { padding:2.2rem 1.5rem; border-radius:18px; }
+    .album-cta { display:block; text-align:center; }
+  }
+
+  /* ── PASSCODE PROMPT ── */
+  .pc-overlay {
+    position:fixed; inset:0; z-index:600;
+    background:rgba(20,32,52,0.72); backdrop-filter:blur(5px);
+    display:none; align-items:center; justify-content:center; padding:1.5rem;
+  }
+  .pc-overlay.open { display:flex; animation:pcFade 0.2s ease-out; }
+  @keyframes pcFade { from{opacity:0} to{opacity:1} }
+  .pc-box {
+    background:var(--warm-white); border-radius:20px;
+    padding:2.3rem 1.9rem; max-width:400px; width:100%;
+    text-align:center; box-shadow:0 24px 60px rgba(0,0,0,0.3);
+    border:2px solid var(--border);
+    animation:pcRise 0.3s cubic-bezier(.2,.8,.3,1);
+  }
+  @keyframes pcRise { from{opacity:0;transform:translateY(18px) scale(0.97)} to{opacity:1;transform:none} }
+  .pc-lock { font-size:2.3rem; margin-bottom:0.5rem; }
+  .pc-title { font-size:1.12rem; font-weight:900; color:var(--text-dark); margin-bottom:0.5rem; }
+  .pc-sub { font-size:0.83rem; color:var(--text-mid); line-height:1.6; font-weight:600; margin-bottom:1.3rem; }
+  .pc-sub span { color:var(--text-light); font-size:0.78rem; }
+  .pc-form { display:flex; flex-direction:column; gap:0.6rem; }
+  .pc-input {
+    font-family:inherit; font-size:1rem; font-weight:700;
+    text-align:center; letter-spacing:2px;
+    padding:0.8rem 1rem; border-radius:12px;
+    border:2px solid var(--border); background:white; color:var(--text-dark);
+    outline:none; transition:border-color 0.2s, box-shadow 0.2s;
+  }
+  .pc-input::placeholder { color:var(--text-light); letter-spacing:1px; font-weight:600; }
+  .pc-input:focus { border-color:var(--sky); box-shadow:0 0 0 4px rgba(30,109,181,0.13); }
+  .pc-err { color:var(--coral); font-size:0.8rem; font-weight:800; min-height:1.1rem; }
+  .pc-go {
+    font-family:inherit; font-size:0.95rem; font-weight:900; cursor:pointer;
+    padding:0.8rem 1rem; border-radius:12px;
+    background:var(--sky); color:white; border:2px solid var(--sky-dark);
+    transition:all 0.2s;
+  }
+  .pc-go:hover { background:var(--sky-dark); transform:translateY(-2px); }
+  .pc-cancel {
+    font-family:inherit; font-size:0.82rem; font-weight:700; cursor:pointer;
+    background:none; border:none; color:var(--text-light); padding:0.4rem;
+  }
+  .pc-cancel:hover { color:var(--text-mid); text-decoration:underline; }
+  .pc-box.shake { animation:pcShake 0.4s; }
+  @keyframes pcShake {
+    0%,100%{transform:translateX(0)} 20%{transform:translateX(-9px)}
+    40%{transform:translateX(9px)} 60%{transform:translateX(-6px)} 80%{transform:translateX(6px)}
+  }
   .event-card p { font-size:0.85rem; color:var(--text-mid); line-height:1.55; font-weight:600; }
 
 /* CALENDAR */
@@ -629,6 +745,49 @@
     </div>
   </div>
 </section>
+
+<!-- ════════════════════════════════════════════════
+     SUMMER 2026 ALBUM — featured, own section
+     Sits between the hero and the About section.
+     Add future albums as more .album-card blocks.
+═════════════════════════════════════════════════ -->
+<section id="album">
+  <div class="container">
+    <a class="album-card" href="summer-2026.html" id="summer2026Card">
+      <div class="album-card-glow"></div>
+      <div class="album-card-body">
+        <span class="album-eyebrow">✦ フォトアルバム / Photo Album</span>
+        <h2 class="album-title">Summer <em>2026</em></h2>
+        <p class="album-sub">サマーイベント2026の写真アルバムが公開されました。<br>
+          アクティビティ、カレー作り、キャンプファイヤー、ウォーターウォーズ — みんなの夏の思い出です。</p>
+        <div class="album-meta">
+          <span class="album-chip count">📷 147枚の写真</span>
+          <span class="album-chip lock">🔒 要パスコード</span>
+        </div>
+        <span class="album-cta">アルバムを見る / View the album →</span>
+        <p class="album-note">パスコードは参加者のご家族にお送りしています。</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- 🔒 PASSCODE PROMPT for the Summer 2026 album -->
+<div class="pc-overlay" id="pcOverlay" role="dialog" aria-modal="true" aria-label="Passcode required">
+  <div class="pc-box" id="pcBox">
+    <div class="pc-lock">🔒</div>
+    <h3 class="pc-title">サマー2026 フォトギャラリー</h3>
+    <p class="pc-sub">参加者のご家族にお送りしたパスコードをご入力ください。<br>
+      <span>Enter the passcode sent to camp families.</span></p>
+    <form id="pcForm" class="pc-form">
+      <input id="pcInput" class="pc-input" type="password" placeholder="passcode"
+             autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
+             aria-label="Passcode">
+      <div class="pc-err" id="pcErr" role="alert"></div>
+      <button class="pc-go" type="submit">アルバムを見る / View album →</button>
+      <button class="pc-cancel" type="button" id="pcCancel">キャンセル</button>
+    </form>
+  </div>
+</div>
 
 <!-- ABOUT -->
 <section id="about">
@@ -988,4 +1147,104 @@
     document.body.style.overflow = '';
   }
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') cl
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  /* ══════════════════════════════════════════════════════
+     🔒 SUMMER 2026 ALBUM — PASSCODE PROMPT
+     Passcode: abc2026oe
+     Stored below as a SHA-256 fingerprint, not as plain text.
+     If you change it here, change it in summer-2026.html too.
+  ══════════════════════════════════════════════════════ */
+  (function () {
+    var PASSCODE_HASH = '7c3576e6cc647818b82aa0b42779ee9fe6b575f1575096571ddc6ae2edb2fd5f';
+    var UNLOCK_KEY    = 'bw-summer-2026';
+    var TARGET        = 'summer-2026.html';
+
+    function sha256(ascii) {
+      function rr(v, a) { return (v >>> a) | (v << (32 - a)); }
+      var mp = Math.pow, maxWord = mp(2, 32), result = '', words = [], i, j;
+      var asciiBitLength = ascii.length * 8;
+      var hash = sha256.h = sha256.h || [], k = sha256.k = sha256.k || [];
+      var primeCounter = k.length, isComposite = {};
+      for (var candidate = 2; primeCounter < 64; candidate++) {
+        if (!isComposite[candidate]) {
+          for (i = 0; i < 313; i += candidate) isComposite[i] = candidate;
+          hash[primeCounter] = (mp(candidate, .5) * maxWord) | 0;
+          k[primeCounter++] = (mp(candidate, 1/3) * maxWord) | 0;
+        }
+      }
+      ascii += '\x80';
+      while (ascii.length % 64 - 56) ascii += '\x00';
+      for (i = 0; i < ascii.length; i++) {
+        j = ascii.charCodeAt(i);
+        if (j >> 8) return;
+        words[i >> 2] |= j << ((3 - i) % 4) * 8;
+      }
+      words[words.length] = (asciiBitLength / maxWord) | 0;
+      words[words.length] = asciiBitLength;
+      for (j = 0; j < words.length;) {
+        var w = words.slice(j, j += 16), oldHash = hash;
+        hash = hash.slice(0, 8);
+        for (i = 0; i < 64; i++) {
+          var w15 = w[i - 15], w2 = w[i - 2], a = hash[0], e = hash[4];
+          var t1 = hash[7] + (rr(e,6)^rr(e,11)^rr(e,25)) + ((e&hash[5])^((~e)&hash[6])) + k[i]
+            + (w[i] = (i < 16) ? w[i] : (w[i-16] + (rr(w15,7)^rr(w15,18)^(w15>>>3)) + w[i-7]
+            + (rr(w2,17)^rr(w2,19)^(w2>>>10))) | 0);
+          var t2 = (rr(a,2)^rr(a,13)^rr(a,22)) + ((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+          hash = [(t1 + t2) | 0].concat(hash);
+          hash[4] = (hash[4] + t1) | 0;
+        }
+        for (i = 0; i < 8; i++) hash[i] = (hash[i] + oldHash[i]) | 0;
+      }
+      for (i = 0; i < 8; i++)
+        for (j = 3; j + 1; j--) {
+          var b = (hash[i] >> (j * 8)) & 255;
+          result += ((b < 16) ? 0 : '') + b.toString(16);
+        }
+      return result;
+    }
+
+    var card = document.getElementById('summer2026Card');
+    if (!card) return;
+
+    var ov    = document.getElementById('pcOverlay');
+    var form  = document.getElementById('pcForm');
+    var input = document.getElementById('pcInput');
+    var err   = document.getElementById('pcErr');
+    var box   = document.getElementById('pcBox');
+
+    function open()  { ov.classList.add('open');  document.body.style.overflow = 'hidden'; setTimeout(function(){ input.focus(); }, 60); }
+    function close() { ov.classList.remove('open'); document.body.style.overflow = ''; err.textContent = ''; input.value = ''; }
+
+    card.addEventListener('click', function (e) {
+      // Already entered it this session — go straight through.
+      try { if (sessionStorage.getItem(UNLOCK_KEY) === PASSCODE_HASH) return; } catch (ex) {}
+      e.preventDefault();
+      open();
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (sha256(input.value.trim().toLowerCase()) === PASSCODE_HASH) {
+        try { sessionStorage.setItem(UNLOCK_KEY, PASSCODE_HASH); } catch (ex) {}
+        window.location.href = TARGET;
+      } else {
+        err.textContent = 'パスコードが違います / Incorrect passcode';
+        box.classList.remove('shake');
+        void box.offsetWidth;
+        box.classList.add('shake');
+        input.select();
+      }
+    });
+
+    input.addEventListener('input', function () { err.textContent = ''; });
+    document.getElementById('pcCancel').addEventListener('click', close);
+    ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && ov.classList.contains('open')) close();
+    });
+  })();
+</script>
+</body>
+</html>
