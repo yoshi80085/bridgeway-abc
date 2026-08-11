@@ -332,12 +332,25 @@
     position:absolute; inset:0;
     background-size:cover; background-position:center;
     opacity:0; transition:opacity 1.4s ease-in-out;
+    transform:scale(1.05);
   }
-  .album-slide.active { opacity:1; }
+  /* Ken Burns: each photo drifts slowly while it's showing. Odd and even
+     slides use opposite keyframes, so it alternates pushing in and pulling
+     back rather than doing the same move every time. */
+  .album-slide.active { opacity:1; animation:albumKenIn 8s ease-out both; }
+  .album-slide:nth-child(even).active { animation-name:albumKenOut; }
+  @keyframes albumKenIn {
+    from { transform:scale(1.04) translate3d(0,0,0); }
+    to   { transform:scale(1.15) translate3d(-1.8%,-1.4%,0); }
+  }
+  @keyframes albumKenOut {
+    from { transform:scale(1.15) translate3d(1.6%,1.1%,0); }
+    to   { transform:scale(1.04) translate3d(0,0,0); }
+  }
   .album-veil {
     position:absolute; inset:0; z-index:1; pointer-events:none;
     background:linear-gradient(100deg,
-      rgba(6,20,34,0.93) 0%, rgba(6,20,34,0.82) 44%, rgba(6,20,34,0.58) 100%);
+      rgba(6,20,34,0.8) 0%, rgba(6,20,34,0.64) 44%, rgba(6,20,34,0.38) 100%);
   }
 
   .album-card.has-photos {
@@ -364,6 +377,7 @@
 
   @media(prefers-reduced-motion:reduce){
     .album-slide { transition:none; }
+    .album-slide.active { animation:none; transform:scale(1.04); }
   }
 
   /* soft pastel wash, echoing the floating blobs in the hero */
@@ -1221,7 +1235,7 @@
 
     var FOLDER = 'summer-2026/thumbs/';
     var EXT    = '.webp';
-    var DELAY  = 4500;   // ms between photos
+    var DELAY  = 6000;   // ms between photos (the Ken Burns drift runs 8s)
     var SHOW   = 6;      // how many of the list to use per visit
 
     var card = document.getElementById('summer2026Card');
