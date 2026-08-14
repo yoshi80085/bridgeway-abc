@@ -297,6 +297,32 @@
   }
   .tile:hover .tile-zoom { opacity:1; transform:scale(1); }
 
+  /* ── VIDEO TILES ──
+     A video sits in the grid like any other tile, but wears a play button so
+     it's obvious it moves. */
+  .tile.is-video .tile-zoom { display:none; }
+  .tile-play {
+    position:absolute; inset:0; display:flex;
+    align-items:center; justify-content:center;
+    pointer-events:none;
+  }
+  .tile-play span {
+    width:58px; height:58px; border-radius:50%;
+    background:rgba(255,255,255,0.9); color:var(--forest-dark);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.4rem; padding-left:5px;
+    box-shadow:0 6px 22px rgba(0,0,0,0.35);
+    transition:transform 0.25s, background 0.25s;
+  }
+  .tile.is-video:hover .tile-play span { transform:scale(1.12); background:var(--sun); }
+  .tile-dur {
+    position:absolute; top:0.7rem; right:0.7rem;
+    background:rgba(10,21,32,0.78); color:white;
+    font-size:0.7rem; font-weight:900; letter-spacing:0.5px;
+    padding:0.22rem 0.55rem; border-radius:20px;
+  }
+  @media(max-width:760px){ .tile-play span { width:46px; height:46px; font-size:1.1rem; } }
+
   /* placeholder tiles (before real photos are added) */
   .tile.pending { background:linear-gradient(145deg,#f2ede4,#e4ece5); cursor:default; }
   .tile.pending:hover { transform:none; box-shadow:0 3px 14px rgba(26,74,46,0.13); }
@@ -371,6 +397,13 @@
     animation:lbIn 0.3s cubic-bezier(.2,.8,.3,1);
   }
   @keyframes lbIn { from{opacity:0; transform:scale(0.94)} to{opacity:1; transform:none} }
+
+  .lb-stage video {
+    max-width:92vw; max-height:78vh;
+    border-radius:10px; background:#000;
+    box-shadow:0 20px 70px rgba(0,0,0,0.65);
+    animation:lbIn 0.3s cubic-bezier(.2,.8,.3,1);
+  }
 
   .lb-ph {
     width:min(80vw,520px); aspect-ratio:4/3;
@@ -553,7 +586,7 @@
     <span class="hero-eyebrow">✦ Photo Album</span>
     <h1 class="gal-title">Summer 2026</h1>
     <p class="gal-subtitle">サマーイベント2026 — みんなの思い出</p>
-    <span class="hero-count">📷 <span id="heroCount">0</span> photos</span>
+    <span class="hero-count" id="heroCount">📷 0 photos</span>
   </div>
 </div>
 
@@ -652,6 +685,20 @@ const GALLERY_CONFIG = {
     { id:'groupphoto',  label:'Group Photo',     emoji:'📸', count:1,  cover:1 }
   ],
 
+  // 🎬 VIDEOS
+  // Each video appears as a play-button tile at the FRONT of its section, and
+  // opens in the lightbox with sound and normal video controls.
+  //   file    — the .mp4 inside the summer-2026 folder
+  //   poster  — a still from the video; it's the grid tile and the first frame.
+  //             Needs to be in summer-2026/ AND summer-2026/thumbs/, same as photos.
+  //   section — which section it belongs to (must match an id in the list above)
+  //   duration— the little badge on the tile, e.g. '0:28' (optional)
+  // To add another, copy the line and change the names.
+  videos: [
+    { file:'waterwars-movie.mp4', poster:'waterwars-movie.webp', section:'waterwars',
+      duration:'0:28', caption:'Water Wars — the whole battle in 28 seconds' }
+  ],
+
   // Photos that make up the drifting mosaic behind the title. Any filenames
   // from the summer-2026 folder work — swap them for your own favourites.
   heroPicks: [
@@ -673,9 +720,25 @@ const GALLERY_CONFIG = {
 
 const CFG = GALLERY_CONFIG;
 
-// Build the full photo list from the config
+// Build the full photo list from the config.
+// A section's video (if it has one) goes first, then its photos in order.
 const PHOTOS = [];
+const VIDEOS = CFG.videos || [];
 CFG.sections.forEach(sec => {
+  VIDEOS.filter(v => v.section === sec.id).forEach(v => {
+    PHOTOS.push({
+      video:    CFG.folder + v.file,                          // the mp4 itself
+      src:      CFG.folder + v.poster,                        // poster still
+      thumb:    (CFG.thumbs || CFG.folder) + v.poster,        // small, for the grid
+      file:     v.file,
+      duration: v.duration || '',
+      section:  sec.id,
+      label:    sec.label,
+      emoji:    sec.emoji,
+      caption:  v.caption || ''
+    });
+  });
+
   for (let i = 1; i <= sec.count; i++) {
     const file = `${sec.id}-${i}.${CFG.ext}`;
     PHOTOS.push({
@@ -701,7 +764,9 @@ let shuffled      = false;
 let visible       = [];   // current filtered list
 let rendered      = 0;
 
-document.getElementById('heroCount').textContent = PHOTOS.length;
+const photoCount = PHOTOS.filter(p => !p.video).length;
+document.getElementById('heroCount').textContent =
+  `📷 ${photoCount} photos` + (VIDEOS.length ? ` · 🎬 ${VIDEOS.length} video${VIDEOS.length === 1 ? '' : 's'}` : '');
 
 /* ── Filter chips ── */
 function buildFilters() {
@@ -716,7 +781,8 @@ function buildFilters() {
 
   filters.innerHTML = '';
   filters.appendChild(mk('all', '✨', 'All Photos', PHOTOS.length));
-  CFG.sections.forEach(s => filters.appendChild(mk(s.id, s.emoji, s.label, s.count)));
+  CFG.sections.forEach(s => filters.appendChild(
+    mk(s.id, s.emoji, s.label, PHOTOS.filter(p => p.section === s.id).length)));
 
   const sep = document.createElement('div');
   sep.className = 'chip-sep';
@@ -814,6 +880,7 @@ function bandFor(sectionId) {
   if (!sec) return null;
 
   const cover = `${sec.id}-${sec.cover || 1}.${CFG.ext}`;
+  const vids  = VIDEOS.filter(v => v.section === sec.id).length;
   const el = document.createElement('button');
   el.className = 'band';
   el.type = 'button';
@@ -826,7 +893,7 @@ function bandFor(sectionId) {
       <div class="band-emoji">${sec.emoji}</div>
       <div class="band-title">${sec.label}</div>
       <div class="band-meta">
-        <span>${sec.count} photo${sec.count === 1 ? '' : 's'}</span>
+        <span>${sec.count} photo${sec.count === 1 ? '' : 's'}${vids ? ` · ${vids} video` : ''}</span>
         <span class="band-see">View this section →</span>
       </div>
     </div>`;
@@ -846,7 +913,10 @@ function tileFor(photo, index) {
   el.type = 'button';
   el.dataset.index = index;
   el.dataset.ratio = '0.75';        // assumed shape until the photo itself loads
-  el.setAttribute('aria-label', `Open photo: ${photo.caption || photo.label}`);
+  if (photo.video) el.classList.add('is-video');
+  el.setAttribute('aria-label', photo.video
+    ? `Play video: ${photo.caption || photo.label}`
+    : `Open photo: ${photo.caption || photo.label}`);
 
   const img = new Image();
   img.loading = 'lazy';
@@ -858,6 +928,10 @@ function tileFor(photo, index) {
       el.dataset.ratio = img.naturalHeight / img.naturalWidth;
     }
     sizeTile(el);
+
+    // A video always gets the wide treatment where there's room — it's the one
+    // tile on the page that moves, so it earns the extra space.
+    if (photo.video && gridMetrics().cols >= 3) { promoteToFeature(el); return; }
 
     // Every 8th photo, if it's a landscape shot, is promoted to a double-width
     // feature tile — it breaks up the wall of same-sized squares.
@@ -894,6 +968,20 @@ function tileFor(photo, index) {
   zoom.className = 'tile-zoom';
   zoom.textContent = '⤢';
   el.appendChild(zoom);
+
+  if (photo.video) {
+    const play = document.createElement('div');
+    play.className = 'tile-play';
+    play.innerHTML = '<span>▶</span>';
+    el.appendChild(play);
+
+    if (photo.duration) {
+      const dur = document.createElement('div');
+      dur.className = 'tile-dur';
+      dur.textContent = '🎬 ' + photo.duration;
+      el.appendChild(dur);
+    }
+  }
 
   el.addEventListener('click', () => openLightbox(index));
   return el;
@@ -1000,6 +1088,35 @@ function showPhoto(i) {
   const p = visible[lbIndex];
 
   lbStage.innerHTML = '';
+
+  // Videos play right here in the lightbox, with controls and sound.
+  if (p.video) {
+    stopSlideshow();                       // don't slide away mid-clip
+    const v = document.createElement('video');
+    v.src         = p.video;
+    v.poster      = p.src;
+    v.controls    = true;
+    v.autoplay    = true;
+    v.playsInline = true;
+    v.preload     = 'metadata';
+    v.setAttribute('controlsList', 'nodownload');
+    v.onerror = () => {
+      lbStage.innerHTML = `
+        <div class="lb-ph">
+          <div style="font-size:3rem">🎬</div>
+          <div class="ph-name">${p.file}</div>
+          <div style="font-size:0.85rem;font-weight:700">This video couldn't be loaded</div>
+        </div>`;
+    };
+    lbStage.appendChild(v);
+    v.play().catch(() => {});              // some browsers block autoplay with sound
+
+    lbTag.textContent   = `${p.emoji} ${p.label}`;
+    lbCap.textContent   = p.caption || '';
+    lbCount.textContent = `${lbIndex + 1} / ${visible.length}`;
+    return;
+  }
+
   const img = new Image();
   img.alt = p.caption || `${p.label} — Summer 2026`;
 
@@ -1040,6 +1157,7 @@ function closeLightbox() {
   lb.classList.remove('open');
   document.body.style.overflow = '';
   stopSlideshow();
+  lbStage.innerHTML = '';        // stops a playing video (and its sound)
 }
 
 function stopSlideshow() {
@@ -1064,13 +1182,18 @@ lb.addEventListener('click', e => { if (e.target === lb || e.target === lbStage)
 document.addEventListener('keydown', e => {
   if (!lb.classList.contains('open')) return;
   if (e.key === 'Escape')     closeLightbox();
+  // Let the arrow keys scrub a video the visitor is actually using.
+  if (e.target && e.target.tagName === 'VIDEO') return;
   if (e.key === 'ArrowRight') { stopSlideshow(); showPhoto(lbIndex + 1); }
   if (e.key === 'ArrowLeft')  { stopSlideshow(); showPhoto(lbIndex - 1); }
 });
 
 // Swipe support
 let touchX = null;
-lb.addEventListener('touchstart', e => { touchX = e.changedTouches[0].clientX; }, { passive:true });
+lb.addEventListener('touchstart', e => {
+  // Don't hijack a swipe that's really someone dragging the video scrubber.
+  touchX = (e.target && e.target.tagName === 'VIDEO') ? null : e.changedTouches[0].clientX;
+}, { passive:true });
 lb.addEventListener('touchend', e => {
   if (touchX === null) return;
   const dx = e.changedTouches[0].clientX - touchX;
