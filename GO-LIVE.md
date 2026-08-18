@@ -54,6 +54,48 @@ still greyed out after a day: Remove the custom domain, retype it, Save — then
 
 ---
 
+### 5. ⚠️ Track down the forgotten third-party deployment
+
+As of 2026-08-18, `https://bridgewayabc.com` was still serving a **live, older
+copy of the site** over HTTPS, while `http://bridgewayabc.com` correctly
+redirected to abc-eikaiwa.com. Most likely DNS mid-propagation, with different
+resolvers giving different answers.
+
+**The old copy is not on GitHub Pages.** Its links are extensionless
+(`/about`, `/course-books`, `/halloween` — no `.html`), which is Netlify, Vercel
+or Cloudflare Pages behaviour, not GitHub's. So there's a forgotten deployment
+somewhere with bridgewayabc.com attached to it.
+
+It's an outdated snapshot: calendar reads April–May 2026, the junior-high course
+is described as "First Hand Access / My Next Grammar" instead of English
+Firsthand, and there's no Summer 2026 album. A visitor landing there gets wrong
+information, and as a duplicate it can split search signals.
+
+**Update, later same day:** it was Netlify, and DNS has since moved —
+`bridgewayabc.com` stopped serving the old copy. But Netlify team `yoshi6000` has
+a project that published minutes after a `git push`, so it's connected to the
+repo and mirroring the live site at some `*.netlify.app` URL. Alex has used
+Netlify under **several different email addresses**, so the stale snapshot was
+probably served by a *different* project under another login.
+
+Dating the stale copy: it contained "My Next Grammar", removed from the repo in
+commit `9397b77`, and lacked the Summer 2026 album added in `4d3866c`. So it was
+a snapshot from before both. It did **not** come from the `New ABC Website`
+folder — that string never existed there.
+
+Not urgent: every page carries an absolute canonical to `abc-eikaiwa.com`, so any
+mirror of the current site tells Google where the real one is.
+
+To do:
+- [ ] Netlify → Projects: how many exist? Check other email logins too.
+- [ ] Each project → Domain management: detach `bridgewayabc.com` if attached.
+- [ ] Active project → Site configuration → Build & deploy → Repository: confirm
+      whether it's linked to `yoshi80085/bridgeway-abc`.
+- [ ] Delete, or keep one deliberately as a staging preview — just with no
+      custom domain pointed at it.
+
+---
+
 ## Open questions / judgement calls
 
 - [ ] **Verify the 1998 founding year.** Currently in the meta description, the
