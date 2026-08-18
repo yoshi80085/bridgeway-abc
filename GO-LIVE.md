@@ -119,12 +119,35 @@ it pointing at the site too.
 
 ---
 
+## Old URL redirects — done
+
+Recovered the full old URL list from the Wayback Machine and built stubs for all
+ten. They're in the repo now and do nothing until abc-eikaiwa.com points here.
+Regenerate with `python3 _tools/redirects.py`.
+
+| Old Squarespace URL | Redirects to |
+|---|---|
+| `/` | homepage (automatic — no stub needed) |
+| `/school-information` | `about.html` ⚠️ see below |
+| `/access` | `index.html#contact` |
+| `/contact-us` | `index.html#contact` |
+| `/take-action` | `index.html#contact` |
+| `/news` + 3 old posts | `index.html#instagram` |
+| `/partners` | `index.html` |
+| `/projects` | `index.html#events` |
+
+⚠️ **One judgement call worth your eye:** `/school-information` was 教室案内 in
+Google's index and is the most valuable redirect after the homepage. I pointed it
+at `about.html`, but that page is "Meet the Teachers". If the old page was more
+about fees, schedule or access, retarget it in `_tools/redirects.py` —
+`course-books.html` or `index.html#about` may fit better. You'll remember what
+was on it; I'm guessing from the title.
+
+`/partners`, `/projects` and `/take-action` are stock Squarespace template page
+names and were probably never used. Built anyway — costs nothing.
+
 ## Still needed from you
 
-- [ ] **The old Squarespace page URLs.** Your old site is unpublished but still in
-      your Squarespace account — don't delete it yet. Squarespace → Pages has the
-      list. Every old URL we map is ranking recovered; every one we miss is
-      ranking lost. I've only been able to confirm `/school-information` so far.
 - [ ] **Confirm the schema email.** I used `abc-eikaiwa@outlook.com` from the old
       site. Fix it in `_tools/seo.py` if wrong.
 - [ ] **Lesson days/hours** — so I can add `openingHoursSpecification`, which is
