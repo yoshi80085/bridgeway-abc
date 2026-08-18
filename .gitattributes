@@ -1,0 +1,17 @@
+# Normalise line endings so Windows editors stop producing phantom diffs.
+# Without this, saving a file in a CRLF editor rewrites every line, and a
+# one-line change shows up in git as "1468 insertions, 1468 deletions".
+* text=auto eol=lf
+
+# Binary assets - never touch these.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.JPG  binary
+*.JPEG binary
+*.webp binary
+*.gif  binary
+*.ico  binary
+*.mp4  binary
+*.mov  binary
+*.pdf  binary

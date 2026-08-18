@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ページが見つかりません｜ABC英会話（山形市）</title>
+<meta name="robots" content="noindex, follow">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:#fdf8f2; --warm-white:#fffcf7; --sky:#1e6db5; --sky-dark:#154f87;
+    --sun:#f0a500; --text-dark:#1a2840; --text-mid:#4a5568; --border:#dde8f0;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:'Nunito',sans-serif; background:var(--cream); color:var(--text-dark);
+    min-height:100vh; display:flex; align-items:center; justify-content:center; padding:2rem;
+  }
+  .wrap { max-width:640px; width:100%; text-align:center; }
+  .logo { height:72px; width:auto; margin-bottom:1.5rem; }
+  .code { font-size:4rem; font-weight:900; color:var(--sky); line-height:1; }
+  h1 { font-size:1.5rem; font-weight:900; margin:0.75rem 0 0.5rem; }
+  .sub { color:var(--text-mid); font-size:1rem; line-height:1.8; margin-bottom:2rem; }
+  .sub .en { display:block; font-size:0.9rem; color:#8a9ab0; margin-top:0.5rem; }
+  .links { display:flex; flex-wrap:wrap; gap:0.75rem; justify-content:center; margin-bottom:2rem; }
+  .links a {
+    background:var(--warm-white); border:2px solid var(--border); border-radius:30px;
+    padding:0.6rem 1.3rem; text-decoration:none; font-weight:700; font-size:0.92rem;
+    color:var(--sky-dark); transition:border-color .2s, transform .15s;
+  }
+  .links a:hover { border-color:var(--sky); transform:translateY(-2px); }
+  .cta {
+    display:inline-block; background:var(--sky); color:#fff; padding:0.8rem 2rem;
+    border-radius:30px; font-weight:800; text-decoration:none;
+    box-shadow:0 4px 14px rgba(30,109,181,.35); transition:background .2s, transform .15s;
+  }
+  .cta:hover { background:var(--sky-dark); transform:translateY(-1px); }
+  .contact { margin-top:2rem; font-size:0.9rem; color:var(--text-mid); line-height:1.9; }
+  .contact a { color:var(--sky-dark); font-weight:700; text-decoration:none; }
+</style>
+</head>
+<body>
+  <!-- NOTE: links here are deliberately RELATIVE, not root-relative ("/about.html").
+       Root-relative paths break while the site is served from a GitHub Pages
+       project URL (yoshi80085.github.io/bridgeway-abc/). These work both now
+       and later on the apex domain. -->
+  <div class="wrap">
+    <img src="logo.png" alt="ABC英会話 ロゴ" class="logo">
+    <div class="code">404</div>
+    <h1>ページが見つかりませんでした</h1>
+    <p class="sub">
+      お探しのページは移動または削除された可能性があります。<br>
+      下のリンクからお探しの内容が見つかるかもしれません。
+      <span class="en">Sorry, we couldn't find that page. Try one of the links below.</span>
+    </p>
+
+    <div class="links">
+      <a href="index.html">ホーム</a>
+      <a href="about.html">講師紹介</a>
+      <a href="course-books.html">コース・教材</a>
+      <a href="little-hands.html">幼児クラス</a>
+      <a href="first-hand.html">中高生・大人</a>
+      <a href="summer-camp.html">サマーキャンプ</a>
+      <a href="halloween.html">ハロウィン</a>
+    </div>
+
+    <a href="index.html#contact" class="cta">無料体験レッスンを予約する</a>
+
+    <p class="contact">
+      お電話でもお気軽にどうぞ &mdash; <a href="tel:0236413059">023-641-3059</a><br>
+      山形県山形市元木2-2-17（〒990-2447）
+    </p>
+  </div>
+</body>
+</html>
