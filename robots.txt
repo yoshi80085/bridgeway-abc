@@ -3,4 +3,4 @@ Allow: /
 
 Disallow: /summer-2026/
 
-Sitemap: https://yoshi80085.github.io/bridgeway-abc/sitemap.xml
+Sitemap: https://abc-eikaiwa.com/sitemap.xml

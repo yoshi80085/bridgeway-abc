@@ -14,13 +14,13 @@ re-run, and commit. Nothing else needs to change.
 import re, os, io, json, glob
 
 # ---------------------------------------------------------------- config
-# Pre-launch: the GitHub Pages project URL (no trailing slash).
-# At launch:  "https://abc-eikaiwa.com"
-SITE = "https://yoshi80085.github.io/bridgeway-abc"
+# Live on the apex domain as of 2026-08-18.
+# (Pre-launch value was "https://yoshi80085.github.io/bridgeway-abc")
+SITE = "https://abc-eikaiwa.com"
 
 # True once the site is served from the apex domain. Controls whether the
 # sitemap and canonicals use a bare root path.
-IS_APEX = False
+IS_APEX = True
 
 OG_IMAGE = SITE + "/images/main2.jpg"
 
@@ -82,7 +82,7 @@ PRIVATE = {
  "summer-2026.html":        None,
  "summer-2026-backup.html": None,
  "animal-race.html":        None,
- "hih-2 copy.html":         None,
+ # "hih-2 copy.html" was a stray duplicate - deleted 2026-08-18.
 }
 
 # Leave this page's markup in English - it's an in-class game, not a public page.
