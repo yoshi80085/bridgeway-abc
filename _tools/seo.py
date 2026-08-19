@@ -69,6 +69,12 @@ PUBLIC = {
  "summer-camp.html": (
   "イングリッシュサマーキャンプ｜山形市 ABC英会話",
   "ABC英会話（山形市）のイングリッシュサマーキャンプ。英語だけで過ごすキャンプで、教室では味わえない自信と度胸が身につきます。過去の様子を写真でご紹介。"),
+ # Directory-index page: keeps the original Squarespace URL
+ # https://abc-eikaiwa.com/school-information , which is still in Google's
+ # index and was the highest-value old URL after the homepage.
+ "school-information/index.html": (
+  "教室案内・受講料｜山形市の英会話教室 ABC英会話",
+  "山形市元木のABC英会話（Bridgeway ABC English School）の教室案内。1998年開校、月〜金16:30〜20:30、未就学児から高校生・大人まで年間42回の少人数レッスン。受講料・アクセス・講師紹介・よくあるご質問はこちら。無料体験受付中／023-641-3059"),
  "tokyo-trip.html": (
   "東京研修旅行｜山形市の子ども英会話 ABC英会話",
   "ABC英会話（山形市）の東京研修旅行。学んだ英語を実際に使う機会として、外国人観光客との交流や現地体験を通して英語を「使える」力に変えます。"),
@@ -88,6 +94,10 @@ PRIVATE = {
 # Leave this page's markup in English - it's an in-class game, not a public page.
 KEEP_ENGLISH = {"animal-race.html"}
 
+# Pages that carry the JSON-LD block. Same @id on both, so Google reads them
+# as one entity described twice, not two schools.
+LD_PAGES = {"index.html", "school-information/index.html"}
+
 SCHEMA = {
  "@context": "https://schema.org",
  "@type": "LanguageSchool",
@@ -102,6 +112,12 @@ SCHEMA = {
  "email": "abc-eikaiwa@outlook.com",   # <- confirm this is current
  "foundingDate": "1998-04",
  "priceRange": "¥¥",
+ # Mon-Fri 16:30-20:30. This is what puts hours in Google's local panel.
+ "openingHoursSpecification": [{
+   "@type": "OpeningHoursSpecification",
+   "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+   "opens": "16:30", "closes": "20:30",
+ }],
  "address": {
    "@type": "PostalAddress", "streetAddress": "元木2-2-17",
    "addressLocality": "山形市", "addressRegion": "山形県",
@@ -140,7 +156,11 @@ def esc(s):
 
 
 def url_for(fn):
-    return SITE + "/" if fn == "index.html" else SITE + "/" + fn.replace(" ", "%20")
+    if fn == "index.html":
+        return SITE + "/"
+    if fn.endswith("/index.html"):          # directory-index page
+        return SITE + "/" + fn[:-len("index.html")]
+    return SITE + "/" + fn.replace(" ", "%20")
 
 
 def build_block(fn, eol="\n"):
@@ -173,7 +193,8 @@ def main():
     os.chdir(root)
 
     known = set(PUBLIC) | set(PRIVATE)
-    found = set(glob.glob("*.html")) - {"404.html"}
+    found = (set(glob.glob("*.html")) - {"404.html"}) | {
+        p for p in known if "/" in p and os.path.exists(p)}
 
     for extra in sorted(found - known):
         print("  !! UNKNOWN PAGE (skipped, add it to the script):", extra)
@@ -204,7 +225,7 @@ def main():
             continue
         s = VIEWPORT.sub(lambda m: m.group(1) + build_block(fn, eol), s, count=1)
 
-        if fn == "index.html":
+        if fn in LD_PAGES:
             ld = eol.join(["", "<!-- MANAGED-SEO-LD -->",
                            '<script type="application/ld+json">',
                            json.dumps(SCHEMA, ensure_ascii=False, indent=2).replace("\n", eol),

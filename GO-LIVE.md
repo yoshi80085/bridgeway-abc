@@ -2,6 +2,8 @@
 
 **Status: LIVE at https://abc-eikaiwa.com as of 2026-08-18.**
 
+Last content pass: **2026-08-19** (see "Done 2026-08-19" below).
+
 Verified serving: homepage, `sitemap.xml`, `robots.txt`, the `/school-information`
 redirect, and `www` → apex. HTTPS works on both hostnames.
 
@@ -28,6 +30,7 @@ redirect, and `www` → apex. HTTPS works on both hostnames.
 ## Remaining work
 
 ### 1. Google Business Profile ← highest value
+*Still outstanding as of 2026-08-19.*
 Update the website URL; it still points at the dead address. For a local school
 the map pack likely drives more enrollment than organic search, so this is worth
 more than everything else on this list combined.
@@ -36,6 +39,8 @@ While in there: confirm the category is 英会話教室 / Language school, check
 and add recent photos.
 
 ### 2. Google Search Console
+*Still outstanding as of 2026-08-19. Add `/school-information/` to the list of
+URLs to request indexing for — it's a brand-new page on an old, trusted URL.*
 - Add `abc-eikaiwa.com` as a property (DNS TXT verification, added in Squarespace DNS)
 - Submit `https://abc-eikaiwa.com/sitemap.xml`
 - URL Inspection → `https://abc-eikaiwa.com/` → **Request Indexing**. Repeat for
@@ -96,30 +101,60 @@ To do:
 
 ---
 
+## Done 2026-08-19
+
+Alex supplied the old Squarespace 教室案内 copy verbatim, which settled every
+open question from the previous pass.
+
+- **Founding year confirmed: 1998年4月.** The old 教室の概要 states it outright.
+  `foundingDate: "1998-04"` was right; nothing to change.
+- **`/school-information` is no longer a redirect — it's a real page again.**
+  Google's index still carries it as 教室案内, and the old page was fees, hours,
+  access and teachers, not "Meet the Teachers". Rather than dissipate its
+  ranking onto another URL, the page was rebuilt at that exact path:
+  `school-information/index.html`. Carries 教育理念, lesson hours, the full fee
+  table, 教室の概要, teacher summaries, the map, and an FAQ — Japanese-first,
+  which the rest of the site is thin on. Linked from the homepage nav and
+  footer, and from about.html / course-books.html.
+- **`openingHoursSpecification` added** — Mo–Fr 16:30–20:30. This is what puts
+  hours in Google's local panel. The JSON-LD block now also renders on
+  `/school-information/` with the same `@id`, so Google reads one entity
+  described twice.
+- **Hero age range widened.** "kindergarten through junior high" → age 3 through
+  high school plus adults; the 🎓 〜中学生 badge → 〜高校生・大人; the courses
+  intro and the enquiry form's age dropdown (高校生 was missing) match too.
+- **`course-books.html` price cards said "月1回50分レッスン"** — once a month, for
+  ¥7,000. Now "50分レッスン・年間42回". This was on all four cards and would have
+  read as either absurdly expensive or a typo to every parent who saw it.
+- **`course-books.html` still called the junior-high course "First Hand
+  Access"** while index.html and first-hand.html said English Firsthand.
+  Unified on English Firsthand; age chip 12〜15歳 → 中学生・高校生.
+- **`course-books.html#adult` was a dead anchor** — no `id="adult"` existed on
+  the page. Added, along with `id="junior"`.
+- **Student private-lesson price (¥22,500) was missing** from the adult card.
+- **`/new-page-1` redirect added.** Google still has the old "Portal access"
+  page indexed; it had no stub. → homepage.
+- **`_tools/seo.py` now handles directory-index pages** (`url_for`, discovery,
+  and a `LD_PAGES` set). Re-running it is still idempotent.
+
+---
+
 ## Open questions / judgement calls
 
-- [ ] **Verify the 1998 founding year.** Currently in the meta description, the
-      hero, and the schema's `foundingDate`. It came from a Google summary of the
-      old site, not a primary source. 2012 was definitely wrong (ruled out: Alex
-      started 2019, predecessor was there ~10 years, and others came before).
-      Confirm against old materials if possible. Fix location: `_tools/seo.py`
-      plus two spots in `index.html`.
-- [ ] **`/school-information` redirect target.** Points at `about.html`
-      ("Meet the Teachers"). If the old page was more about fees, schedule or
-      access, retarget in `_tools/redirects.py` — `course-books.html` or
-      `index.html#about` may fit better. This is the most valuable redirect
-      after the homepage.
-- [ ] **Lesson days and times** — needed to add `openingHoursSpecification` to
-      the schema, which is what makes hours appear in Google's local panel.
+- [ ] **`images/kyoko.jpg` doesn't exist.** about.html falls back to a
+      "Photo coming soon" placeholder, so nothing is visibly broken — but the
+      Japanese-side teacher has no photo. Worth adding.
+- [ ] **Little Hands price card reads `¥7,000 (¥5,500)`** with no explanation of
+      what the bracketed figure is. The old site listed 未就学児7,000円 only.
+      Either explain it or drop it.
+- [ ] **`about.html` is entirely in English** under `lang="ja"`. The bios are
+      good, but 山形市 英会話 講師 searches won't find them. Worth a Japanese
+      version of each bio at some point.
 
 ---
 
 ## Content issues noticed but not changed
 
-- **Hero undersells the age range.** It says lessons run "from kindergarten
-  through junior high" and the badge reads 🎓 〜中学生, but the courses section
-  offers English Firsthand for 中学生・高校生 *and* an adult class. The first
-  thing visitors read is narrower than what's actually offered.
 - **`images/calendar-June_July.jpg`** is now unreferenced. Harmless; delete whenever.
 - **`C:\Users\ATBro\Documents\New ABC Website`** is the stale pre-git copy. It has
   a superseded-notice file in it. Safe to delete once you're confident nothing

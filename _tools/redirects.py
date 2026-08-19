@@ -23,11 +23,10 @@ SITE = "https://abc-eikaiwa.com"
 # "/" is intentionally absent - the homepage redirects itself the moment DNS
 # points at this repo, and it carries most of the inbound links.
 REDIRECTS = {
-    # Highest value after the homepage. This was 教室案内 in Google's index.
-    # JUDGEMENT CALL: about.html is "Meet the Teachers". If the old page was
-    # more fees/schedule/access than people, retarget it at course-books.html
-    # or index.html#about.
-    "school-information": "about.html",
+    # NOTE: /school-information is NOT redirected. It was 教室案内 in Google's
+    # index - fees, hours, access, teachers - so rather than throw its ranking
+    # at another page, the real page was rebuilt at that exact URL.
+    # See school-information/index.html.
 
     # Address, map and phone all live in the homepage contact block now.
     "access":     "index.html#contact",
@@ -40,6 +39,10 @@ REDIRECTS = {
     "news/2014/1/23/get-out-there":          "index.html#instagram",
     "news/challenge-week-3":                 "index.html#instagram",
     "news/nv00pq0r7kabc8en0t2hro3lkan08h":   "index.html#instagram",
+
+    # Old Squarespace "Portal access" page, still in Google's index as of
+    # 2026-08-19. Generic landing - send it to the homepage.
+    "new-page-1": "index.html",
 
     # Stock Squarespace template pages - almost certainly unused, but free.
     "partners": "index.html",
