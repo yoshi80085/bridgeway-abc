@@ -98,6 +98,11 @@ KEEP_ENGLISH = {"animal-race.html"}
 # as one entity described twice, not two schools.
 LD_PAGES = {"index.html", "school-information/index.html"}
 
+# Pages whose <div class="faq-item"> blocks get turned into FAQPage schema.
+# The schema is generated FROM the page markup, so editing the FAQ on the
+# page and re-running this script keeps the two in sync automatically.
+FAQ_PAGES = {"school-information/index.html"}
+
 SCHEMA = {
  "@context": "https://schema.org",
  "@type": "LanguageSchool",
@@ -163,6 +168,31 @@ def url_for(fn):
     return SITE + "/" + fn.replace(" ", "%20")
 
 
+FAQ_ITEM = re.compile(
+    r'<div class="faq-item">\s*<h3>(.*?)</h3>\s*<p>(.*?)</p>', re.S)
+TAGS = re.compile(r'<[^>]+>')
+
+
+def plain(html):
+    """Strip markup and collapse whitespace - schema answers are plain text."""
+    return re.sub(r'\s+', ' ', TAGS.sub('', html)).strip()
+
+
+def faq_schema(s):
+    items = FAQ_ITEM.findall(s)
+    if not items:
+        return None
+    return {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": plain(q),
+        "acceptedAnswer": {"@type": "Answer", "text": plain(a)},
+      } for q, a in items],
+    }
+
+
 def build_block(fn, eol="\n"):
     out = ["<!-- MANAGED-SEO -->"]
     if fn in PRIVATE:
@@ -226,11 +256,20 @@ def main():
         s = VIEWPORT.sub(lambda m: m.group(1) + build_block(fn, eol), s, count=1)
 
         if fn in LD_PAGES:
-            ld = eol.join(["", "<!-- MANAGED-SEO-LD -->",
-                           '<script type="application/ld+json">',
-                           json.dumps(SCHEMA, ensure_ascii=False, indent=2).replace("\n", eol),
-                           "</script>", "<!-- /MANAGED-SEO-LD -->", ""])
-            s = s.replace("</head>", ld + "</head>", 1)
+            blobs = [SCHEMA]
+            if fn in FAQ_PAGES:
+                faq = faq_schema(s)
+                if faq:
+                    blobs.append(faq)
+                else:
+                    print("  !! no .faq-item blocks found in", fn)
+            parts = ["", "<!-- MANAGED-SEO-LD -->"]
+            for blob in blobs:
+                parts += ['<script type="application/ld+json">',
+                          json.dumps(blob, ensure_ascii=False, indent=2).replace("\n", eol),
+                          "</script>"]
+            parts += ["<!-- /MANAGED-SEO-LD -->", ""]
+            s = s.replace("</head>", eol.join(parts) + "</head>", 1)
 
         io.open(fn, "w", encoding="utf-8", newline="").write(s)
         done += 1

@@ -40,9 +40,17 @@ REDIRECTS = {
     "news/challenge-week-3":                 "index.html#instagram",
     "news/nv00pq0r7kabc8en0t2hro3lkan08h":   "index.html#instagram",
 
-    # Old Squarespace "Portal access" page, still in Google's index as of
-    # 2026-08-19. Generic landing - send it to the homepage.
+    # Leftover Squarespace auto-named pages, all still in Google's index as
+    # of 2026-08-19. "new-page-1" was titled "Portal access"; the others are
+    # generic. Nothing on the new site matches, so they go to the homepage.
+    "new-page":   "index.html",
     "new-page-1": "index.html",
+    "new-page-2": "index.html",
+
+    # Old per-level course URLs.
+    "little-hands-1": "little-hands.html",
+    "little-hands-2": "little-hands.html",
+    "hh1-u13":        "hih-1.html",
 
     # Stock Squarespace template pages - almost certainly unused, but free.
     "partners": "index.html",

@@ -137,6 +137,97 @@ open question from the previous pass.
 - **`_tools/seo.py` now handles directory-index pages** (`url_for`, discovery,
   and a `LD_PAGES` set). Re-running it is still idempotent.
 
+### Second pass, same day
+
+- **FAQPage schema on `/school-information/`.** Generated *from* the page's
+  `.faq-item` blocks by `seo.py`, so editing the FAQ and re-running keeps the
+  two in sync — it can't drift. Five Q&As. This is the cheapest route to a
+  richer-looking result in Google.
+- **NAP made consistent across all 36 pages.** It wasn't: the footer said
+  "ABC Bridgeway English School" on 16 pages and "Bridgeway ABC English School"
+  on one, the nav wordmark had four different spellings, and no footer carried
+  the postcode or the Japanese name at all. Now every page reads
+  `ABC英会話｜Bridgeway ABC English School` and
+  `〒990-2447 山形県山形市元木2-2-17 ｜ TEL 023-641-3059`. Address notation is
+  `元木2-2-17` everywhere (23 occurrences, no variants).
+  This matters because the map pack cross-references the site against
+  directory listings, and mismatched strings weaken the match.
+- **Nav sub-line now reads `ABC英会話 · 山形市元木`** instead of "English School",
+  so the two keywords that matter appear on every page. Cosmetic change —
+  revert in the `nav-logo-text` markup if you don't like it.
+- **Japanese teacher bios added to `about.html`.** The page was entirely in
+  English under `lang="ja"`; good credentials that no Japanese search could
+  find. Both bios now have a Japanese version, and the page intro leads in
+  Japanese.
+- **Five more old Squarespace URLs got redirect stubs**: `/new-page`,
+  `/new-page-2`, `/little-hands-1`, `/little-hands-2`, `/hh1-u13`. All still
+  in Google's index, none had a stub. 15 stubs total now.
+
+---
+
+## Local citations — the actual path to the map pack
+
+Researched 2026-08-19. Blunt finding: **there is essentially no citation
+footprint.** Searching the phone number, the address and the brand name across
+Japanese directories turned up exactly one third-party listing.
+
+Also worth knowing: the discovery query 山形市 英会話教室 子ども おすすめ is
+dominated by affiliate listicles (English Hub, プロリア英会話, コドモブースター,
+コトスタキッズ) and chains. You don't outrank those with your own site — you get
+*listed in* them, and you win on the map pack and on longer, more specific
+queries instead.
+
+### The one listing that exists
+
+**コドモブースター** — https://kodomo-booster.com/schools/s16218
+Listed as `ABC英会話教室 山形市元木英会話教室`, rated 4.0 (2 reviews, from families
+who joined in 2013 and 2019). Phone: **blank.** Website: **blank.** 料金: blank.
+対象年齢: 調査中. Flagged as not accepting enquiries. It is unclaimed.
+
+Claim it (https://kodomo-booster.com/contacts), add the phone, add
+`https://abc-eikaiwa.com`, fill in 対象年齢 and fees, enable trial applications.
+Fastest single win on this page.
+
+### Free registrations, in priority order
+
+1. **iタウンページ** — https://itp.ne.jp/about-posted-application/ (feeds other aggregators)
+2. **Yahoo!プレイス** — https://yplace.yahoo.co.jp/ (drives Yahoo!ロコ and Yahoo!マップ)
+3. **エキテン 教室プラン** — https://www.owner.ekiten.jp/free-lesson01 (free plan includes 口コミ + website link)
+4. **習い事スクスク** — https://sp-sukusuku.jp/
+5. **子どもスクールナビ** — https://ksn-japan.net/ ／ **すたぽ** — https://sutapo.com/
+6. **ジモティー** — https://jmty.jp/yamagata/les-eng (post 無料体験 recruitment, not just a listing)
+
+Use the exact same NAP string every time — the one now in the site footer.
+
+Skip まいぷれ: no 山形市 edition exists.
+
+**Could not verify, needs a human:** Yahoo!ロコ (robots-blocked), NAVITIME (403),
+iタウンページ presence, みんなの英語ひろば, and Google Business Profile itself.
+
+### Note on the brand name
+
+`abcenglish.velvet.jp` (Shiga) and `eikaiwa-abc.com` (Shizuoka) both compete for
+the bare "ABC英会話" query. Register everywhere as **ABC英会話 山形** or
+**ABC英会話（山形市元木）**, never bare "ABC".
+
+---
+
+## The content gap, measured
+
+Direct local competitor ニコニコ英会話 (山形市松栄) has **153 URLs in its sitemap.
+This site has 16.** Nearly all of their extra pages are ongoing Japanese-language
+posts — news, blog, per-course pages, plus separate 料金 and アクセス pages.
+
+They publish full fees openly (入会金10,000円, 幼児8,365円, 小学生8,365円〜, 大人
+9,600円/月 年間42回). Worth knowing what you're priced against: ABC is
+7,000–7,700円, i.e. meaningfully cheaper, which is an argument the site should
+probably be making out loud.
+
+The gap isn't design — the new 教室案内 page closes the 料金/アクセス/時間 hole.
+What's left is that there's no stream of dated Japanese content. The Halloween,
+summer-camp and Tokyo-trip pages already exist as one-offs; turning the
+Instagram feed into dated Japanese posts would be the natural next move.
+
 ---
 
 ## Open questions / judgement calls
