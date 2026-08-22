@@ -308,12 +308,12 @@
 <div>
   <div class="class-gallery" style="grid-template-columns: repeat(2, 1fr);">
     <div class="gallery-slot">
-      <img src="images/hih-4-photo1.jpeg" alt="Hand in Hand 2 class"
+      <img src="images/hih-4-photo1.jpeg" alt="Hand in Hand 4 class"
         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
       <div class="gallery-slot-empty" style="display:none"><span>📷</span>Photo 1</div>
     </div>
     <div class="gallery-slot">
-      <img src="images/hih-4-photo2.png" alt="Hand in Hand 2 class"
+      <img src="images/hih-4-photo2.png" alt="Hand in Hand 4 class"
         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
       <div class="gallery-slot-empty" style="display:none"><span>📷</span>Photo 2</div>
     </div>
@@ -1112,13 +1112,25 @@
     });
   });
   // Randomly pick one of two class activity videos
+/* Class footage for Hand in Hand 4.
+     This list is intentionally empty: the IDs that were here belonged to
+     Hand in Hand 2, not Hand in Hand 4, so the page was showing the wrong level's
+     class. Paste this level's own YouTube IDs below and the player comes
+     back automatically; while the list is empty the slot stays hidden. */
 const classVideos = [
-  "0k4AaUQe05A",
-  "nhSQ21mRGf4"
+  // TODO: add Hand in Hand 4 class video IDs here (Public or Unlisted).
 ];
-const randomVideo = classVideos[Math.floor(Math.random() * classVideos.length)];
-document.getElementById("random-class-video").src = 
-  "https://www.youtube.com/embed/" + randomVideo + "?rel=0";
+(function () {
+  const frame = document.getElementById("random-class-video");
+  if (!frame) return;
+  if (!classVideos.length) {
+    const slot = frame.closest(".video-hover");
+    if (slot && slot.parentElement) slot.parentElement.style.display = "none";
+    return;
+  }
+  frame.src = "https://www.youtube.com/embed/" +
+    classVideos[Math.floor(Math.random() * classVideos.length)] + "?rel=0";
+})();
 </script>
 
 </body>

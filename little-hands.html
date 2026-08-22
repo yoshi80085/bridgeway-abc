@@ -724,23 +724,40 @@
       }, 2500);
     }
   }
-  // Section 1 random video
-const section1Videos = ["q0shOiJYduI", "wtRyrId-bRo"];
-document.getElementById("random-video-section1").src = 
-  "https://www.youtube.com/embed/" + 
-  section1Videos[Math.floor(Math.random() * section1Videos.length)] + "?rel=0";
+/* ------------------------------------------------------------------
+   CLASS VIDEOS
+   Only list YouTube IDs that are set to Public or Unlisted in YouTube
+   Studio. A Private video renders as "Video unavailable" for visitors.
 
-// Section 2 random video
-const section2Videos = ["3BFQ-s0cgCc", "9c28qa7uaHU"];
-document.getElementById("random-video-section2").src = 
-  "https://www.youtube.com/embed/" + 
-  section2Videos[Math.floor(Math.random() * section2Videos.length)] + "?rel=0";
+   Currently PRIVATE in YouTube Studio (re-add here once made Unlisted):
+     Section 1 (Little Hands 1): wtRyrId-bRo
+     Section 2 (Little Hands 2): 3BFQ-s0cgCc, 9c28qa7uaHU
+     Section 3 (Little Hands 3): QLWFOG3oJvg, pWDFils1OVw
 
-// Section 3 random video
-const section3Videos = ["QLWFOG3oJvg", "pWDFils1OVw"];
-document.getElementById("random-video-section3").src = 
-  "https://www.youtube.com/embed/" + 
-  section3Videos[Math.floor(Math.random() * section3Videos.length)] + "?rel=0";
+   If a section's list is empty, its video panel is hidden automatically
+   so visitors see the photos instead of a broken player.
+------------------------------------------------------------------ */
+const sectionVideos = {
+  "random-video-section1": ["q0shOiJYduI"],
+  "random-video-section2": [],
+  "random-video-section3": []
+};
+
+Object.entries(sectionVideos).forEach(([id, ids]) => {
+  const frame = document.getElementById(id);
+  if (!frame) return;
+  if (!ids.length) {
+    // Hide the whole "Class Videos" block for this section.
+    const wrap = frame.closest(".video-hover");
+    const grid = wrap && wrap.parentElement && wrap.parentElement.parentElement;
+    const label = grid && grid.previousElementSibling;
+    if (label && label.classList.contains("media-panel-label")) label.style.display = "none";
+    if (grid) grid.style.display = "none";
+    return;
+  }
+  frame.src = "https://www.youtube.com/embed/" +
+    ids[Math.floor(Math.random() * ids.length)] + "?rel=0";
+});
 </script>
 
 </body>

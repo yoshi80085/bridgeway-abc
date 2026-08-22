@@ -326,12 +326,19 @@
         </div>
       </div>
 
-      <!-- ✏️ Replace your-video-filename with your actual filename -->
-      <div class="local-video-slot">
+      <!-- CLASS VIDEO
+           ✏️ Put a Public or Unlisted YouTube ID in data-video-id below.
+           A Private video renders as "Video unavailable" for visitors.
+           Leave it empty and this slot hides itself automatically.
+
+           Previously used: LdH16IlaDm4 — currently PRIVATE in YouTube Studio.
+           Set it to Unlisted and paste the ID back in to restore this video. -->
+      <div class="local-video-slot" id="starter-class-video" data-video-id="">
   <div class="video-hover" style="border-radius:14px; overflow:hidden; border:2px solid var(--border);">
       <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden;">
         <iframe
-          src="https://www.youtube.com/embed/LdH16IlaDm4?rel=0"
+          id="starter-class-video-frame"
+          src=""
           style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
           allowfullscreen
           loading="lazy">
@@ -1123,6 +1130,16 @@
       wrap.replaceChild(iframeWrap, thumb);
     });
   });
+
+  // Class video slot — hide it unless a playable YouTube ID is set.
+  (function () {
+    const slot = document.getElementById('starter-class-video');
+    if (!slot) return;
+    const id = (slot.dataset.videoId || '').trim();
+    if (!id) { slot.style.display = 'none'; return; }
+    document.getElementById('starter-class-video-frame').src =
+      'https://www.youtube.com/embed/' + id + '?rel=0';
+  })();
 </script>
 
 </body>
