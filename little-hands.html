@@ -729,18 +729,13 @@
    Only list YouTube IDs that are set to Public or Unlisted in YouTube
    Studio. A Private video renders as "Video unavailable" for visitors.
 
-   Currently PRIVATE in YouTube Studio (re-add here once made Unlisted):
-     Section 1 (Little Hands 1): wtRyrId-bRo
-     Section 2 (Little Hands 2): 3BFQ-s0cgCc, 9c28qa7uaHU
-     Section 3 (Little Hands 3): QLWFOG3oJvg, pWDFils1OVw
-
    If a section's list is empty, its video panel is hidden automatically
    so visitors see the photos instead of a broken player.
 ------------------------------------------------------------------ */
 const sectionVideos = {
-  "random-video-section1": ["q0shOiJYduI"],
-  "random-video-section2": [],
-  "random-video-section3": []
+  "random-video-section1": ["q0shOiJYduI", "wtRyrId-bRo"],   // lh1 video1 / video2
+  "random-video-section2": ["3BFQ-s0cgCc", "9c28qa7uaHU"],   // lh2 video1 / video2
+  "random-video-section3": ["QLWFOG3oJvg", "pWDFils1OVw"]    // lh3 video1 / video2
 };
 
 Object.entries(sectionVideos).forEach(([id, ids]) => {

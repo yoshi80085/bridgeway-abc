@@ -1,0 +1,26 @@
+# Catches image paths that work on Windows but 404 on GitHub Pages.
+#
+# Windows filenames are case-insensitive, so a page referencing "photo1.JPG"
+# when the committed file is "photo1.jpg" looks fine locally and breaks live.
+# This runs _tools/check_assets.py on every push and pull request to main.
+name: Check assets
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  check-assets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Check asset references
+        run: python3 _tools/check_assets.py
