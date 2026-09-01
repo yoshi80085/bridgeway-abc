@@ -2,7 +2,7 @@
 
 **Status: LIVE at https://abc-eikaiwa.com as of 2026-08-18.**
 
-Last content pass: **2026-08-19** (see "Done 2026-08-19" below).
+Last content pass: **2026-09-01** (see "Done 2026-09-01" below).
 
 Verified serving: homepage, `sitemap.xml`, `robots.txt`, the `/school-information`
 redirect, and `www` → apex. HTTPS works on both hostnames.
@@ -24,6 +24,12 @@ redirect, and `www` → apex. HTTPS works on both hostnames.
 - `python3 _tools/seo.py` — regenerates titles, meta descriptions, canonicals, OG
   tags, schema, `sitemap.xml`, `robots.txt`. Domain is the `SITE` constant at the top.
 - `python3 _tools/redirects.py` — regenerates the ten old-Squarespace URL stubs.
+- `python3 _tools/optimize_images.py` — shrinks oversized images in place, keeping
+  every filename. Skips anything already small enough.
+- `python3 _tools/img_attrs.py` — adds `loading="lazy"`, `decoding="async"` and
+  `width`/`height` to `<img>` tags. Never overwrites an attribute that's there.
+
+Run the last two after adding new photos.
 
 ---
 
@@ -162,6 +168,84 @@ open question from the previous pass.
 - **Five more old Squarespace URLs got redirect stubs**: `/new-page`,
   `/new-page-2`, `/little-hands-1`, `/little-hands-2`, `/hh1-u13`. All still
   in Google's index, none had a stub. 15 stubs total now.
+
+---
+
+## Done 2026-09-01 — page weight and gallery cleanup
+
+### Images were the biggest unaddressed technical problem
+
+Nearly every photo was the original camera file: 4032x3024, 2–4 MB each, for
+slots that display at 300–400 px. Every one of those bytes was downloaded and
+thrown away. Nothing on the site shows an image wider than about 1200 CSS px.
+
+All of them were resized to a 1600 px long edge and re-encoded in place —
+same filenames, same formats, so no page needed editing and no reference
+could break. Calendars kept more pixels (2200 px, quality 88) because the
+printed month grid has to stay readable when a parent zooms in; that was
+checked by eye, QR codes included.
+
+| | before | after |
+|---|---|---|
+| `images/` | 80.3 MB | 17.3 MB |
+| `tokyo-trip/`, `halloween/`, `summer-camp/` | 42.8 MB | 9.1 MB |
+| `summer-2026/` | 33.5 MB | 26.0 MB |
+| **homepage payload** | **~9 MB** | **2.27 MB** |
+
+The `.webp` files in `summer-2026/` were already sensible, so only the largest
+were touched. Originals are all recoverable from git history if any single
+image looks wrong: `git checkout HEAD~1 -- images/photo5.jpeg`.
+
+### Loading attributes across all 36 pages
+
+`loading="lazy"` on 79 below-the-fold images, `decoding="async"` on 177, and
+`width`/`height` from the actual file on 176. The first two images on each page
+are deliberately left eager — lazy-loading the image that paints first makes a
+page slower, not faster. The width/height pair is what stops text jumping down
+the page as photos arrive, which is Cumulative Layout Shift, one of the three
+Core Web Vitals Google measures.
+
+Gallery pages still total several MB (halloween.html is 6.4 MB across 44
+photos), but nothing below the fold is fetched until it's scrolled to, so the
+initial load is a fraction of that.
+
+### Placeholder text was live on two pages
+
+**`tokyo-trip.html` was a half-finished template, publicly.** Every one of the
+twelve photo tiles rendered "📷 Add photo" and "✏️ Add caption" next to the
+real photograph. Four of the `<img>` tags were also unclosed, so the first
+tile's frame was structurally broken and tiles 2–4 swallowed the markup after
+them. The grid was rebuilt: tags closed, placeholders gone, Japanese `alt` text
+added, and a comment left in place showing how to add real captions back.
+Verified by rendering the page — all twelve load, no stray text.
+
+**`halloween.html` had 42 instances of "✏️ Add caption here"**, revealed on
+hover over every photo. Removed. Seven `✏️` editing markers were also sitting
+at the front of published copy (the "Notable Costumes" lines) — the pencil is
+used throughout this repo to mean "edit me", and these lines were already
+filled in. Same three markers cleaned off `summer-camp.html`, along with
+"sandwhich" → "sandwich".
+
+**`hih-6.html` carried a malformed `<img bridge-bg.png>`** — no `src`
+attribute, so it rendered as a broken image in the page header. No other
+`hih-*` page has an image there. Removed.
+
+### Alt text
+
+The six photos in the homepage Instagram grid had none. Now described in
+Japanese. Site-wide, every `<img>` outside a comment has an `alt`.
+
+### Noticed, not changed
+
+- **The Aug/Sep calendar image tells parents the site is at
+  `www.bridgewayabc.com`.** That domain 301s to the right place, so nobody is
+  stranded, but the next calendar should say `abc-eikaiwa.com` — it's printed
+  material that outlives a redirect.
+- **The Oct–Nov calendar slot is still a "coming soon" placeholder**, and it's
+  now September. Slot 2 of the homepage calendar section is waiting for it.
+- **`hih-6.html`'s header reads "12 Units · 42 Lessons ·"** with a trailing
+  separator and no class day/time, where hih-1 through hih-5 all list theirs.
+- `_tools/check_assets.py` passes: 188 references across 36 pages.
 
 ---
 
