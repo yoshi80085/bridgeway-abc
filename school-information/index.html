@@ -19,6 +19,9 @@
 <title>教室案内・受講料｜山形市の英会話教室 ABC英会話</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
+  /* --- image aspect-ratio guard: keeps intrinsic width/height attrs from stretching images --- */
+  img { max-width: 100%; height: auto; }
+
   :root {
     --cream: #fdf8f2;
     --warm-white: #fffcf7;
@@ -228,7 +231,7 @@
 
   @media(max-width:640px) {
     nav { padding:0 1rem; }
-    .nav-logo img { height:42px; }
+    .nav-logo img { height:42px; width:auto;}
     .info-table th { width:110px; white-space:normal; font-size:0.85rem; padding:0.8rem 0.7rem; }
     .info-table td { font-size:0.88rem; padding:0.8rem 0.7rem; }
     .fee-table th, .fee-table td { padding:0.7rem 0.6rem; font-size:0.85rem; }

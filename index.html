@@ -19,6 +19,9 @@
 <title>山形市の子ども英会話教室 ABC英会話｜幼児〜高校生・無料体験受付中</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
+  /* --- image aspect-ratio guard: keeps intrinsic width/height attrs from stretching images --- */
+  img { max-width: 100%; height: auto; }
+
   :root {
     --cream: #fdf8f2;
     --warm-white: #fffcf7;
@@ -104,7 +107,7 @@
     border:2px solid var(--border); border-radius:28px;
     padding:2.6rem 2.2rem; box-shadow:0 18px 55px var(--shadow);
   }
-  .hero-brand-logo { height:82px; width:auto; max-width:70%; margin:0 auto 1rem; display:block; filter:drop-shadow(0 8px 20px rgba(30,109,181,0.18)); }
+  .hero-brand-logo { max-height:82px; height:auto; width:auto; max-width:70%; margin:0 auto 1rem; display:block; filter:drop-shadow(0 8px 20px rgba(30,109,181,0.18)); }
   .hero-visual .hero-wordmark { font-size:clamp(2rem,4.2vw,3.2rem); line-height:1.05; }
   .hero-brand-tag { font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--text-light); font-size:0.78rem; margin-top:0.3rem; }
   .hero-brand-meta { margin-top:1.3rem; display:inline-block; background:var(--sun-light); color:#a06800; border-radius:30px; padding:0.4rem 1.1rem; font-size:0.82rem; font-weight:800; }
@@ -121,7 +124,7 @@
     .hero-brand-card { max-width:360px; margin:0 auto; }
   }
   @media (max-width: 600px) {
-    .hero-logo-big img { height:100px; }
+    .hero-logo-big img { height:100px; width:auto;}
     #hero { background-size: 100% auto; }
   }
   @keyframes popIn { from{opacity:0;transform:scale(0.7)} to{opacity:1;transform:scale(1)} }

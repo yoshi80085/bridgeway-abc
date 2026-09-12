@@ -10,6 +10,9 @@
 <title>お問い合わせありがとうございます｜ABC英会話</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
+  /* --- image aspect-ratio guard: keeps intrinsic width/height attrs from stretching images --- */
+  img { max-width: 100%; height: auto; }
+
   :root {
     --cream: #fdf8f2;
     --warm-white: #fffcf7;
@@ -168,7 +171,7 @@
     font-size:0.88rem; line-height:1.8; font-weight:600;
   }
   .footer-logo-wrap { display:flex; align-items:center; justify-content:center; gap:0.7rem; margin-bottom:0.8rem; }
-  .footer-logo-wrap img { height:36px; filter:brightness(0) invert(1); }
+  .footer-logo-wrap img { height:36px; filter:brightness(0) invert(1); width:auto;}
   .footer-logo-wrap span { font-weight:900; font-size:1rem; }
   footer p { color:rgba(255,255,255,0.6); margin-bottom:0.4rem; }
   .footer-links { display:flex; gap:1.5rem; justify-content:center; list-style:none; margin:1rem 0; flex-wrap:wrap; }
@@ -183,7 +186,7 @@
   .footer-copy { color:rgba(255,255,255,0.35); font-size:0.78rem; }
 
   @media(max-width:600px) {
-    .logo-wrap img { height:90px; }
+    .logo-wrap img { height:90px; width:auto;}
     .info-cards { flex-direction:column; align-items:center; }
     .info-card { max-width:100%; width:100%; }
   }
