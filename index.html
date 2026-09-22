@@ -1111,14 +1111,22 @@
       </div>
 
       <!-- ====================================================
-        CALENDAR SLOT 2 — Placeholder until the next calendar is ready
-        ✏️ When the next calendar is done, replace everything inside
-           the <div class="calendar-slot"> below with the same two lines
-           as Slot 1, e.g.:
-             <div class="calendar-slot-label">📅 October – November 2026</div>
-             <img src="images/calendar-Oct_Nov.jpg" alt="2026年10月・11月のレッスンカレンダー">
+        CALENDAR SLOT 2 — Next calendar
+        ✏️ Update the label text and swap the image file each period.
+           Set width="" and height="" to the image's real pixel size.
+        ✏️ If the next calendar is NOT ready yet, replace the two lines
+           below with the "coming soon" block kept at the bottom of this
+           section (see the commented-out COMING SOON TEMPLATE).
       ===================================================== -->
       <div class="calendar-slot">
+        <div class="calendar-slot-label">📅 October – November 2026</div>
+        <img src="images/calendar-Oct_Nov.jpg" alt="2026年10月・11月のレッスンカレンダー" loading="lazy" decoding="async" width="2479" height="3509">
+      </div>
+
+      <!-- ====================================================
+        COMING SOON TEMPLATE — paste this inside a .calendar-slot
+        when a period's calendar isn't ready yet.
+
         <div class="calendar-coming">
           <span class="calendar-coming-icon">🗓️</span>
           <h3>次回スケジュール準備中</h3>
@@ -1128,7 +1136,7 @@
             <a href="https://www.instagram.com/abc_eikaiwa/" target="_blank" class="btn-secondary cal-cta">📸 Instagram</a>
           </div>
         </div>
-      </div>
+      ===================================================== -->
 
     </div>
   </div>
